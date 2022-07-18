@@ -1,29 +1,30 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "mushroom",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "AnimalMace's Mushroom Update",
+  "description": "",
   "authors": [
-    "KxmischesDomi"
+    "KxmischesDomi",
+    "AnimalMace"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://discord.gg/CvrFVbgeEU",
+    "sources": "https://github.com/KxmischesDomi/MushroomUpdate"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "Custom License",
+  "icon": "assets/mushroom/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "de.kxmischesdomi.modid.ExampleMod"
+      "de.kxmischesdomi.mushroom.MushroomMod"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+	  "mushroom.mixins.json"
   ],
 
   "depends": {
