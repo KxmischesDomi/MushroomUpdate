@@ -11,10 +11,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
-import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -35,8 +32,9 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  */
 public class ShroomPal extends PathfinderMob implements IAnimatable {
 
-	private static final EntityDataAccessor<Boolean> BROWN_MUSHROOM = SynchedEntityData.defineId(AgeableMob.class, EntityDataSerializers.BOOLEAN);
-	private static final EntityDataAccessor<Boolean> BIG = SynchedEntityData.defineId(AgeableMob.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> BROWN_MUSHROOM = SynchedEntityData.defineId(ShroomPal.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> BIG = SynchedEntityData.defineId(ShroomPal.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Boolean> DANCING = SynchedEntityData.defineId(ShroomPal.class, EntityDataSerializers.BOOLEAN);
 
 	private final AnimationFactory factory = new AnimationFactory(this);
 
@@ -56,6 +54,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.75, 1));
+		this.goalSelector.addGoal(5, new DanceGoal(this));
 		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8));
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 	}
@@ -65,6 +64,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		super.defineSynchedData();
 		entityData.define(BIG, false);
 		entityData.define(BROWN_MUSHROOM, false);
+		entityData.define(DANCING, false);
 	}
 
 	@Override
@@ -97,6 +97,14 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		entityData.set(BROWN_MUSHROOM, brown);
 	}
 
+	public boolean isDancing() {
+		return entityData.get(DANCING);
+	}
+
+	public void setDancing(boolean dancing) {
+		entityData.set(DANCING, dancing);
+	}
+
 	@Override
 	public void registerControllers(AnimationData animationData) {
 		animationData.addAnimationController(new AnimationController(this, "controller_walk", 0, event -> {
@@ -107,12 +115,18 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 			return PlayState.STOP;
 		}));
 		animationData.addAnimationController(new AnimationController(this, "controller_bounce", 0, event -> {
-			if (false) {
+			if (isDancing()) {
 				event.getController().setAnimation(new AnimationBuilder().addAnimation("bounce", true));
 				return PlayState.CONTINUE;
 			}
 			return PlayState.STOP;
 		}));
+	}
+
+	@Override
+	public void tick() {
+
+		super.tick();
 	}
 
 	@Override
@@ -131,6 +145,36 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes()
 				.add(Attributes.MOVEMENT_SPEED, 0.25D);
+	}
+
+	public static class DanceGoal extends Goal {
+
+		private final ShroomPal pal;
+
+		public DanceGoal(ShroomPal pal) {
+			this.pal = pal;
+		}
+
+		@Override
+		public boolean canUse() {
+			return canContinueToUse();
+		}
+
+		@Override
+		public boolean canContinueToUse() {
+			return pal.isOnGround() && !pal.getNavigation().isInProgress();
+		}
+
+		@Override
+		public void start() {
+			pal.setDancing(true);
+		}
+
+		@Override
+		public void stop() {
+			pal.setDancing(false);
+		}
+
 	}
 
 }
