@@ -106,6 +106,13 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 			}
 			return PlayState.STOP;
 		}));
+		animationData.addAnimationController(new AnimationController(this, "controller_bounce", 0, event -> {
+			if (false) {
+				event.getController().setAnimation(new AnimationBuilder().addAnimation("bounce", true));
+				return PlayState.CONTINUE;
+			}
+			return PlayState.STOP;
+		}));
 	}
 
 	@Override
