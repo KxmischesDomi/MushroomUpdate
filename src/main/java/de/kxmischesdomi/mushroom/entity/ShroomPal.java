@@ -53,6 +53,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.75, 1));
 		this.goalSelector.addGoal(5, new DanceGoal(this));
 		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8));
