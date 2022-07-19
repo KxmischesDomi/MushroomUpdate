@@ -21,6 +21,9 @@
   "entrypoints": {
     "main": [
       "de.kxmischesdomi.mushroom.MushroomMod"
+    ],
+    "client": [
+      "de.kxmischesdomi.mushroom.MushroomClient"
     ]
   },
   "mixins": [

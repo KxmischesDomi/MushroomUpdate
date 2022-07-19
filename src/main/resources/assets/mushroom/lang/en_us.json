@@ -1,0 +1,10 @@
+{
+	"itemGroup.mushroom.root": "Mushroom Update",
+
+	"item.mushroom.shroom_glider": "Shroom Glider",
+	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Egg",
+	"item.mushroom.shroom_pal_spawn_egg": "Shroom Pal Spawn Egg",
+
+	"entity.mushroom.puff_creeper": "Puff Creeper",
+	"entity.mushroom.shroom_pal": "Shroom Pal"
+}
