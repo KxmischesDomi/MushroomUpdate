@@ -10,3 +10,7 @@ Mod has to be installed on Server and Client
 ## Dependencies
 - FabricAPI
 - GeckoLib
+
+![](https://media.discordapp.net/attachments/995778727399149629/999082880749801502/unknown.png?width=1276&height=676)
+![](https://media.discordapp.net/attachments/995778727399149629/999083328445628576/unknown.png?width=1276&height=676)
+![](https://media.discordapp.net/attachments/995778727399149629/999083424927203338/unknown.png?width=1276&height=676)
