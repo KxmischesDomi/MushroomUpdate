@@ -9,5 +9,8 @@
 			"item": "minecraft:red_mushroom_block"
 		}
 	},
-	"result": {}
+	"result": {
+		"item": "mushroom:shroom_glider",
+		"count": 1
+	}
 }
