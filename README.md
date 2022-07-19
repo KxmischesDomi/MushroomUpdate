@@ -1,9 +1,12 @@
-# Fabric Example Mod
+# Mushroom Update
 
-## Setup
+[comment]: <> ([![Downloads]&#40;http://cf.way2muchnoise.eu/full_526274_downloads.svg&#41;]&#40;https://www.curseforge.com/minecraft/mc-mods/boat-container&#41;)
+[comment]: <> ([![Versions]&#40;http://cf.way2muchnoise.eu/versions/515000.svg&#41;]&#40;https://www.curseforge.com/minecraft/mc-mods/boat-container&#41;)
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+[![Discord](https://img.shields.io/discord/803346914455584778?color=%237289DA&label=Discord&logo=discord&logoColor=white)](https://discord.gg/CvrFVbgeEU)
 
-## License
+Mod has to be installed on Server and Client
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## Dependencies
+- FabricAPI
+- GeckoLib
