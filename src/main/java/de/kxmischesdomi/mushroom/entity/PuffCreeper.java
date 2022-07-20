@@ -103,7 +103,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 				this.playSound(SoundEvents.PUFFER_FISH_BLOW_OUT, 1.0f, 1.0f);
 				setLastPuffTicks(0);
 
-				for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, new AABB(getX() - 3, getY() - 3, getZ() - 3, getX() + 3, getY() + 3, getZ() + 3))) {
+				for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, new AABB(getX() - 2.5, getY() - 2.5, getZ() - 2.5, getX() + 2.5, getY() + 2.5, getZ() + 2.5))) {
 					if (entity instanceof PuffCreeper) continue;
 
 					Difficulty difficulty = getLevel().getDifficulty();
@@ -156,7 +156,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 
 	public boolean isInTargetReach() {
 		if (getTarget() == null) return false;
-		if (distanceTo(getTarget()) > 3) return false;
+		if (distanceTo(getTarget()) > 2.5) return false;
 		return getSensing().hasLineOfSight(getTarget());
 	}
 
