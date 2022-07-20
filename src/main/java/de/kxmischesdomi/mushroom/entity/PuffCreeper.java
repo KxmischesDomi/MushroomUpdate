@@ -61,6 +61,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(0, new PanicGoal(this, 1.25));
 		this.goalSelector.addGoal(2, new PuffLeapAtTargetGoal(this, 0.4f));
 		this.goalSelector.addGoal(3, new MeleeAttackGoal(this, 1.25, false));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.75, 1));
