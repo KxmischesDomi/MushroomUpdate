@@ -145,6 +145,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes()
+				.add(Attributes.MAX_HEALTH, 4)
 				.add(Attributes.MOVEMENT_SPEED, 0.25D);
 	}
 
