@@ -1,0 +1,26 @@
+{
+	"puff_creeper_death": {
+		"subtitle": "subtitles.entity.mushroom.puff_creeper.death",
+		"sounds": [
+			"mushroom:puff_creeper_death"
+		]
+	},
+	"puff_creeper_hurt": {
+		"subtitle": "subtitles.entity.mushroom.puff_creeper.hurt",
+		"sounds": [
+			"mushroom:puff_creeper_hurt_1",
+			"mushroom:puff_creeper_hurt_2",
+			"mushroom:puff_creeper_hurt_3",
+			"mushroom:puff_creeper_hurt_4"
+		]
+	},
+	"puff_creeper_puff": {
+		"subtitle": "subtitles.entity.mushroom.puff_creeper.puff",
+		"sounds": [
+			"mushroom:puff_creeper_puff_1",
+			"mushroom:puff_creeper_puff_2",
+			"mushroom:puff_creeper_puff_3",
+			"mushroom:puff_creeper_puff_4"
+		]
+	}
+}

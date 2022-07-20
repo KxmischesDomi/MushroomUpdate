@@ -2,6 +2,7 @@ package de.kxmischesdomi.mushroom.entity;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
 import de.kxmischesdomi.mushroom.entity.ai.goal.PuffLeapAtTargetGoal;
+import de.kxmischesdomi.mushroom.registry.ModSounds;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
@@ -130,7 +132,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 					);
 				}
 
-
+				this.playSound(ModSounds.PUFF_CREEPER_PUFF, 1, 1);
 
 			} else {
 				setLastPuffTicks(getLastPuffTicks() + 1);
@@ -164,6 +166,16 @@ public class PuffCreeper extends Monster implements IAnimatable {
 
 	public void setLastPuffTicks(int ticks) {
 		lastPuffTicks = ticks;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return ModSounds.PUFF_CREEPER_DEATH;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSource) {
+		return ModSounds.PUFF_CREEPER_HURT;
 	}
 
 	@Override
