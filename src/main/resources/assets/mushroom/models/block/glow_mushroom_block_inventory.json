@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mushroom:block/glow_mushroom_block"
+  }
+}

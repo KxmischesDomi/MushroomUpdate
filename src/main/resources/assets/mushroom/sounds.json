@@ -17,10 +17,7 @@
 	"puff_creeper_puff": {
 		"subtitle": "subtitles.entity.mushroom.puff_creeper.puff",
 		"sounds": [
-			"mushroom:puff_creeper_puff_1",
-			"mushroom:puff_creeper_puff_2",
-			"mushroom:puff_creeper_puff_3",
-			"mushroom:puff_creeper_puff_4"
+			"mushroom:puff_creeper_fuse"
 		]
 	}
 }
