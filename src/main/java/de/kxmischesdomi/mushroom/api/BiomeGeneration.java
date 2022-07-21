@@ -41,6 +41,4 @@ public class BiomeGeneration {
 		return PlacementUtils.register(string, holder, List.of(placementModifiers));
 	}
 
-	}
-
 }
