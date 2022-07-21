@@ -41,8 +41,6 @@ public class BiomeGeneration {
 		return PlacementUtils.register(string, holder, List.of(placementModifiers));
 	}
 
-	public static Biome biome(Biome.Precipitation precipitation, float f, float g, MobSpawnSettings.Builder builder, BiomeGenerationSettings.Builder builder2, @Nullable Music music) {
-		return biome(precipitation, f, g, 4159204, 329011, builder, builder2, music);
 	}
 
 }
