@@ -11,6 +11,8 @@
 	"entity.mushroom.puff_creeper": "Puff Creeper",
 	"entity.mushroom.shroom_pal": "Shroom Pal",
 
+	"biome.mushroom.shroom_caves": "Shroom Caves",
+
 	"subtitles.entity.mushroom.puff_creeper.death": "Puff Creeper dies",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Puff Creeper hurts",
 	"subtitles.entity.mushroom.puff_creeper.puff": "Puff Creeper puffs"

@@ -1,5 +1,6 @@
 package de.kxmischesdomi.mushroom.entity;
 
+import de.kxmischesdomi.mushroom.entity.ai.goal.FollowMobGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -55,7 +56,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
 		SpawnGroupData groupData = super.finalizeSpawn(serverLevelAccessor, difficultyInstance, mobSpawnType, spawnGroupData, compoundTag);
-		setBrownMushroom(random.nextFloat() > 0.5);
+		setBrownMushroom(random.nextBoolean());
 		return groupData;
 	}
 
@@ -64,6 +65,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
 		this.goalSelector.addGoal(2, new TurnCropsIntoBoneMealGoal(this, 1, 3));
+		this.goalSelector.addGoal(3, new FollowMobGoal(this, Player.class, 1.25));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.75, 1));
 		this.goalSelector.addGoal(5, new DanceGoal(this));
 		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8));
@@ -161,7 +163,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	}
 
 	public static boolean checkShroomPalSpawnRules(EntityType<ShroomPal> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-		return levelAccessor.getBlockState(blockPos.below()).is(BlockTags.MOOSHROOMS_SPAWNABLE_ON) && isBrightEnoughToSpawn(levelAccessor, blockPos);
+		return levelAccessor.getBlockState(blockPos.below()).is(BlockTags.MOOSHROOMS_SPAWNABLE_ON);
 	}
 
 	protected static boolean isBrightEnoughToSpawn(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos) {
@@ -169,8 +171,13 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	}
 
 	@Override
-	public boolean requiresCustomPersistence() {
-		return super.requiresCustomPersistence() || isBig() || getCropsEaten() > 0;
+	public boolean removeWhenFarAway(double d) {
+		return false;
+	}
+
+	@Override
+	public int getExperienceReward() {
+		return 1 + this.level.random.nextInt(3);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -185,6 +192,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 
 		public DanceGoal(ShroomPal pal) {
 			this.pal = pal;
+			setFlags(EnumSet.of(Flag.MOVE));
 		}
 
 		@Override

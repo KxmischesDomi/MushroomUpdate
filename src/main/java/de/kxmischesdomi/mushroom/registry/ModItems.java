@@ -30,7 +30,6 @@ public class ModItems {
 
 	public static final Item SHROOM_PAL_SPAWN_EGG = register("shroom_pal_spawn_egg", new SpawnEggItem(ModEntities.SHROOM_PAL, 0x8B1A18, 0xFCBDBD, new FabricItemSettings().group(TAB)));
 
-
 	private static Item register(String name, Item item) {
 		return register(new ResourceLocation(MushroomMod.MOD_ID, name), item);
 	}
