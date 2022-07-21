@@ -12,6 +12,7 @@ group = project.maven_group
 
 repositories {
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+	maven { url = 'https://maven.minecraftforge.net/' }
 }
 
 dependencies {
@@ -24,6 +25,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.5'
+	modImplementation 'com.github.glitchfiend:TerraBlender-fabric:1.19-2.0.0.117'
 }
 
 processResources {

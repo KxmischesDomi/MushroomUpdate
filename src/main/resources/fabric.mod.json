@@ -24,6 +24,9 @@
     ],
     "client": [
       "de.kxmischesdomi.mushroom.MushroomClient"
+    ],
+    "terrablender": [
+      "de.kxmischesdomi.mushroom.TerraBlenderEntry"
     ]
   },
   "mixins": [
@@ -34,6 +37,7 @@
     "minecraft": "1.19.x",
     "fabricloader": "*",
     "geckolib3": "*",
+    "terrablender": "*",
     "fabric": "*"
   }
 }
