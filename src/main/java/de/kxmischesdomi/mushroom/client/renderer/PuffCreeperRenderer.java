@@ -1,6 +1,7 @@
 package de.kxmischesdomi.mushroom.client.renderer;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
+import de.kxmischesdomi.mushroom.client.layer.PuffCreeperArmorLayer;
 import de.kxmischesdomi.mushroom.client.model.PuffCreeperModel;
 import de.kxmischesdomi.mushroom.entity.PuffCreeper;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -19,6 +20,7 @@ public class PuffCreeperRenderer extends GeoEntityRenderer<PuffCreeper> {
 
 	public PuffCreeperRenderer(EntityRendererProvider.Context ctx) {
 		super(ctx, new PuffCreeperModel());
+		addLayer(new PuffCreeperArmorLayer(this));
 	}
 
 	@Override

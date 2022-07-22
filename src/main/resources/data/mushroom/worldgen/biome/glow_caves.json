@@ -28,7 +28,6 @@
   "features": [
     [],
     [
-      "minecraft:lake_lava_underground",
       "minecraft:lake_lava_surface"
     ],
     [
@@ -39,14 +38,12 @@
       "minecraft:monster_room_deep"
     ],
     [
-      "mushroom:shroom_caves/shroom_patch_mycelium",
-      "mushroom:shroom_caves/shroom_patch_moss",
+      "mushroom:glow_caves/shroom_patch_mycelium",
+      "mushroom:glow_caves/glow_caves_pool",
       "mushroom:shroom_caves/mycelium",
-      "mushroom:shroom_caves/mud_patch",
-      "mushroom:shroom_caves/mushroom_brown_small",
-      "mushroom:shroom_caves/mushroom_brown",
-      "mushroom:shroom_caves/mushroom_red",
-      "minecraft:lush_caves_ceiling_vegetation",
+      "mushroom:glow_caves/mushroom_glow_small",
+      "mushroom:glow_caves/mushroom_glow",
+      "mushroom:glow_caves/glow_caves_ceiling_vegetation",
       "mushroom:shroom_caves/root_patch"
     ],
     [],
@@ -83,8 +80,7 @@
     ],
     [],
     [
-      "minecraft:spring_water",
-      "minecraft:spring_lava"
+      "minecraft:spring_water"
     ],
     [
       "minecraft:glow_lichen",
@@ -101,28 +97,10 @@
   "spawners": {
     "monster": [
       {
-        "type": "minecraft:skeleton",
-        "weight": 100,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
-        "type": "mushroom:puff_creeper",
-        "weight": 100,
-        "minCount": 4,
-        "maxCount": 4
-      },
-      {
         "type": "minecraft:slime",
         "weight": 100,
         "minCount": 4,
         "maxCount": 4
-      },
-      {
-        "type": "minecraft:witch",
-        "weight": 5,
-        "minCount": 1,
-        "maxCount": 1
       }
     ],
     "creature": [
@@ -136,15 +114,9 @@
     "ambient": [
       {
         "type": "minecraft:bat",
-        "weight": 0,
+        "weight": 10,
         "minCount": 8,
         "maxCount": 8
-      },
-      {
-        "type": "mushroom:firefly",
-        "weight": 10,
-        "minCount": 4,
-        "maxCount": 4
       }
     ],
     "axolotls": [],

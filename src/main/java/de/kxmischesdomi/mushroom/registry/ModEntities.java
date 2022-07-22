@@ -1,6 +1,7 @@
 package de.kxmischesdomi.mushroom.registry;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
+import de.kxmischesdomi.mushroom.entity.Firefly;
 import de.kxmischesdomi.mushroom.entity.ShroomPal;
 import de.kxmischesdomi.mushroom.entity.PuffCreeper;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -18,26 +19,33 @@ import net.minecraft.world.entity.MobCategory;
  */
 public class ModEntities {
 
+	public static final EntityType<ShroomPal> SHROOM_PAL = register("shroom_pal",
+			FabricEntityTypeBuilder
+					.create(MobCategory.CREATURE, ShroomPal::new)
+					.dimensions(EntityDimensions.fixed(0.6f, 0.85f))
+	);
+
 	public static final EntityType<PuffCreeper> PUFF_CREEPER = register("puff_creeper",
 			FabricEntityTypeBuilder
 					.create(MobCategory.MONSTER, PuffCreeper::new)
 					.dimensions(EntityDimensions.fixed(0.6f, 0.85f))
 	);
 
-	public static final EntityType<ShroomPal> SHROOM_PAL = register("shroom_pal",
+	public static final EntityType<Firefly> FIREFLY = register("firefly",
 			FabricEntityTypeBuilder
-					.create(MobCategory.CREATURE, ShroomPal::new)
-					.dimensions(EntityDimensions.fixed(0.6f, 0.85f))
-
+					.create(MobCategory.AMBIENT, Firefly::new)
+					.dimensions(EntityDimensions.fixed(0.1f, 0.05f))
 	);
+
 
 	private static <T extends Entity> EntityType<T> register(String name, FabricEntityTypeBuilder<T> builder) {
 		return Registry.register(Registry.ENTITY_TYPE, new ResourceLocation(MushroomMod.MOD_ID, name), builder.build());
 	}
 
 	public static void registerAttributes() {
-		FabricDefaultAttributeRegistry.register(PUFF_CREEPER, PuffCreeper.createAttributes());
 		FabricDefaultAttributeRegistry.register(SHROOM_PAL, ShroomPal.createAttributes());
+		FabricDefaultAttributeRegistry.register(PUFF_CREEPER, PuffCreeper.createAttributes());
+		FabricDefaultAttributeRegistry.register(FIREFLY, Firefly.createAttributes());
 	}
 
 }

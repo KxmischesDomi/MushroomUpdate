@@ -1,6 +1,6 @@
 package de.kxmischesdomi.mushroom.entity;
 
-import de.kxmischesdomi.mushroom.entity.ai.goal.FollowMobGoal;
+import de.kxmischesdomi.mushroom.entity.ai.goal.ShroomPalFollowMobGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -65,7 +65,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
 		this.goalSelector.addGoal(2, new TurnCropsIntoBoneMealGoal(this, 1, 3));
-		this.goalSelector.addGoal(3, new FollowMobGoal(this, Player.class, 1.25));
+		this.goalSelector.addGoal(3, new ShroomPalFollowMobGoal(this, Player.class, 1.25));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.75, 1));
 		this.goalSelector.addGoal(5, new DanceGoal(this));
 		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8));
@@ -202,7 +202,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 
 		@Override
 		public boolean canContinueToUse() {
-			return pal.isOnGround() && !pal.getNavigation().isInProgress();
+			return pal.isOnGround() && pal.getNavigation().isDone();
 		}
 
 		@Override

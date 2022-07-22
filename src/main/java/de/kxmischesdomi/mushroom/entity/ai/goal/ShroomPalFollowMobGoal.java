@@ -1,7 +1,7 @@
 package de.kxmischesdomi.mushroom.entity.ai.goal;
 
+import de.kxmischesdomi.mushroom.entity.ShroomPal;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,14 +11,14 @@ import java.util.List;
  * @author KxmischesDomi | https://github.com/kxmischesdomi
  * @since 1.0
  */
-public class FollowMobGoal extends Goal {
+public class ShroomPalFollowMobGoal extends Goal {
 
 	public static final int HORIZONTAL_SCAN_RANGE = 8;
 	public static final int VERTICAL_SCAN_RANGE = 4;
 	public static final int DONT_FOLLOW_IF_CLOSER_THAN = 5;
 	public static final int DONT_FOLLOW_IF_FURTHER_THAN = 10;
 
-	private final PathfinderMob mob;
+	private final ShroomPal mob;
 	private final Class<? extends LivingEntity> toFollow;
 	private final double speedModifier;
 
@@ -26,7 +26,7 @@ public class FollowMobGoal extends Goal {
 	private LivingEntity following;
 	private int timeToRecalcPath;
 
-	public FollowMobGoal(PathfinderMob mob, Class<? extends LivingEntity> toFollow, double speedModifier) {
+	public ShroomPalFollowMobGoal(ShroomPal mob, Class<? extends LivingEntity> toFollow, double speedModifier) {
 		this.mob = mob;
 		this.toFollow = toFollow;
 		this.speedModifier = speedModifier;
@@ -34,6 +34,10 @@ public class FollowMobGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
+		if (mob.isBig()) {
+			return false;
+		}
+
 		List<? extends LivingEntity> list = mob.level.getEntitiesOfClass(toFollow, mob.getBoundingBox().inflate(HORIZONTAL_SCAN_RANGE, VERTICAL_SCAN_RANGE, HORIZONTAL_SCAN_RANGE));
 
 		LivingEntity entity = null;
@@ -55,7 +59,7 @@ public class FollowMobGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		if (this.following == null || !this.following.isAlive()) {
+		if (this.following == null || !this.following.isAlive() || mob.isBig()) {
 			return false;
 		}
 		double d = this.mob.distanceToSqr(this.following);
