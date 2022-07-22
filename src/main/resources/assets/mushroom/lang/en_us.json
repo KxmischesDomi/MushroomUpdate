@@ -2,14 +2,16 @@
 	"itemGroup.mushroom.root": "Mushroom Update",
 
 	"item.mushroom.shroom_glider": "Shroom Glider",
-	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Egg",
 	"item.mushroom.shroom_pal_spawn_egg": "Shroom Pal Spawn Egg",
+	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Egg",
+	"item.mushroom.firefly_spawn_egg": "Firefly Spawn Egg",
 
 	"block.mushroom.glow_mushroom": "Glow Mushroom",
 	"block.mushroom.glow_mushroom_block": "Glow Mushroom Block",
 
-	"entity.mushroom.puff_creeper": "Puff Creeper",
 	"entity.mushroom.shroom_pal": "Shroom Pal",
+	"entity.mushroom.puff_creeper": "Puff Creeper",
+	"entity.mushroom.firefly": "Firefly",
 
 	"biome.mushroom.shroom_caves": "Shroom Caves",
 	"biome.mushroom.glow_caves": "Glow Caves",
