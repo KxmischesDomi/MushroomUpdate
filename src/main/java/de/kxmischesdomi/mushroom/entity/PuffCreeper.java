@@ -11,6 +11,9 @@ import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -36,7 +39,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.AABB;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -51,6 +53,8 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 public class PuffCreeper extends Monster implements IAnimatable {
 
 	private final AnimationFactory factory = new AnimationFactory(this);
+
+	private static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(PuffCreeper.class, EntityDataSerializers.BOOLEAN);
 
 	private int lastPuffTicks = 0;
 
@@ -78,11 +82,13 @@ public class PuffCreeper extends Monster implements IAnimatable {
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
+		entityData.define(POWERED, false);
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag compoundTag) {
 		super.addAdditionalSaveData(compoundTag);
+		compoundTag.putBoolean("Powered", isPowered());
 		compoundTag.putInt("NextPuff", getLastPuffTicks());
 		compoundTag.putInt("PlayPuff", getLastPuffTicks());
 	}
@@ -90,6 +96,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 	@Override
 	public void readAdditionalSaveData(CompoundTag compoundTag) {
 		super.readAdditionalSaveData(compoundTag);
+		setPowered(compoundTag.getBoolean("Powered"));
 		if (compoundTag.contains("NextPuff")) {
 			setLastPuffTicks(compoundTag.getInt("NextPuff"));
 		}
@@ -108,16 +115,17 @@ public class PuffCreeper extends Monster implements IAnimatable {
 				this.playSound(SoundEvents.PUFFER_FISH_BLOW_OUT, 1.0f, 1.0f);
 				setLastPuffTicks(0);
 
-				for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, new AABB(getX() - 2.5, getY() - 2.5, getZ() - 2.5, getX() + 2.5, getY() + 2.5, getZ() + 2.5))) {
+				for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(getExplodeRange()))) {
 					if (entity instanceof PuffCreeper) continue;
 
 					Difficulty difficulty = getLevel().getDifficulty();
+					float multiplier = isPowered() ? 2f : 1;
 					if (difficulty == Difficulty.EASY) {
-						entity.addEffect(new MobEffectInstance(MobEffects.POISON, 5*20, 1));
+						entity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (5*20 * multiplier), 1));
 					} else if (difficulty == Difficulty.NORMAL) {
-						entity.addEffect(new MobEffectInstance(MobEffects.POISON, 6*20, 1));
+						entity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (6*20 * multiplier), 1));
 					} else if (difficulty == Difficulty.HARD) {
-						entity.addEffect(new MobEffectInstance(MobEffects.POISON, 7*20, 1));
+						entity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) (7*20 * multiplier), 1));
 					}
 
 				}
@@ -131,8 +139,8 @@ public class PuffCreeper extends Monster implements IAnimatable {
 							new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SANDSTONE.defaultBlockState()),
 							true,
 							getX(), getY(), getZ(),
-							100,
-							1, 1, 1,
+							isPowered() ? 400 : 100,
+							getExplodeRange() / 2.5, getExplodeRange() / 2.5, getExplodeRange() / 2.5,
 							10
 					);
 				}
@@ -145,6 +153,10 @@ public class PuffCreeper extends Monster implements IAnimatable {
 
 		}
 
+	}
+
+	public float getExplodeRange() {
+		return isPowered() ? 5 : 2.5f;
 	}
 
 	@Override
@@ -161,7 +173,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 
 	public boolean isInTargetReach() {
 		if (getTarget() == null) return false;
-		if (distanceTo(getTarget()) > 2.5) return false;
+		if (distanceTo(getTarget()) > getExplodeRange()) return false;
 		return getSensing().hasLineOfSight(getTarget());
 	}
 
@@ -171,6 +183,14 @@ public class PuffCreeper extends Monster implements IAnimatable {
 
 	public void setLastPuffTicks(int ticks) {
 		lastPuffTicks = ticks;
+	}
+
+	public boolean isPowered() {
+		return entityData.get(POWERED);
+	}
+
+	public void setPowered(boolean powered) {
+		entityData.set(POWERED, powered);
 	}
 
 	@Override
