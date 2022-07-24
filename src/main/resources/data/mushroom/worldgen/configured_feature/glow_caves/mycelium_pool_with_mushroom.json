@@ -12,7 +12,7 @@
     },
     "replaceable": "#minecraft:lush_ground_replaceable",
     "surface": "floor",
-    "vegetation_chance": 0.1,
+    "vegetation_chance": 0.025,
     "vegetation_feature": {
       "feature": "mushroom:glow_caves/mushroom_glow_small",
       "placement": []

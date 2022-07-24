@@ -39,11 +39,17 @@
     ],
     [
       "mushroom:glow_caves/shroom_patch_mycelium",
+      "mushroom:shroom_caves/shroom_patch_moss",
       "mushroom:glow_caves/glow_caves_pool",
       "mushroom:shroom_caves/mycelium",
+      "mushroom:shroom_caves/mud_patch",
       "mushroom:glow_caves/mushroom_glow_small",
       "mushroom:glow_caves/mushroom_glow",
-      "mushroom:glow_caves/glow_caves_ceiling_vegetation",
+      "mushroom:shroom_caves/mushroom_brown_small",
+      "mushroom:shroom_caves/mushroom_brown",
+      "mushroom:shroom_caves/mushroom_red",
+      "minecraft:lush_caves_ceiling_vegetation",
+
       "mushroom:shroom_caves/root_patch"
     ],
     [],
