@@ -15,6 +15,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,6 +25,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -114,6 +116,15 @@ public class PuffCreeper extends Monster implements IAnimatable {
 		if (compoundTag.contains("PlayPuff")) {
 			setLastPuffTicks(compoundTag.getInt("PlayPuff"));
 		}
+	}
+
+	/**
+	 * Turns the puff creeper into a powered creeper when struck by lightning.
+	 */
+	@Override
+	public void thunderHit(ServerLevel serverLevel, LightningBolt lightningBolt) {
+		super.thunderHit(serverLevel, lightningBolt);
+		setPowered(true);
 	}
 
 	@Override
