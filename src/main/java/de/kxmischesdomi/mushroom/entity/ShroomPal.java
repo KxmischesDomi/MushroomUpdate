@@ -383,6 +383,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 
 		@Override
 		public boolean canUse() {
+			if (mob.lastHurtByPlayerTime > 0) {
+				return false;
+			}
 			if (mob.isBig()) {
 				return false;
 			}
@@ -408,6 +411,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 
 		@Override
 		public boolean canContinueToUse() {
+			if (mob.lastHurtByPlayerTime > 0) {
+				return false;
+			}
 			if (this.following == null || !this.following.isAlive() || mob.isBig()) {
 				return false;
 			}
