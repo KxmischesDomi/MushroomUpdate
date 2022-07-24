@@ -1,0 +1,34 @@
+{
+	"itemGroup.mushroom.root": "Mushroom Update",
+
+	"item.mushroom.shroom_glider": "Грибной планер",
+	"item.mushroom.shroom_pal_spawn_egg": "Яйцо вызова Грибочка",
+	"item.mushroom.puff_creeper_spawn_egg": "Яйцо вызова Грибного Крипера",
+	"item.mushroom.firefly_spawn_egg": "Яйцо вызова светлячка",
+
+	"block.mushroom.glow_mushroom": "Светлогриб",
+	"block.mushroom.glow_mushroom_block": "Блок светлогриба",
+
+	"entity.mushroom.shroom_pal": "Грибочек",
+	"entity.mushroom.puff_creeper": "Грибной Крипер",
+	"entity.mushroom.firefly": "Светлячок",
+
+	"biome.mushroom.shroom_caves": "Грибные Пещеры",
+	"biome.mushroom.glow_caves": "Светопещеры",
+
+	"subtitles.entity.mushroom.puff_creeper.death": "Грибной Крипер умирает",
+	"subtitles.entity.mushroom.puff_creeper.hurt": "Грибной Крипер ранился",
+	"subtitles.entity.mushroom.puff_creeper.puff": "Грибной Крипер выпускает споры",
+
+	"subtitles.entity.mushroom.shroom_pal.death": "Грибочек умирает",
+	"subtitles.entity.mushroom.shroom_pal.death_big": "Большой грибочек умирает",
+	"subtitles.entity.mushroom.shroom_pal.hurt": "Грибочек поранился",
+	"subtitles.entity.mushroom.shroom_pal.hurt_big": "Большой грибочек поранился",
+	"subtitles.entity.mushroom.shroom_pal.harvest": "Грибочек собирает",
+	"subtitles.entity.mushroom.shroom_pal.harvest_big": "Большой грибочек собирает",
+	"subtitles.entity.mushroom.shroom_pal.ambient": "Грибочек пищит",
+	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Большой грибочек пищит",
+	"subtitles.entity.mushroom.shroom_pal.step": "Грибочек топает",
+	"subtitles.entity.mushroom.shroom_pal.step_big": "Большой грибочек топает",
+	"subtitles.entity.mushroom.shroom_pal.grow": "Грибочек растёт"
+}
