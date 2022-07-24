@@ -1,6 +1,7 @@
 package de.kxmischesdomi.mushroom.entity;
 
 import de.kxmischesdomi.mushroom.registry.ModSounds;
+import de.kxmischesdomi.mushroom.registry.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -228,7 +229,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	 * @return if the shroom pal is able to spawn with the given parameters.
 	 */
 	public static boolean checkShroomPalSpawnRules(EntityType<ShroomPal> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-		return levelAccessor.getBlockState(blockPos.below()).is(BlockTags.MOOSHROOMS_SPAWNABLE_ON);
+		return levelAccessor.getBlockState(blockPos.below()).is(ModTags.SHROOMPALS_SPAWNABLE_ON);
 	}
 
 	@Override
