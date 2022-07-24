@@ -31,7 +31,7 @@ public class ModEntities {
 					.dimensions(EntityDimensions.fixed(0.6f, 0.85f))
 	);
 
-	public static final EntityType<Glowfly> FIREFLY = register("glowfly",
+	public static final EntityType<Glowfly> GLOWFLY = register("glowfly",
 			FabricEntityTypeBuilder
 					.create(MobCategory.AMBIENT, Glowfly::new)
 					.dimensions(EntityDimensions.fixed(0.1f, 0.05f))
@@ -45,7 +45,7 @@ public class ModEntities {
 	public static void registerAttributes() {
 		FabricDefaultAttributeRegistry.register(SHROOM_PAL, ShroomPal.createAttributes());
 		FabricDefaultAttributeRegistry.register(PUFF_CREEPER, PuffCreeper.createAttributes());
-		FabricDefaultAttributeRegistry.register(FIREFLY, Glowfly.createAttributes());
+		FabricDefaultAttributeRegistry.register(GLOWFLY, Glowfly.createAttributes());
 	}
 
 }

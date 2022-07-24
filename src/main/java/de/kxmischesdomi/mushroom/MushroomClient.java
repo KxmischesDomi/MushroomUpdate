@@ -24,7 +24,7 @@ public class MushroomClient implements ClientModInitializer {
 	public void onInitializeClient() {
 
 		EntityRendererRegistry.register(ModEntities.SHROOM_PAL, ShroomPalRenderer::new);
-		EntityRendererRegistry.register(ModEntities.FIREFLY, GlowflyRenderer::new);
+		EntityRendererRegistry.register(ModEntities.GLOWFLY, GlowflyRenderer::new);
 		EntityRendererRegistry.register(ModEntities.PUFF_CREEPER, PuffCreeperRenderer::new);
 		PuffCreeperRenderer.initPuffReceiver();
 
