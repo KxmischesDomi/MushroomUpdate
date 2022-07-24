@@ -1,19 +1,35 @@
 {
 	"itemGroup.mushroom.root": "Mushroom Update",
 
-	"item.mushroom.shroom_glider": "Paddo Zweefvlieger",
-	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Ei",
+	"item.mushroom.shroom_glider": "Paddenstoel Zweefvlieger",
 	"item.mushroom.shroom_pal_spawn_egg": "Paddo Mattie Spawn Ei",
+	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Ei",
+	"item.mushroom.firefly_spawn_egg": "Gloeivlieg Spawn Ei",
 
 	"block.mushroom.glow_mushroom": "Gloei Champignon",
-	"block.mushroom.glow_mushroom_block": "Gloei Champignonblok",
+	"block.mushroom.glow_mushroom_block": "Gloei Champignonblock",
+	"block.mushroom.potted_glow_mushroom": "Gloei Champignon In Een Pot",
 
-	"entity.mushroom.puff_creeper": "Puff Creeper",
 	"entity.mushroom.shroom_pal": "Paddo Mattie",
+	"entity.mushroom.puff_creeper": "Puff Creeper",
+	"entity.mushroom.firefly": "Gloeivlieg",
 
 	"biome.mushroom.shroom_caves": "Paddenstoelen Grot",
+	"biome.mushroom.glowing_shroom_caves": "Gloed Grot",
 
 	"subtitles.entity.mushroom.puff_creeper.death": "Puff Creeper sterft",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Puff Creeper raakt gewond",
-	"subtitles.entity.mushroom.puff_creeper.puff": "Puff Creeper puft"
+	"subtitles.entity.mushroom.puff_creeper.puff": "Puff Creeper puft",
+
+	"subtitles.entity.mushroom.shroom_pal.death": "Paddo Mattie sterft",
+	"subtitles.entity.mushroom.shroom_pal.death_big": "Groot Paddo Mattie sterft",
+	"subtitles.entity.mushroom.shroom_pal.hurt": "Paddo Mattie raakt gewond",
+	"subtitles.entity.mushroom.shroom_pal.hurt_big": "Groot Paddo Mattie raakt gewond",
+	"subtitles.entity.mushroom.shroom_pal.harvest": "Paddo Mattie oogst",
+	"subtitles.entity.mushroom.shroom_pal.harvest_big": "Grote Paddo Mattie oogst",
+	"subtitles.entity.mushroom.shroom_pal.ambient": "Paddo Mattie piept",
+	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Groot Paddo Mattie piept",
+	"subtitles.entity.mushroom.shroom_pal.step": "Paddo Mattie stappen",
+	"subtitles.entity.mushroom.shroom_pal.step_big": "Grote Paddo Mattie stappen",
+	"subtitles.entity.mushroom.shroom_pal.grow": "Paddo Mattie groeit"
 }
