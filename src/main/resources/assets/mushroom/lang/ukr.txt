@@ -1,5 +1,5 @@
 {
-	"itemGroup.mushroom.root": "Грибний Апдейт",
+	"itemGroup.mushroom.root": "Грибне Оновлення",
 
 	"item.mushroom.shroom_glider": "Грибний планер",
 	"item.mushroom.shroom_pal_spawn_egg": "Яйце виклику Грибочка",
