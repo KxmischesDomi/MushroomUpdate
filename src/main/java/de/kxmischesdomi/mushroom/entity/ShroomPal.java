@@ -348,7 +348,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 					}
 				}
 
-				pal.playSound(pal.isBig() ? ModSounds.SHROOM_PAL_HARVEST : ModSounds.SHROOM_PAL_HARVEST_BIG);
+				pal.playSound(pal.isBig() ? ModSounds.SHROOM_PAL_HARVEST_BIG : ModSounds.SHROOM_PAL_HARVEST);
 				pal.level.setBlock(this.blockPos, blockState.setValue(cropBlock.getAgeProperty(), 1), 2);
 			}
 
