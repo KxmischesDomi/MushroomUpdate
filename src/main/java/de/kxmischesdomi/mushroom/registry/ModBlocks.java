@@ -5,10 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HugeMushroomBlock;
-import net.minecraft.world.level.block.MushroomBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
@@ -34,6 +31,12 @@ public class ModBlocks {
 			.strength(0.2f)
 			.sound(SoundType.WOOD)
 			.lightLevel(state -> 14)
+			)
+	);
+
+	public static final Block POTTED_GLOW_MUSHROOM = register("potted_glow_mushroom", new FlowerPotBlock(GLOW_MUSHROOM, BlockBehaviour.Properties.of(Material.DECORATION)
+			.instabreak()
+			.noOcclusion()
 			)
 	);
 

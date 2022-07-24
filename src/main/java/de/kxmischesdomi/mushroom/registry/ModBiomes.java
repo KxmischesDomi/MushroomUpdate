@@ -13,7 +13,7 @@ import net.minecraft.world.level.biome.Biome;
 public class ModBiomes {
 
 	public static final ResourceKey<Biome> SHROOM_CAVES = ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MushroomMod.MOD_ID, "shroom_caves"));
-	public static final ResourceKey<Biome> GLOW_CAVES = ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MushroomMod.MOD_ID, "glow_caves"));
+	public static final ResourceKey<Biome> GLOW_CAVES = ResourceKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MushroomMod.MOD_ID, "glow_shroom_caves"));
 
 	public static void init() {
 

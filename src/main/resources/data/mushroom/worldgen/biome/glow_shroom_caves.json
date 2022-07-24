@@ -127,8 +127,8 @@
       {
         "type": "mushroom:glowfly",
         "weight": 100,
-        "minCount": 4,
-        "maxCount": 4
+        "minCount": 1,
+        "maxCount": 1
       }
     ],
     "axolotls": [],

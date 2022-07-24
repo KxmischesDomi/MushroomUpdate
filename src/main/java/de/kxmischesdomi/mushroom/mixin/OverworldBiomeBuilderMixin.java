@@ -34,7 +34,7 @@ public abstract class OverworldBiomeBuilderMixin {
 	@Inject(method = "addUndergroundBiomes", at = @At("HEAD"))
 	public void addUndergroundBiomesInject(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer, CallbackInfo ci) {
 		this.addUndergroundBiome(consumer, this.FULL_RANGE, this.FULL_RANGE, this.mushroomFieldsContinentalness, this.FULL_RANGE, this.FULL_RANGE, 0.0f, ModBiomes.SHROOM_CAVES);
-		this.addUndergroundBiome(consumer, this.FULL_RANGE, this.FULL_RANGE, this.mushroomFieldsContinentalness, this.FULL_RANGE, this.FULL_RANGE, 0.0f, ModBiomes.GLOW_CAVES);
+//		this.addUndergroundBiome(consumer, this.FULL_RANGE, this.FULL_RANGE, this.mushroomFieldsContinentalness, this.FULL_RANGE, this.FULL_RANGE, 0.0f, ModBiomes.GLOW_CAVES);
 	}
 
 }

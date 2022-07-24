@@ -5,6 +5,7 @@
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"BiomesMixin",
+		"BlendingDataMixin",
 		"LivingEntityMixin",
 		"OverworldBiomeBuilderMixin",
 		"SpawnPlacementsMixin"

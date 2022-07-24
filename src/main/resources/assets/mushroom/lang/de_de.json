@@ -1,0 +1,35 @@
+{
+	"itemGroup.mushroom.root": "Mushroom Update",
+
+	"item.mushroom.shroom_glider": "Pilz Gleiter",
+	"item.mushroom.shroom_pal_spawn_egg": "Pilz-Kumpel-Spawn-Ei",
+	"item.mushroom.puff_creeper_spawn_egg": "Puff-Creeper-Spawn-Ei",
+	"item.mushroom.firefly_spawn_egg": "Leuchtwürmchen-Spawn-Ei",
+
+	"block.mushroom.glow_mushroom": "Leuchtender Pilz",
+	"block.mushroom.glow_mushroom_block": "Leuchtender Pilzblock",
+	"block.mushroom.potted_glow_mushroom": "Eingetopfter Leuchtender Pilz",
+
+	"entity.mushroom.shroom_pal": "Pilz Kumpel",
+	"entity.mushroom.puff_creeper": "Puff Creeper",
+	"entity.mushroom.firefly": "Leuchtwürmchen",
+
+	"biome.mushroom.shroom_caves": "Pilz Höhlen",
+	"biome.mushroom.glowing_shroom_caves": "Leuchtende Pilz Höhlen",
+
+	"subtitles.entity.mushroom.puff_creeper.death": "Puff Creeper stirbt",
+	"subtitles.entity.mushroom.puff_creeper.hurt": "Puff Creeper nimmt Schaden",
+	"subtitles.entity.mushroom.puff_creeper.puff": "Puff Creeper pufft",
+
+	"subtitles.entity.mushroom.shroom_pal.death": "Pilz Kumpel stirbt",
+	"subtitles.entity.mushroom.shroom_pal.death_big": "Großer Pilz Kumpel stirbt",
+	"subtitles.entity.mushroom.shroom_pal.hurt": "Pilz Kumpel nimmt Schaden",
+	"subtitles.entity.mushroom.shroom_pal.hurt_big": "Großer Pilz Kumpel nimmt Schaden",
+	"subtitles.entity.mushroom.shroom_pal.harvest": "Pilz Kumpel erntet Feld",
+	"subtitles.entity.mushroom.shroom_pal.harvest_big": "Großer Pilz Kumpel erntet Feld",
+	"subtitles.entity.mushroom.shroom_pal.ambient": "Pilz Kumpel quietscht",
+	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Großer Pilz Kumpel quietscht",
+	"subtitles.entity.mushroom.shroom_pal.step": "Pilz Kumpel läuft",
+	"subtitles.entity.mushroom.shroom_pal.step_big": "Großer Pilz Kumpel läuft",
+	"subtitles.entity.mushroom.shroom_pal.grow": "Pilz Kumpel wächst"
+}
