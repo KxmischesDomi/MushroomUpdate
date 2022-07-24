@@ -1,0 +1,34 @@
+{
+	"itemGroup.mushroom.root": "Mushroom Update",
+
+	"item.mushroom.shroom_glider": "Грыбний планёр",
+	"item.mushroom.shroom_pal_spawn_egg": "Яйка выкліку Грыбочка",
+	"item.mushroom.puff_creeper_spawn_egg": "Яйка выкліку Грыбного Кріпера",
+	"item.mushroom.firefly_spawn_egg": "Яйка выкліку светлячка",
+
+	"block.mushroom.glow_mushroom": "Святлогрыб",
+	"block.mushroom.glow_mushroom_block": "Блок святлогрыбу",
+
+	"entity.mushroom.shroom_pal": "Грыбочок",
+	"entity.mushroom.puff_creeper": "Грыбны Кріпер",
+	"entity.mushroom.firefly": "Свeтлячок",
+
+	"biome.mushroom.shroom_caves": "Грыбны Пячоры",
+	"biome.mushroom.glow_caves": "Святлопячора",
+
+	"subtitles.entity.mushroom.puff_creeper.death": "Грыбны Кріпер памірае",
+	"subtitles.entity.mushroom.puff_creeper.hurt": "Грыбны Кріпер пацярпеў",
+	"subtitles.entity.mushroom.puff_creeper.puff": "Грыбны Кріпер выпускае споры",
+
+	"subtitles.entity.mushroom.shroom_pal.death": "Грыбочок памірае",
+	"subtitles.entity.mushroom.shroom_pal.death_big": "Вялікі грыбочок памірае",
+	"subtitles.entity.mushroom.shroom_pal.hurt": "Грыбочок пацярпеў",
+	"subtitles.entity.mushroom.shroom_pal.hurt_big": "Вялікі грыбочок пацярпеў",
+	"subtitles.entity.mushroom.shroom_pal.harvest": "Грыбочок збірае",
+	"subtitles.entity.mushroom.shroom_pal.harvest_big": "Вялікі грыбочок збірае",
+	"subtitles.entity.mushroom.shroom_pal.ambient": "Грыбочок пішчыць",
+	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Вялікі грыбочок пішчыць",
+	"subtitles.entity.mushroom.shroom_pal.step": "Грыбочок тупае",
+	"subtitles.entity.mushroom.shroom_pal.step_big": "Вялікі грыбочок тупае",
+	"subtitles.entity.mushroom.shroom_pal.grow": "Грыбочок росте"
+}
