@@ -1,0 +1,19 @@
+{
+	"itemGroup.mushroom.root": "Paddenstoelen Update",
+
+	"item.mushroom.shroom_glider": "Paddo Zweefvlieger",
+	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Ei",
+	"item.mushroom.shroom_pal_spawn_egg": "Paddo Mattie Spawn Ei",
+
+	"block.mushroom.glow_mushroom": "Gloei Champignon",
+	"block.mushroom.glow_mushroom_block": "Gloei Champignonblok",
+
+	"entity.mushroom.puff_creeper": "Puff Creeper",
+	"entity.mushroom.shroom_pal": "Paddo Mattie",
+
+	"biome.mushroom.shroom_caves": "Paddenstoelen Grot",
+
+	"subtitles.entity.mushroom.puff_creeper.death": "Puff Creeper sterft",
+	"subtitles.entity.mushroom.puff_creeper.hurt": "Puff Creeper raakt gewond",
+	"subtitles.entity.mushroom.puff_creeper.puff": "Puff Creeper puft"
+}
