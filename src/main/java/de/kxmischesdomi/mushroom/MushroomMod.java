@@ -1,9 +1,6 @@
 package de.kxmischesdomi.mushroom;
 
-import de.kxmischesdomi.mushroom.registry.ModConfiguredFeatures;
-import de.kxmischesdomi.mushroom.registry.ModEntities;
-import de.kxmischesdomi.mushroom.registry.ModItems;
-import de.kxmischesdomi.mushroom.registry.ModSounds;
+import de.kxmischesdomi.mushroom.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -24,6 +21,7 @@ public class MushroomMod implements ModInitializer {
 		ModItems.init();
 		ModSounds.init();
 		ModConfiguredFeatures.init();
+		ModBiomes.init();
 
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MUSHROOM_FIELDS), MobCategory.MONSTER, ModEntities.PUFF_CREEPER, 100, 1, 3);
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MUSHROOM_FIELDS), MobCategory.CREATURE, ModEntities.SHROOM_PAL, 10, 4, 8);

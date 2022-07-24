@@ -24,6 +24,10 @@ public abstract class LivingEntityMixin extends Entity {
 		super(entityType, level);
 	}
 
+	/**
+	 * Checks if the entity is wearing a shroom glider and if so, changes the item stack's durability and returns true.
+	 * @return true if the entity is wearing a shroom glider.
+	 */
 	@Inject(method = "hasEffect", at = @At("HEAD"), cancellable = true)
 	public void hasEffectInject(MobEffect mobEffect, CallbackInfoReturnable<Boolean> cir) {
 		if (mobEffect == MobEffects.SLOW_FALLING) {

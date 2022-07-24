@@ -1,19 +1,17 @@
 package de.kxmischesdomi.mushroom.entity;
 
-import de.kxmischesdomi.mushroom.entity.ai.goal.ShroomPalFollowMobGoal;
+import de.kxmischesdomi.mushroom.registry.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -24,6 +22,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -34,6 +33,7 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.EnumSet;
+import java.util.List;
 
 /**
  * @author KxmischesDomi | https://github.com/kxmischesdomi
@@ -52,6 +52,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		super(entityType, level);
 	}
 
+	/**
+	 * Give natural generated shroom pals a random chance to be brown
+	 */
 	@Nullable
 	@Override
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType mobSpawnType, @Nullable SpawnGroupData spawnGroupData, @Nullable CompoundTag compoundTag) {
@@ -60,18 +63,24 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		return groupData;
 	}
 
+	/**
+	 * Creates the ai goals for the shroom pal.
+	 */
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new PanicGoal(this, 1.25));
 		this.goalSelector.addGoal(2, new TurnCropsIntoBoneMealGoal(this, 1, 3));
-		this.goalSelector.addGoal(3, new ShroomPalFollowMobGoal(this, Player.class, 1.25));
+		this.goalSelector.addGoal(3, new FollowMobGoal(this, Player.class, 1.25));
 		this.goalSelector.addGoal(4, new WaterAvoidingRandomStrollGoal(this, 0.75, 1));
 		this.goalSelector.addGoal(5, new DanceGoal(this));
 		this.goalSelector.addGoal(5, new LookAtPlayerGoal(this, Player.class, 8));
 		this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
 	}
 
+	/**
+	 * Defines the attributes for the shroom pal.
+	 */
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
@@ -81,6 +90,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		entityData.define(DANCING, false);
 	}
 
+	/**
+	 * Writes the shroom pal's data to the nbt.
+	 */
 	@Override
 	public void addAdditionalSaveData(CompoundTag compoundTag) {
 		super.addAdditionalSaveData(compoundTag);
@@ -89,6 +101,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		compoundTag.putInt("CropsEaten", getCropsEaten());
 	}
 
+	/**
+	 * Reads the shroom pal's data from the nbt.
+	 */
 	@Override
 	public void readAdditionalSaveData(CompoundTag compoundTag) {
 		super.readAdditionalSaveData(compoundTag);
@@ -97,38 +112,93 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		this.setCropsEaten(compoundTag.getInt("CropsEaten"));
 	}
 
+	/**
+	 * @return if the shroom pal is big.
+	 */
 	public boolean isBig() {
 		return entityData.get(BIG);
 	}
 
-	public void setBig(boolean baby) {
-		entityData.set(BIG, baby);
+	/**
+	 * @param big if the shroom pal should be big.
+	 */
+	public void setBig(boolean big) {
+		entityData.set(BIG, big);
 	}
 
+	/**
+	 * @return if the shroom pal is brown.
+	 */
 	public boolean isBrownMushroom() {
 		return entityData.get(BROWN_MUSHROOM);
 	}
 
+	/**
+	 * @param brown if the shroom pal should be brown.
+	 */
 	public void setBrownMushroom(boolean brown) {
 		entityData.set(BROWN_MUSHROOM, brown);
 	}
 
+	/**
+	 * @return if the shroom pal is dancing.
+	 */
 	public boolean isDancing() {
 		return entityData.get(DANCING);
 	}
 
+	/**
+	 * @param dancing if the shroom pal should be dancing.
+	 */
 	public void setDancing(boolean dancing) {
 		entityData.set(DANCING, dancing);
 	}
 
+	/**
+	 * @return the number of crops eaten by the shroom pal
+	 */
 	public int getCropsEaten() {
 		return entityData.get(CROPS_EATEN);
 	}
 
+	/**
+	 * @param cropsEaten the number of crops eaten by the shroom pal
+	 */
 	public void setCropsEaten(int cropsEaten) {
 		entityData.set(CROPS_EATEN, cropsEaten);
 	}
 
+	@Nullable
+	@Override
+	protected SoundEvent getDeathSound() {
+		return isBig() ? ModSounds.SHROOM_PAL_DEATH_BIG : ModSounds.SHROOM_PAL_DEATH;
+	}
+
+	@Nullable
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damageSource) {
+		return isBig() ? ModSounds.SHROOM_PAL_HURT_BIG : ModSounds.SHROOM_PAL_HURT;
+	}
+
+	@Nullable
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return isBig() ? ModSounds.SHROOM_PAL_AMBIENT_BIG : ModSounds.SHROOM_PAL_AMBIENT;
+	}
+
+	@Override
+	protected void playStepSound(BlockPos blockPos, BlockState blockState) {
+		if (blockState.getMaterial().isLiquid()) {
+			return;
+		}
+		BlockState blockState2 = this.level.getBlockState(blockPos.above());
+		SoundType soundType = blockState2.is(BlockTags.INSIDE_STEP_SOUND_BLOCKS) ? blockState2.getSoundType() : blockState.getSoundType();
+		this.playSound(isBig() ? ModSounds.SHROOM_PAL_STEP_BIG : ModSounds.SHROOM_PAL_STEP, soundType.getVolume() * 0.15f, soundType.getPitch());
+	}
+
+	/**
+	 * Registers the animation controllers for the shroom pal.
+	 */
 	@Override
 	public void registerControllers(AnimationData animationData) {
 		animationData.addAnimationController(new AnimationController(this, "controller_walk", 0, event -> {
@@ -148,26 +218,15 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	}
 
 	@Override
-	public void tick() {
-		super.tick();
-	}
-
-	@Override
 	public AnimationFactory getFactory() {
 		return factory;
 	}
 
-	@Override
-	public boolean wantsToPickUp(ItemStack itemStack) {
-		return super.wantsToPickUp(itemStack);
-	}
-
+	/**
+	 * @return if the shroom pal is able to spawn with the given parameters.
+	 */
 	public static boolean checkShroomPalSpawnRules(EntityType<ShroomPal> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
 		return levelAccessor.getBlockState(blockPos.below()).is(BlockTags.MOOSHROOMS_SPAWNABLE_ON);
-	}
-
-	protected static boolean isBrightEnoughToSpawn(BlockAndTintGetter blockAndTintGetter, BlockPos blockPos) {
-		return blockAndTintGetter.getRawBrightness(blockPos, 0) > 8;
 	}
 
 	@Override
@@ -200,6 +259,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 			return canContinueToUse();
 		}
 
+		/**
+		 * @return if the shroom pal is able to dance.
+		 */
 		@Override
 		public boolean canContinueToUse() {
 			return pal.isOnGround() && pal.getNavigation().isDone();
@@ -280,10 +342,11 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 					pal.setCropsEaten(pal.getCropsEaten() + 1);
 					if (pal.getCropsEaten() >= 50) {
 						pal.setBig(true);
+						pal.playSound(ModSounds.SHROOM_PAL_GROW);
 					}
 				}
 
-				pal.playSound(SoundEvents.COMPOSTER_FILL_SUCCESS, 1.0f, 1.0f);
+				pal.playSound(pal.isBig() ? ModSounds.SHROOM_PAL_HARVEST : ModSounds.SHROOM_PAL_HARVEST_BIG);
 				pal.level.setBlock(this.blockPos, blockState.setValue(cropBlock.getAgeProperty(), 1), 2);
 			}
 
@@ -293,6 +356,83 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		public void start() {
 			this.ticksWaited = 0;
 			super.start();
+		}
+
+	}
+
+	public static class FollowMobGoal extends Goal {
+
+		public static final int HORIZONTAL_SCAN_RANGE = 8;
+		public static final int VERTICAL_SCAN_RANGE = 4;
+		public static final int DONT_FOLLOW_IF_CLOSER_THAN = 5;
+		public static final int DONT_FOLLOW_IF_FURTHER_THAN = 10;
+
+		private final ShroomPal mob;
+		private final Class<? extends LivingEntity> toFollow;
+		private final double speedModifier;
+
+		@Nullable
+		private LivingEntity following;
+		private int timeToRecalcPath;
+
+		public FollowMobGoal(ShroomPal mob, Class<? extends LivingEntity> toFollow, double speedModifier) {
+			this.mob = mob;
+			this.toFollow = toFollow;
+			this.speedModifier = speedModifier;
+		}
+
+		@Override
+		public boolean canUse() {
+			if (mob.isBig()) {
+				return false;
+			}
+
+			List<? extends LivingEntity> list = mob.level.getEntitiesOfClass(toFollow, mob.getBoundingBox().inflate(HORIZONTAL_SCAN_RANGE, VERTICAL_SCAN_RANGE, HORIZONTAL_SCAN_RANGE));
+
+			LivingEntity entity = null;
+			double d = Double.MAX_VALUE;
+			for (LivingEntity entity2 : list) {
+				double e;
+				if ((e = this.mob.distanceToSqr(entity2)) > d) continue;
+				d = e;
+				entity = entity2;
+			}
+
+			if (entity == null || d < (DONT_FOLLOW_IF_CLOSER_THAN^2)) {
+				return false;
+			}
+
+			this.following = entity;
+			return true;
+		}
+
+		@Override
+		public boolean canContinueToUse() {
+			if (this.following == null || !this.following.isAlive() || mob.isBig()) {
+				return false;
+			}
+			double d = this.mob.distanceToSqr(this.following);
+			return !(d < (DONT_FOLLOW_IF_CLOSER_THAN^2)) && !(d > (DONT_FOLLOW_IF_FURTHER_THAN^2));
+		}
+
+		@Override
+		public void start() {
+			this.timeToRecalcPath = 0;
+		}
+
+		@Override
+		public void stop() {
+			this.mob.getNavigation().stop();
+			this.following = null;
+		}
+
+		@Override
+		public void tick() {
+			if (--this.timeToRecalcPath > 0 || this.following == null) {
+				return;
+			}
+			this.timeToRecalcPath = this.adjustedTickDelay(10);
+			this.mob.getNavigation().moveTo(this.following, this.speedModifier);
 		}
 
 	}

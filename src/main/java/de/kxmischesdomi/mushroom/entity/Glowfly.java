@@ -24,15 +24,18 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
  * @author KxmischesDomi | https://github.com/kxmischesdomi
  * @since 1.0
  */
-public class Firefly extends PathfinderMob implements IAnimatable {
+public class Glowfly extends PathfinderMob implements IAnimatable {
 
 	private final AnimationFactory factory = new AnimationFactory(this);
 
-	public Firefly(EntityType<? extends PathfinderMob> entityType, Level level) {
+	public Glowfly(EntityType<? extends PathfinderMob> entityType, Level level) {
 		super(entityType, level);
 		this.moveControl = new FlyingMoveControl(this, 10, false);
 	}
 
+	/**
+	 * Creates the navigation for the glowfly.
+	 */
 	@Override
 	protected PathNavigation createNavigation(Level level) {
 		FlyingPathNavigation flyingPathNavigation = new FlyingPathNavigation(this, level);
@@ -42,6 +45,9 @@ public class Firefly extends PathfinderMob implements IAnimatable {
 		return flyingPathNavigation;
 	}
 
+	/**
+	 * Creates the ai goals for the glowfly.
+	 */
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1, 1));
@@ -98,7 +104,6 @@ public class Firefly extends PathfinderMob implements IAnimatable {
 
 	@Override
 	protected void playStepSound(BlockPos blockPos, BlockState blockState) {
-
 	}
 
 	@Override
@@ -116,6 +121,9 @@ public class Firefly extends PathfinderMob implements IAnimatable {
 		return super.removeWhenFarAway(d);
 	}
 
+	/**
+	 * Registers the animations for the glowfly.
+	 */
 	@Override
 	public void registerControllers(AnimationData animationData) {
 		animationData.addAnimationController(new AnimationController(this, "controller", 1, event -> {
@@ -136,7 +144,10 @@ public class Firefly extends PathfinderMob implements IAnimatable {
 		return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 1).add(Attributes.FLYING_SPEED, 0.4f).add(Attributes.MOVEMENT_SPEED, 0.2);
 	}
 
-	public static boolean checkFireflySpawnRules(EntityType<Firefly> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
+	/**
+	 * @return if the glowfl can naturally spawn with the given parameters.
+	 */
+	public static boolean checkGlowflySpawnRules(EntityType<Glowfly> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
 		return checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, blockPos, randomSource);
 	}
 

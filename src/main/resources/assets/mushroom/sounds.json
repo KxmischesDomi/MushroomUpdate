@@ -2,24 +2,116 @@
 	"puff_creeper_death": {
 		"subtitle": "subtitles.entity.mushroom.puff_creeper.death",
 		"sounds": [
-			"mushroom:puff_creeper_death"
+			"mushroom:puff_creeper/death"
 		]
 	},
 	"puff_creeper_hurt": {
 		"subtitle": "subtitles.entity.mushroom.puff_creeper.hurt",
 		"sounds": [
-			"mushroom:puff_creeper_hurt_1",
-			"mushroom:puff_creeper_hurt_2",
-			"mushroom:puff_creeper_hurt_3",
-			"mushroom:puff_creeper_hurt_4"
+			"mushroom:puff_creeper/hurt_1",
+			"mushroom:puff_creeper/hurt_2",
+			"mushroom:puff_creeper/hurt_3",
+			"mushroom:puff_creeper/hurt_4"
 		]
 	},
 	"puff_creeper_puff": {
 		"subtitle": "subtitles.entity.mushroom.puff_creeper.puff",
 		"sounds": [
-			"mushroom:puff_creeper_explosion_1",
-			"mushroom:puff_creeper_explosion_2",
-			"mushroom:puff_creeper_explosion_3"
+			"mushroom:puff_creeper/explosion_1",
+			"mushroom:puff_creeper/explosion_2",
+			"mushroom:puff_creeper/explosion_3"
+		]
+	},
+	"shroom_pal_death": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.death",
+		"sounds": [
+			"mushroom:shroom_pal/death_1",
+			"mushroom:shroom_pal/death_2"
+		]
+	},
+	"shroom_pal_death_big": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.death_big",
+		"sounds": [
+			"mushroom:shroom_pal/death_1_big",
+			"mushroom:shroom_pal/death_2_big"
+		]
+	},
+	"shroom_pal_hurt": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.hurt",
+		"sounds": [
+			"mushroom:shroom_pal/hurt_1",
+			"mushroom:shroom_pal/hurt_2",
+			"mushroom:shroom_pal/hurt_3",
+			"mushroom:shroom_pal/hurt_4"
+		]
+	},
+	"shroom_pal_hurt_big": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.hurt_big",
+		"sounds": [
+			"mushroom:shroom_pal/hurt_1_big",
+			"mushroom:shroom_pal/hurt_2_big",
+			"mushroom:shroom_pal/hurt_3_big",
+			"mushroom:shroom_pal/hurt_4_big"
+		]
+	},
+	"shroom_pal_harvest": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.harvest",
+		"sounds": [
+			"mushroom:shroom_pal/harvest_1",
+			"mushroom:shroom_pal/harvest_2",
+			"mushroom:shroom_pal/harvest_3",
+			"mushroom:shroom_pal/harvest_4"
+		]
+	},
+	"shroom_pal_harvest_big": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.harvest_big",
+		"sounds": [
+			"mushroom:shroom_pal/harvest_1_big",
+			"mushroom:shroom_pal/harvest_2_big",
+			"mushroom:shroom_pal/harvest_3_big",
+			"mushroom:shroom_pal/harvest_4_big"
+		]
+	},
+	"shroom_pal_ambient": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.ambient",
+		"sounds": [
+			"mushroom:shroom_pal/ambient_1",
+			"mushroom:shroom_pal/ambient_2",
+			"mushroom:shroom_pal/ambient_3",
+			"mushroom:shroom_pal/ambient_4"
+		]
+	},
+	"shroom_pal_ambient_big": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.ambient_big",
+		"sounds": [
+			"mushroom:shroom_pal/ambient_1_big",
+			"mushroom:shroom_pal/ambient_2_big",
+			"mushroom:shroom_pal/ambient_3_big",
+			"mushroom:shroom_pal/ambient_4_big"
+		]
+	},
+	"shroom_pal_step": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.step",
+		"sounds": [
+			"mushroom:shroom_pal/step_1",
+			"mushroom:shroom_pal/step_2",
+			"mushroom:shroom_pal/step_3",
+			"mushroom:shroom_pal/step_4"
+		]
+	},
+	"shroom_pal_step_big": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.step_big",
+		"sounds": [
+			"mushroom:shroom_pal/step_1_big",
+			"mushroom:shroom_pal/step_2_big",
+			"mushroom:shroom_pal/step_3_big",
+			"mushroom:shroom_pal/step_4_big"
+		]
+	},
+	"shroom_pal_grow": {
+		"subtitle": "subtitles.entity.mushroom.shroom_pal.grow",
+		"sounds": [
+			"mushroom:shroom_pal/grow"
 		]
 	}
 }

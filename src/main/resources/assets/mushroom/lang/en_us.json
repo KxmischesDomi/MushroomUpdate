@@ -18,5 +18,17 @@
 
 	"subtitles.entity.mushroom.puff_creeper.death": "Puff Creeper dies",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Puff Creeper hurts",
-	"subtitles.entity.mushroom.puff_creeper.puff": "Puff Creeper puffs"
+	"subtitles.entity.mushroom.puff_creeper.puff": "Puff Creeper puffs",
+
+	"subtitles.entity.mushroom.shroom_pal.death": "Shroom Pal dies",
+	"subtitles.entity.mushroom.shroom_pal.death_big": "Big Shroom Pal dies",
+	"subtitles.entity.mushroom.shroom_pal.hurt": "Shroom Pal hurts",
+	"subtitles.entity.mushroom.shroom_pal.hurt_big": "Big Shroom Pal hurts",
+	"subtitles.entity.mushroom.shroom_pal.harvest": "Shroom Pal harvests",
+	"subtitles.entity.mushroom.shroom_pal.harvest_big": "Big Shroom Pal harvests",
+	"subtitles.entity.mushroom.shroom_pal.ambient": "Shroom Pal squeaks",
+	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Big Shroom Pal squeaks",
+	"subtitles.entity.mushroom.shroom_pal.step": "Shroom Pal steps",
+	"subtitles.entity.mushroom.shroom_pal.step_big": "Big Shroom Pal steps",
+	"subtitles.entity.mushroom.shroom_pal.grow": "Big Shroom Pal grows"
 }

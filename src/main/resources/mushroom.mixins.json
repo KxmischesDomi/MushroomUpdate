@@ -4,7 +4,9 @@
 	"package": "de.kxmischesdomi.mushroom.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+		"BiomesMixin",
 		"LivingEntityMixin",
+		"OverworldBiomeBuilderMixin",
 		"SpawnPlacementsMixin"
 	],
 	"client": [

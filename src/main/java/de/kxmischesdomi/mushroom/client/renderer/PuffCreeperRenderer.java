@@ -23,15 +23,22 @@ public class PuffCreeperRenderer extends GeoEntityRenderer<PuffCreeper> {
 		addLayer(new PuffCreeperArmorLayer(this));
 	}
 
+	/**
+	 * @return the puff creepers texture location
+	 */
 	@Override
 	public ResourceLocation getTextureLocation(PuffCreeper entity) {
 		return new ResourceLocation(MushroomMod.MOD_ID, "textures/entity/puff_creeper.png");
 	}
 
+	/**
+	 * Registers the receiver for the packet that is sent to the client for the Puff Creeper's puff.
+	 */
 	public static void initPuffReceiver() {
 		ClientPlayNetworking.registerGlobalReceiver(new ResourceLocation(MushroomMod.MOD_ID, "puff"), (client, handler, buf, responseSender) -> {
 			UUID uuid = buf.readUUID();
 			client.execute(() -> {
+				if (client.level == null) return;
 				for (Entity entity : client.level.entitiesForRendering()) {
 					if (entity.getUUID().equals(uuid) && entity instanceof PuffCreeper puffCreeper) {
 						puffCreeper.playPuffAnimation = true;

@@ -136,13 +136,13 @@
     "ambient": [
       {
         "type": "minecraft:bat",
-        "weight": 0,
+        "weight": 10,
         "minCount": 8,
         "maxCount": 8
       },
       {
-        "type": "mushroom:firefly",
-        "weight": 10,
+        "type": "mushroom:glowfly",
+        "weight": 100,
         "minCount": 4,
         "maxCount": 4
       }

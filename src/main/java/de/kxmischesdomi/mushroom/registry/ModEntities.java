@@ -1,7 +1,7 @@
 package de.kxmischesdomi.mushroom.registry;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
-import de.kxmischesdomi.mushroom.entity.Firefly;
+import de.kxmischesdomi.mushroom.entity.Glowfly;
 import de.kxmischesdomi.mushroom.entity.ShroomPal;
 import de.kxmischesdomi.mushroom.entity.PuffCreeper;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
@@ -31,9 +31,9 @@ public class ModEntities {
 					.dimensions(EntityDimensions.fixed(0.6f, 0.85f))
 	);
 
-	public static final EntityType<Firefly> FIREFLY = register("firefly",
+	public static final EntityType<Glowfly> FIREFLY = register("glowfly",
 			FabricEntityTypeBuilder
-					.create(MobCategory.AMBIENT, Firefly::new)
+					.create(MobCategory.AMBIENT, Glowfly::new)
 					.dimensions(EntityDimensions.fixed(0.1f, 0.05f))
 	);
 
@@ -45,7 +45,7 @@ public class ModEntities {
 	public static void registerAttributes() {
 		FabricDefaultAttributeRegistry.register(SHROOM_PAL, ShroomPal.createAttributes());
 		FabricDefaultAttributeRegistry.register(PUFF_CREEPER, PuffCreeper.createAttributes());
-		FabricDefaultAttributeRegistry.register(FIREFLY, Firefly.createAttributes());
+		FabricDefaultAttributeRegistry.register(FIREFLY, Glowfly.createAttributes());
 	}
 
 }

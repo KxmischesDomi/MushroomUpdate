@@ -17,6 +17,9 @@ public class ShroomPalRenderer extends GeoEntityRenderer<ShroomPal> {
 		super(ctx, new ShroomPalModel());
 	}
 
+	/**
+	 * @return the shroom pal's texture location
+	 */
 	@Override
 	public ResourceLocation getTextureLocation(ShroomPal entity) {
 		return new ResourceLocation(MushroomMod.MOD_ID, "textures/entity/redshroom.png");

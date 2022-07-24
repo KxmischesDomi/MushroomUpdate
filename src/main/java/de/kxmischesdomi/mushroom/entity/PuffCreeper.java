@@ -36,7 +36,6 @@ import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -64,6 +63,9 @@ public class PuffCreeper extends Monster implements IAnimatable {
 		super(entityType, level);
 	}
 
+	/**
+	 * Creates the ai goals for the puff creeper.
+	 */
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
@@ -79,12 +81,18 @@ public class PuffCreeper extends Monster implements IAnimatable {
 		this.targetSelector.addGoal(2, new HurtByTargetGoal(this, new Class[0]));
 	}
 
+	/**
+	 * Creates the attributes for the puff creeper.
+	 */
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
 		entityData.define(POWERED, false);
 	}
 
+	/**
+	 * Writes the puff creeper's data to nbt.
+	 */
 	@Override
 	public void addAdditionalSaveData(CompoundTag compoundTag) {
 		super.addAdditionalSaveData(compoundTag);
@@ -93,6 +101,9 @@ public class PuffCreeper extends Monster implements IAnimatable {
 		compoundTag.putInt("PlayPuff", getLastPuffTicks());
 	}
 
+	/**
+	 * Reads the puff creeper's data from nbt.
+	 */
 	@Override
 	public void readAdditionalSaveData(CompoundTag compoundTag) {
 		super.readAdditionalSaveData(compoundTag);
@@ -118,6 +129,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 				for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, getBoundingBox().inflate(getExplodeRange()))) {
 					if (entity instanceof PuffCreeper) continue;
 
+					// Add poison effects to target entities.
 					Difficulty difficulty = getLevel().getDifficulty();
 					float multiplier = isPowered() ? 2f : 1;
 					if (difficulty == Difficulty.EASY) {
@@ -132,9 +144,13 @@ public class PuffCreeper extends Monster implements IAnimatable {
 
 				FriendlyByteBuf buf = PacketByteBufs.create();
 				buf.writeUUID(uuid);
+
 				for (ServerPlayer player : PlayerLookup.tracking(this)) {
+
+					// Send the puff animation to the client.
 					ServerPlayNetworking.send(player, new ResourceLocation(MushroomMod.MOD_ID, "puff"), buf);
 
+					// Send the puff particle to the client.
 					player.getLevel().sendParticles(player,
 							new BlockParticleOption(ParticleTypes.FALLING_DUST, Blocks.SANDSTONE.defaultBlockState()),
 							true,
@@ -145,6 +161,7 @@ public class PuffCreeper extends Monster implements IAnimatable {
 					);
 				}
 
+				// Send the puff sound to the client.
 				this.playSound(ModSounds.PUFF_CREEPER_PUFF, 1, 1);
 
 			} else {
@@ -155,54 +172,76 @@ public class PuffCreeper extends Monster implements IAnimatable {
 
 	}
 
+	/**
+	 * @return the puff creeper's explode range based on its power.
+	 */
 	public float getExplodeRange() {
 		return isPowered() ? 5 : 2.5f;
 	}
 
-	@Override
-	public boolean hurt(DamageSource damageSource, float f) {
-		if (damageSource == DamageSource.MAGIC) {
-			return false;
-		}
-		return super.hurt(damageSource, f);
-	}
-
+	/**
+	 * @return if the puff creeper should puff.
+	 */
 	public boolean puff() {
 		return isInTargetReach() && getLastPuffTicks() >= 60;
 	}
 
+	/**
+	 * @return if the puff creeper is in range of its target.
+	 */
 	public boolean isInTargetReach() {
 		if (getTarget() == null) return false;
 		if (distanceTo(getTarget()) > getExplodeRange()) return false;
 		return getSensing().hasLineOfSight(getTarget());
 	}
 
+	/**
+	 * @return the puff creeper's last puff ticks.
+	 */
 	public int getLastPuffTicks() {
 		return lastPuffTicks;
 	}
 
+	/**
+	 * Sets the puff creeper's last puff ticks.
+	 */
 	public void setLastPuffTicks(int ticks) {
 		lastPuffTicks = ticks;
 	}
 
+	/**
+	 * @return the puff creeper's power.
+	 */
 	public boolean isPowered() {
 		return entityData.get(POWERED);
 	}
 
+	/**
+	 * Sets the puff creeper's power.
+	 */
 	public void setPowered(boolean powered) {
 		entityData.set(POWERED, powered);
 	}
 
+	/**
+	 * @return the puff creeper's death sound.
+	 */
 	@Override
 	protected SoundEvent getDeathSound() {
 		return ModSounds.PUFF_CREEPER_DEATH;
 	}
 
+	/**
+	 * @return the puff creeper's hurt sound.
+	 */
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSource) {
 		return ModSounds.PUFF_CREEPER_HURT;
 	}
 
+	/**
+	 * Registers the puff creeper's animation controllers
+	 */
 	@Override
 	public void registerControllers(AnimationData animationData) {
 		animationData.addAnimationController(new AnimationController(this, "controller_walk", 0, event -> {
@@ -229,12 +268,11 @@ public class PuffCreeper extends Monster implements IAnimatable {
 		return factory;
 	}
 
+	/**
+	 * @return if the puff creeper can spawn with the given parameters.
+	 */
 	public static boolean checkMonsterSpawnRules(EntityType<? extends Monster> entityType, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
 		return serverLevelAccessor.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(serverLevelAccessor, blockPos, randomSource) && Monster.checkMobSpawnRules(entityType, serverLevelAccessor, mobSpawnType, blockPos, randomSource);
-	}
-
-	public static boolean checkAnyLightMonsterSpawnRules(EntityType<? extends Monster> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-		return levelAccessor.getDifficulty() != Difficulty.PEACEFUL && Monster.checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, blockPos, randomSource);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
