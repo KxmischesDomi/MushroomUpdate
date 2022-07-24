@@ -183,6 +183,8 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	@Nullable
 	@Override
 	protected SoundEvent getAmbientSound() {
+		boolean play = random.nextFloat() < 0.3;
+		if (!play) return null;
 		return isBig() ? ModSounds.SHROOM_PAL_AMBIENT_BIG : ModSounds.SHROOM_PAL_AMBIENT;
 	}
 
