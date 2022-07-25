@@ -1,0 +1,34 @@
+{
+	"itemGroup.mushroom.root": "Mushroom Update",
+
+	"item.mushroom.shroom_glider": "Planor de ciupercă",
+	"item.mushroom.shroom_pal_spawn_egg": "Ou de prieten din ciupercă",
+	"item.mushroom.puff_creeper_spawn_egg": "Ou de prieten din Creeper de ciupercă",
+	"item.mushroom.firefly_spawn_egg": "Ou de prieten din licurici",
+
+	"block.mushroom.glow_mushroom": "Ciupercă strălucitoare",
+	"block.mushroom.glow_mushroom_block": "Bloc de ciupercă strălucitoare",
+
+	"entity.mushroom.shroom_pal": "Prieten din ciupercă",
+	"entity.mushroom.puff_creeper": "Creeper de ciupercă",
+	"entity.mushroom.firefly": "Licurici",
+
+	"biome.mushroom.shroom_caves": "Peșteri de ciuperci",
+	"biome.mushroom.glow_caves": "Peșteri strălucitoare",
+
+	"subtitles.entity.mushroom.puff_creeper.death": "Creeper de ciupercă moare",
+	"subtitles.entity.mushroom.puff_creeper.hurt": "Creeper de ciupercă rănește",
+	"subtitles.entity.mushroom.puff_creeper.puff": "Creeper de ciupercă eliberează spori",
+
+	"subtitles.entity.mushroom.shroom_pal.death": "Prieten din ciupercă moare",
+	"subtitles.entity.mushroom.shroom_pal.death_big": "Prieten mare din ciupercă moare",
+	"subtitles.entity.mushroom.shroom_pal.hurt": "Prieten din ciupercă rănește",
+	"subtitles.entity.mushroom.shroom_pal.hurt_big": "Prieten mare din ciupercă rănește",
+	"subtitles.entity.mushroom.shroom_pal.harvest": "Prieten din ciupercă cultivează",
+	"subtitles.entity.mushroom.shroom_pal.harvest_big": "Prieten mare din ciupercă cultivează",
+	"subtitles.entity.mushroom.shroom_pal.ambient": "Prieten din ciupercă chițăie",
+	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Prieten mare din ciupercă chițăie",
+	"subtitles.entity.mushroom.shroom_pal.step": "Prieten din ciupercă pășește",
+	"subtitles.entity.mushroom.shroom_pal.step_big": "Prieten mare din ciupercă pășește",
+	"subtitles.entity.mushroom.shroom_pal.grow": "Prieten din ciupercă creste"
+}
