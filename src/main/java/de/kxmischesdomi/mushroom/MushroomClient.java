@@ -1,9 +1,6 @@
 package de.kxmischesdomi.mushroom;
 
-import de.kxmischesdomi.mushroom.client.renderer.GlowflyRenderer;
-import de.kxmischesdomi.mushroom.client.renderer.PuffCreeperRenderer;
-import de.kxmischesdomi.mushroom.client.renderer.ShroomGliderRenderer;
-import de.kxmischesdomi.mushroom.client.renderer.ShroomPalRenderer;
+import de.kxmischesdomi.mushroom.client.renderer.*;
 import de.kxmischesdomi.mushroom.registry.ModBlocks;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
 import de.kxmischesdomi.mushroom.registry.ModItems;
@@ -25,12 +22,14 @@ public class MushroomClient implements ClientModInitializer {
 
 		EntityRendererRegistry.register(ModEntities.SHROOM_PAL, ShroomPalRenderer::new);
 		EntityRendererRegistry.register(ModEntities.GLOWFLY, GlowflyRenderer::new);
+		EntityRendererRegistry.register(ModEntities.GLOW_MOOSHROOM, GlowMushroomCowRenderer::new);
 		EntityRendererRegistry.register(ModEntities.PUFF_CREEPER, PuffCreeperRenderer::new);
 		PuffCreeperRenderer.initPuffReceiver();
 
 		GeoArmorRenderer.registerArmorRenderer(new ShroomGliderRenderer(), ModItems.SHROOM_GLIDER);
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.GLOW_MUSHROOM);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.POTTED_GLOW_MUSHROOM);
 	}
 
 }

@@ -1,5 +1,6 @@
 package de.kxmischesdomi.mushroom.mixin;
 
+import de.kxmischesdomi.mushroom.entity.GlowMushroomCow;
 import de.kxmischesdomi.mushroom.entity.Glowfly;
 import de.kxmischesdomi.mushroom.entity.PuffCreeper;
 import de.kxmischesdomi.mushroom.entity.ShroomPal;
@@ -29,6 +30,7 @@ public abstract class SpawnPlacementsMixin {
 	private static void cinitInject(CallbackInfo ci) {
 		register(ModEntities.SHROOM_PAL, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ShroomPal::checkShroomPalSpawnRules);
 		register(ModEntities.PUFF_CREEPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, PuffCreeper::checkMonsterSpawnRules);
+		register(ModEntities.GLOW_MOOSHROOM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GlowMushroomCow::checkMushroomSpawnRules);
 		register(ModEntities.GLOWFLY, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Glowfly::checkGlowflySpawnRules);
 	}
 

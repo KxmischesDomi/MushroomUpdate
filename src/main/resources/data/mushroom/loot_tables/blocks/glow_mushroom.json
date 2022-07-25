@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mushroom:glow_mushroom_block"
+          "name": "mushroom:glow_mushroom"
         }
       ],
       "rolls": 1.0

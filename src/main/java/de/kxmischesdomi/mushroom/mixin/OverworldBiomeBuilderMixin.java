@@ -26,15 +26,16 @@ public abstract class OverworldBiomeBuilderMixin {
 
 	@Shadow @Final private Climate.Parameter FULL_RANGE;
 
-	@Shadow @Final private Climate.Parameter mushroomFieldsContinentalness;
+	private final Climate.Parameter shroomCavesContinentalness = Climate.Parameter.span(-1.2f, -1.06f);
+	private final Climate.Parameter glowCavesContinentalness = Climate.Parameter.span(-1.06f, -1.05f);
 
 	/**
 	 * Add custom biomes to vanilla world generation
 	 */
 	@Inject(method = "addUndergroundBiomes", at = @At("HEAD"))
 	public void addUndergroundBiomesInject(Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> consumer, CallbackInfo ci) {
-		this.addUndergroundBiome(consumer, this.FULL_RANGE, this.FULL_RANGE, this.mushroomFieldsContinentalness, this.FULL_RANGE, this.FULL_RANGE, 0.0f, ModBiomes.SHROOM_CAVES);
-//		this.addUndergroundBiome(consumer, this.FULL_RANGE, this.FULL_RANGE, this.mushroomFieldsContinentalness, this.FULL_RANGE, this.FULL_RANGE, 0.0f, ModBiomes.GLOW_CAVES);
+		this.addUndergroundBiome(consumer, this.FULL_RANGE, this.FULL_RANGE, this.glowCavesContinentalness, this.FULL_RANGE, this.FULL_RANGE, 0.0f, ModBiomes.SHROOM_CAVES);
+		this.addUndergroundBiome(consumer, this.FULL_RANGE, this.FULL_RANGE, this.shroomCavesContinentalness, this.FULL_RANGE, this.FULL_RANGE, 0.0f, ModBiomes.GLOW_CAVES);
 	}
 
 }

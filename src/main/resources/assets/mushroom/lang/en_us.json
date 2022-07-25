@@ -4,6 +4,7 @@
 	"item.mushroom.shroom_glider": "Shroom Glider",
 	"item.mushroom.shroom_pal_spawn_egg": "Shroom Pal Spawn Egg",
 	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Egg",
+	"item.mushroom.glow_mooshroom_spawn_egg": "Glow Mooshroom Spawn Egg",
 	"item.mushroom.glowfly_spawn_egg": "Glowfly Spawn Egg",
 
 	"block.mushroom.glow_mushroom": "Glow Mushroom",
@@ -12,10 +13,11 @@
 
 	"entity.mushroom.shroom_pal": "Shroom Pal",
 	"entity.mushroom.puff_creeper": "Puff Creeper",
+	"entity.mushroom.glow_mooshroom": "Glow Mooshroom",
 	"entity.mushroom.firefly": "Glowfly",
 
 	"biome.mushroom.shroom_caves": "Shroom Caves",
-	"biome.mushroom.glowing_shroom_caves": "Glow Caves",
+	"biome.mushroom.glowing_shroom_caves": "Glowing Shroom Caves",
 
 	"subtitles.entity.mushroom.puff_creeper.death": "Puff Creeper dies",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Puff Creeper hurts",

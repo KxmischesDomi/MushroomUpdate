@@ -28,6 +28,7 @@ public class ModItems {
 
 	public static final Item SHROOM_PAL_SPAWN_EGG = register("shroom_pal_spawn_egg", new SpawnEggItem(ModEntities.SHROOM_PAL, 0x8B1A18, 0xFCBDBD, new FabricItemSettings().group(TAB)));
 	public static final Item PUFF_CREEPER_SPAWN_EGG = register("puff_creeper_spawn_egg", new SpawnEggItem(ModEntities.PUFF_CREEPER, 0xC5AB80, 0x5D5247, new FabricItemSettings().group(TAB)));
+	public static final Item GLOW_MOOSHROOM_SPAWN_EGG = register("glow_mooshroom_spawn_egg", new SpawnEggItem(ModEntities.GLOW_MOOSHROOM, 0x095656, 0x69E2D0, new FabricItemSettings().group(TAB)));
 	public static final Item GLOWFLY_SPAWN_EGG = register("glowfly_spawn_egg", new SpawnEggItem(ModEntities.GLOWFLY, 0x343338, 0x00FFFA, new FabricItemSettings().group(TAB)));
 
 	private static Item register(String name, Item item) {
