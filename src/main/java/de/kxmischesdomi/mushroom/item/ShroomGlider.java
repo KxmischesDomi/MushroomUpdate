@@ -1,8 +1,11 @@
 package de.kxmischesdomi.mushroom.item;
 
+import de.kxmischesdomi.mushroom.registry.ModSounds;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
@@ -22,6 +25,12 @@ public class ShroomGlider extends ArmorItem implements IAnimatable {
 	@Override
 	public void registerControllers(AnimationData animationData) {
 
+	}
+
+	@Nullable
+	@Override
+	public SoundEvent getEquipSound() {
+		return ModSounds.SHROOM_GLIDER_EQUIP;
 	}
 
 	@Override

@@ -2,9 +2,11 @@
 	"itemGroup.mushroom.root": "Mushroom Update",
 
 	"item.mushroom.shroom_glider": "Pilz Gleiter",
+	"item.mushroom.glow_mushroom_stew": "Leuchtende Pilzsuppe",
 	"item.mushroom.shroom_pal_spawn_egg": "Pilz-Kumpel-Spawn-Ei",
 	"item.mushroom.puff_creeper_spawn_egg": "Puff-Creeper-Spawn-Ei",
-	"item.mushroom.firefly_spawn_egg": "Leuchtwürmchen-Spawn-Ei",
+	"item.mushroom.glow_mooshroom_spawn_egg": "Leuchtmooshroom-Spawn-Ei",
+	"item.mushroom.glowfly_spawn_egg": "Leuchtwürmchen-Spawn-Ei",
 
 	"block.mushroom.glow_mushroom": "Leuchtender Pilz",
 	"block.mushroom.glow_mushroom_block": "Leuchtender Pilzblock",
@@ -12,6 +14,7 @@
 
 	"entity.mushroom.shroom_pal": "Pilz Kumpel",
 	"entity.mushroom.puff_creeper": "Puff Creeper",
+	"entity.mushroom.glow_mooshroom": "Leuchtmooshroom",
 	"entity.mushroom.firefly": "Leuchtwürmchen",
 
 	"biome.mushroom.shroom_caves": "Pilz Höhlen",
@@ -31,5 +34,9 @@
 	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Großer Pilz Kumpel quietscht",
 	"subtitles.entity.mushroom.shroom_pal.step": "Pilz Kumpel läuft",
 	"subtitles.entity.mushroom.shroom_pal.step_big": "Großer Pilz Kumpel läuft",
-	"subtitles.entity.mushroom.shroom_pal.grow": "Pilz Kumpel wächst"
+	"subtitles.entity.mushroom.shroom_pal.grow": "Pilz Kumpel wächst",
+
+	"subtitles.item.mushroom.shroom_glider.gliding": "Shroom Glider gleitet",
+	"subtitles.item.mushroom.shroom_glider.close": "Shroom Glider schließt",
+	"subtitles.item.mushroom.shroom_glider.equip": "Shroom Glider ausgerüstet"
 }

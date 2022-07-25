@@ -113,5 +113,25 @@
 		"sounds": [
 			"mushroom:shroom_pal/grow"
 		]
+	},
+	"shroom_glider_gliding": {
+		"subtitle": "subtitles.item.mushroom.shroom_glider.gliding",
+		"sounds": [
+			"mushroom:shroom_glider/gliding"
+		]
+	},
+	"shroom_glider_close": {
+		"subtitle": "subtitles.item.mushroom.shroom_glider.close",
+		"sounds": [
+			"mushroom:shroom_glider/close_1",
+			"mushroom:shroom_glider/close_2"
+		]
+	},
+	"shroom_glider_equip": {
+		"subtitle": "subtitles.item.mushroom.shroom_glider.equip",
+		"sounds": [
+			"mushroom:shroom_glider/equip_1",
+			"mushroom:shroom_glider/equip_2"
+		]
 	}
 }

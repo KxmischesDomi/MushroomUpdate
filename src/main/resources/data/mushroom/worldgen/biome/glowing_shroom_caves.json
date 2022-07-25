@@ -115,6 +115,12 @@
         "weight": 10,
         "minCount": 4,
         "maxCount": 8
+      },
+      {
+        "type": "mushroom:glow_mooshroom",
+        "maxCount": 8,
+        "minCount": 4,
+        "weight": 8
       }
     ],
     "ambient": [
@@ -155,5 +161,5 @@
   "precipitation": "rain",
   "temperature": 0.5,
   "downfall": 0.5,
-  "category": "underground"
+  "category": "mushroom"
 }

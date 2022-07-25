@@ -27,6 +27,10 @@ public class ModSounds {
 	public static final SoundEvent SHROOM_PAL_STEP_BIG = register("shroom_pal_step_big");
 	public static final SoundEvent SHROOM_PAL_GROW = register("shroom_pal_grow");
 
+	public static final SoundEvent SHROOM_GLIDER_GLIDING = register("shroom_glider_gliding");
+	public static final SoundEvent SHROOM_GLIDER_CLOSE = register("shroom_glider_close");
+	public static final SoundEvent SHROOM_GLIDER_EQUIP = register("shroom_glider_equip");
+
 	private static SoundEvent register(String name) {
 		ResourceLocation location = new ResourceLocation(MushroomMod.MOD_ID, name);
 		return Registry.register(Registry.SOUND_EVENT, location, new SoundEvent(location));
