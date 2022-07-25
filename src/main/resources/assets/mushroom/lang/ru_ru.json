@@ -11,10 +11,10 @@
 
 	"entity.mushroom.shroom_pal": "Грибочек",
 	"entity.mushroom.puff_creeper": "Грибной Крипер",
-	"entity.mushroom.firefly": "Светлячок",
+	"entity.mushroom.glowfly": "Светлячок",
 
 	"biome.mushroom.shroom_caves": "Грибные Пещеры",
-	"biome.mushroom.glow_caves": "Светопещеры",
+	"biome.mushroom.glowing_shroom_caves": "Светопещеры",
 
 	"subtitles.entity.mushroom.puff_creeper.death": "Грибной Крипер умирает",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Грибной Крипер ранился",

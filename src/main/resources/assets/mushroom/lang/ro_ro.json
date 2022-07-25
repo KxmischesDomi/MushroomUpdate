@@ -4,17 +4,17 @@
 	"item.mushroom.shroom_glider": "Planor de ciupercă",
 	"item.mushroom.shroom_pal_spawn_egg": "Ou de prieten din ciupercă",
 	"item.mushroom.puff_creeper_spawn_egg": "Ou de prieten din Creeper de ciupercă",
-	"item.mushroom.firefly_spawn_egg": "Ou de prieten din licurici",
+	"item.mushroom.glowfly_spawn_egg": "Ou de prieten din licurici",
 
 	"block.mushroom.glow_mushroom": "Ciupercă strălucitoare",
 	"block.mushroom.glow_mushroom_block": "Bloc de ciupercă strălucitoare",
 
 	"entity.mushroom.shroom_pal": "Prieten din ciupercă",
 	"entity.mushroom.puff_creeper": "Creeper de ciupercă",
-	"entity.mushroom.firefly": "Licurici",
+	"entity.mushroom.glowfly": "Licurici",
 
 	"biome.mushroom.shroom_caves": "Peșteri de ciuperci",
-	"biome.mushroom.glow_caves": "Peșteri strălucitoare",
+	"biome.mushroom.glowing_shroom_caves": "Peșteri strălucitoare",
 
 	"subtitles.entity.mushroom.puff_creeper.death": "Creeper de ciupercă moare",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Creeper de ciupercă rănește",
