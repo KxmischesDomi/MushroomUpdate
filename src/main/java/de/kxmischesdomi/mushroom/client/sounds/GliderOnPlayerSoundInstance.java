@@ -27,10 +27,7 @@ public class GliderOnPlayerSoundInstance extends AbstractTickableSoundInstance {
     public void tick() {
         ++this.time;
         boolean gliding = isGliding(player);
-        if (this.player.isRemoved() || !gliding) {
-            if (!isStopped() && this.time > DELAY) {
-                player.playNotifySound(ModSounds.SHROOM_GLIDER_CLOSE, SoundSource.PLAYERS, 1, 1);
-            }
+        if (this.player.isRemoved() || player.getAbilities().flying || this.time > DELAY*2 && !gliding) {
             this.stop();
             return;
         }
@@ -42,7 +39,7 @@ public class GliderOnPlayerSoundInstance extends AbstractTickableSoundInstance {
         if (this.time < DELAY) {
             this.volume = 0.0f;
         } else if (this.time < DELAY*2) {
-            this.volume *= (float)(this.time - DELAY) / DELAY;
+            this.volume *= (float)(this.time - DELAY/2) / DELAY;
         }
         float g = 0.8f;
         this.pitch = this.volume > g ? 1.0f + (this.volume - g) : 1.0f;
