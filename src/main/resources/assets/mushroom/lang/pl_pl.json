@@ -4,17 +4,17 @@
 	"item.mushroom.shroom_glider": "Szybowiec grzybowy",
 	"item.mushroom.shroom_pal_spawn_egg": "Jajo pryzyzwające Grzybeka",
 	"item.mushroom.puff_creeper_spawn_egg": "Jajo pryzyzwające Gryzbowogo Creepera",
-	"item.mushroom.firefly_spawn_egg": "Jajo pryzyzwające świetlika",
+	"item.mushroom.glowfly_spawn_egg": "Jajo pryzyzwające świetlika",
 
 	"block.mushroom.glow_mushroom": "Światłogrzyb",
 	"block.mushroom.glow_mushroom_block": "Blok światłogrzyb",
 
 	"entity.mushroom.shroom_pal": "Grzybek",
 	"entity.mushroom.puff_creeper": "Gryzbowi Creeper",
-	"entity.mushroom.firefly": "Świetlik",
+	"entity.mushroom.glowfly": "Świetlik",
 
 	"biome.mushroom.shroom_caves": "Gryzbowi jaskinie",
-	"biome.mushroom.glow_caves": "Światłojaskinie",
+	"biome.mushroom.glowing_shroom_caves": "Światłojaskinie",
 
 	"subtitles.entity.mushroom.puff_creeper.death": "Gryzbowi Creeper umiera",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Gryzbowi Creeper zranił się",
