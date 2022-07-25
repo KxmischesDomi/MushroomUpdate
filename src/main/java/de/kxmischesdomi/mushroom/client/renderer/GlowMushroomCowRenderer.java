@@ -21,6 +21,9 @@ public class GlowMushroomCowRenderer extends MobRenderer<GlowMushroomCow, CowMod
 		this.addLayer(new GlowMushroomCowMushroomLayer<>(this, context.getBlockRenderDispatcher()));
 	}
 
+	/**
+	 * @return the cow's texture location
+	 */
 	@Override
 	public ResourceLocation getTextureLocation(GlowMushroomCow mushroomCow) {
 		return new ResourceLocation(MushroomMod.MOD_ID, "textures/entity/glow_mooshroom.png");

@@ -2,6 +2,7 @@
 	"itemGroup.mushroom.root": "Mushroom Update",
 
 	"item.mushroom.shroom_glider": "Shroom Glider",
+	"item.mushroom.glow_mushroom_stew": "Glow Mushroom Stew",
 	"item.mushroom.shroom_pal_spawn_egg": "Shroom Pal Spawn Egg",
 	"item.mushroom.puff_creeper_spawn_egg": "Puff Creeper Spawn Egg",
 	"item.mushroom.glow_mooshroom_spawn_egg": "Glow Mooshroom Spawn Egg",
@@ -33,5 +34,9 @@
 	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Big Shroom Pal squeaks",
 	"subtitles.entity.mushroom.shroom_pal.step": "Shroom Pal steps",
 	"subtitles.entity.mushroom.shroom_pal.step_big": "Big Shroom Pal steps",
-	"subtitles.entity.mushroom.shroom_pal.grow": "Shroom Pal grows"
+	"subtitles.entity.mushroom.shroom_pal.grow": "Shroom Pal grows",
+
+	"subtitles.item.mushroom.shroom_glider.gliding": "Shroom Glider glides",
+	"subtitles.item.mushroom.shroom_glider.close": "Shroom Glider closes",
+	"subtitles.item.mushroom.shroom_glider.equip": "Shroom Glider equips"
 }

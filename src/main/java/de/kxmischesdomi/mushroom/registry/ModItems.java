@@ -1,12 +1,15 @@
 package de.kxmischesdomi.mushroom.registry;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
+import de.kxmischesdomi.mushroom.item.GlowMushroomStewItem;
 import de.kxmischesdomi.mushroom.item.ShroomGlider;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 
@@ -23,6 +26,8 @@ public class ModItems {
 
 	public static final Item GLOW_MUSHROOM = registerBlock(ModBlocks.GLOW_MUSHROOM);
 	public static final Item GLOW_MUSHROOM_BLOCK = registerBlock(ModBlocks.GLOW_MUSHROOM_BLOCK);
+
+	public static final Item GLOW_MUSHROOM_STEW = register("glow_mushroom_stew", new GlowMushroomStewItem(new Item.Properties().stacksTo(1).tab(TAB).food(Foods.MUSHROOM_STEW)));
 
 	public static final Item SHROOM_GLIDER = register("shroom_glider", new ShroomGlider(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new FabricItemSettings().group(TAB).maxCount(1).durability(100)));
 
@@ -44,7 +49,7 @@ public class ModItems {
 	}
 
 	public static void init() {
-
+		CompostingChanceRegistry.INSTANCE.add(ModItems.GLOW_MUSHROOM, 0.65f);
 	}
 
 }
