@@ -1,0 +1,34 @@
+{
+	"itemGroup.mushroom.root": "Mushroom Update",
+
+	"item.mushroom.shroom_glider": "Szybowiec grzybowy",
+	"item.mushroom.shroom_pal_spawn_egg": "Jajo pryzyzwające Grzybeka",
+	"item.mushroom.puff_creeper_spawn_egg": "Jajo pryzyzwające Gryzbowogo Creepera",
+	"item.mushroom.firefly_spawn_egg": "Jajo pryzyzwające świetlika",
+
+	"block.mushroom.glow_mushroom": "Światłogrzyb",
+	"block.mushroom.glow_mushroom_block": "Blok światłogrzyb",
+
+	"entity.mushroom.shroom_pal": "Grzybek",
+	"entity.mushroom.puff_creeper": "Gryzbowi Creeper",
+	"entity.mushroom.firefly": "Świetlik",
+
+	"biome.mushroom.shroom_caves": "Gryzbowi jaskinie",
+	"biome.mushroom.glow_caves": "Światłojaskinie",
+
+	"subtitles.entity.mushroom.puff_creeper.death": "Gryzbowi Creeper umiera",
+	"subtitles.entity.mushroom.puff_creeper.hurt": "Gryzbowi Creeper zranił się",
+	"subtitles.entity.mushroom.puff_creeper.puff": "Gryzbowi Creeper uwalnia zarodniki",
+
+	"subtitles.entity.mushroom.shroom_pal.death": "Grzybek umiera",
+	"subtitles.entity.mushroom.shroom_pal.death_big": "Wielki grzybek umiera",
+	"subtitles.entity.mushroom.shroom_pal.hurt": "Grzybek zranił się",
+	"subtitles.entity.mushroom.shroom_pal.hurt_big": "Wielki grzybek zranił się",
+	"subtitles.entity.mushroom.shroom_pal.harvest": "Grzybek zbiera",
+	"subtitles.entity.mushroom.shroom_pal.harvest_big": "Wielki grzybek zbiera",
+	"subtitles.entity.mushroom.shroom_pal.ambient": "Grzybek piszczeć",
+	"subtitles.entity.mushroom.shroom_pal.ambient_big": "Wielki grzybek piszczeć",
+	"subtitles.entity.mushroom.shroom_pal.step": "Grzybek depcze",
+	"subtitles.entity.mushroom.shroom_pal.step_big": "Wielki grzybek depcze",
+	"subtitles.entity.mushroom.shroom_pal.grow": "Grzybek rośnie"
+}
