@@ -262,7 +262,6 @@ public class PuffCreeper extends Monster implements IAnimatable {
 			if (playPuffAnimation) {
 				playPuffAnimation = false;
 				event.getController().setAnimation(new AnimationBuilder().addAnimation("puff", false));
-				return PlayState.CONTINUE;
 			} else {
 				event.getController().clearAnimationCache();
 			}
