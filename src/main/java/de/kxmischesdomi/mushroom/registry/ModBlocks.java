@@ -1,6 +1,8 @@
 package de.kxmischesdomi.mushroom.registry;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
+import de.kxmischesdomi.mushroom.block.GlowMushroomBlock;
+import de.kxmischesdomi.mushroom.block.HugeGlowMushroomBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +19,7 @@ import net.minecraft.world.level.material.MaterialColor;
  */
 public class ModBlocks {
 
-	public static final Block GLOW_MUSHROOM = register("glow_mushroom", new MushroomBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.COLOR_CYAN)
+	public static final Block GLOW_MUSHROOM = register("glow_mushroom", new GlowMushroomBlock(BlockBehaviour.Properties.of(Material.PLANT, MaterialColor.COLOR_CYAN)
 			.noCollission()
 			.randomTicks()
 			.instabreak()
@@ -27,7 +29,7 @@ public class ModBlocks {
 			)
 	);
 
-	public static final Block GLOW_MUSHROOM_BLOCK = register("glow_mushroom_block", new HugeMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.COLOR_CYAN)
+	public static final Block GLOW_MUSHROOM_BLOCK = register("glow_mushroom_block", new HugeGlowMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.COLOR_CYAN)
 			.strength(0.2f)
 			.sound(SoundType.WOOD)
 			.lightLevel(state -> 14)
