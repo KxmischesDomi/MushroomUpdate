@@ -45,6 +45,14 @@ public class GlowMushroomCow extends Cow implements Shearable {
 	}
 
 	@Override
+	public void aiStep() {
+		super.aiStep();
+		if (random.nextFloat() > 0.7F) {
+			this.level.addParticle(ParticleTypes.GLOW, this.getRandomX(0.8), this.getRandomY(), this.getRandomZ(0.8), 0.0, 0.0, 0.0);
+		}
+	}
+
+	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
 		ItemStack itemStack = player.getItemInHand(interactionHand);
 		if (itemStack.is(Items.BOWL) && !this.isBaby()) {

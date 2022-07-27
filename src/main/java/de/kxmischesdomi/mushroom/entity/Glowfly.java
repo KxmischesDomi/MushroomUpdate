@@ -2,6 +2,7 @@ package de.kxmischesdomi.mushroom.entity;
 
 import de.kxmischesdomi.mushroom.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -51,6 +52,14 @@ public class Glowfly extends PathfinderMob implements IAnimatable {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1, 1));
+	}
+
+	@Override
+	public void aiStep() {
+		super.aiStep();
+		if (random.nextFloat() > 0.95F) {
+			this.level.addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+		}
 	}
 
 	@Override
