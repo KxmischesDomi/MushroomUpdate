@@ -57,6 +57,8 @@
       "minecraft:ore_diorite_lower",
       "minecraft:ore_andesite_upper",
       "minecraft:ore_andesite_lower",
+	  "minecraft:ore_coal_upper",
+      "minecraft:ore_coal_lower",
       "minecraft:ore_iron_upper",
       "minecraft:ore_iron_middle",
       "minecraft:ore_iron_small",
