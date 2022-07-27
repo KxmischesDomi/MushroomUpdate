@@ -30,18 +30,6 @@
                             "half": "lower"
                         }
                     }
-                },
-                {
-                    "weight": 10,
-                    "data": {
-                        "Name": "minecraft:brown_mushroom"
-                    }
-                },
-                {
-                    "weight": 25,
-                    "data": {
-                        "Name": "minecraft:red_mushroom"
-                    }
                 }
             ]
         }
