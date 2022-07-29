@@ -1,16 +1,21 @@
 {
   "effects": {
+    "ambient_sound": "mushroom:glow_shroom_caves_ambient",
+    "additions_sound": {
+      "sound": "mushroom:glow_shroom_caves_ambient_additions",
+      "tick_chance": 0.00111
+    },
     "mood_sound": {
-      "sound": "minecraft:ambient.cave",
+      "sound": "mushroom:glow_shroom_caves_mood",
       "tick_delay": 6000,
       "block_search_extent": 8,
       "offset": 2.0
     },
     "music": {
-      "sound": "minecraft:music.overworld.lush_caves",
+      "sound": "mushroom:glow_shroom_caves_music",
       "min_delay": 12000,
       "max_delay": 24000,
-      "replace_current_music": false
+      "replace_current_music": true
     },
     "sky_color": 8103167,
     "fog_color": 12638463,

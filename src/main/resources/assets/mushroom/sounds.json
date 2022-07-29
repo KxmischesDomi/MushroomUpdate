@@ -7,6 +7,53 @@
 			}
 		]
 	},
+	"glow_shroom_caves_ambient": {
+		"sounds": [
+			{
+				"name": "mushroom:ambient/glowing_shroom_caves/ambience",
+				"stream": true,
+				"volume": 0.74
+			}
+		]
+	},
+	"glow_shroom_caves_ambient_additions": {
+		"sounds": [
+			{
+				"name": "mushroom:ambient/glowing_shroom_caves/glow_1",
+				"stream": true,
+				"volume": 0.4
+			},
+			{
+				"name": "mushroom:ambient/glowing_shroom_caves/glow_2",
+				"stream": true,
+				"volume": 0.4
+			},			{
+				"name": "mushroom:ambient/glowing_shroom_caves/glow_3",
+				"stream": true,
+				"volume": 0.4
+			}
+		]
+	},
+	"glow_shroom_caves_music": {
+		"sounds": []
+	},
+	"glow_shroom_caves_mood": {
+		"sounds": [
+			"mushroom:ambient/glowing_shroom_caves/fluid_1",
+			"mushroom:ambient/glowing_shroom_caves/mood_1",
+			"mushroom:ambient/glowing_shroom_caves/mood_2",
+			"mushroom:ambient/glowing_shroom_caves/mood_3",
+			"mushroom:ambient/glowing_shroom_caves/mood_4",
+			"mushroom:ambient/glowing_shroom_caves/mood_5",
+			"mushroom:ambient/glowing_shroom_caves/mood_6",
+			"mushroom:ambient/glowing_shroom_caves/mood_7",
+			"mushroom:ambient/glowing_shroom_caves/mood_8",
+			"mushroom:ambient/glowing_shroom_caves/mood_9",
+			"mushroom:ambient/glowing_shroom_caves/mood_10",
+			"mushroom:ambient/glowing_shroom_caves/mushy_1",
+			"mushroom:ambient/glowing_shroom_caves/mushy_2"
+		]
+	},
 	"puff_creeper_death": {
 		"subtitle": "subtitles.entity.mushroom.puff_creeper.death",
 		"sounds": [
