@@ -23,9 +23,11 @@ public class GlowMushroomBlock extends MushroomBlock {
 
 	@Override
 	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-		double d = (double)blockPos.getX() + randomSource.nextDouble();
-		double e = (double)blockPos.getY() + randomSource.nextDouble() / 2;
-		double f = (double)blockPos.getZ() + randomSource.nextDouble();
-		level.addParticle(ParticleTypes.GLOW, d, e, f, 0, 0, 0);
+		if (randomSource.nextBoolean()) {
+			double d = (double)blockPos.getX() + randomSource.nextDouble();
+			double e = (double)blockPos.getY() + randomSource.nextDouble() / 2;
+			double f = (double)blockPos.getZ() + randomSource.nextDouble();
+			level.addParticle(ParticleTypes.GLOW, d, e, f, 0, 0, 0);
+		}
 	}
 }
