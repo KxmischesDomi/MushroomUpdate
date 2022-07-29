@@ -1,4 +1,12 @@
 {
+	"music_disc_twilight": {
+		"sounds": [
+			{
+				"name": "mushroom:records/twilight",
+				"stream": true
+			}
+		]
+	},
 	"puff_creeper_death": {
 		"subtitle": "subtitles.entity.mushroom.puff_creeper.death",
 		"sounds": [

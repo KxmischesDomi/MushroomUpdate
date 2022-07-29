@@ -11,6 +11,8 @@ import net.minecraft.sounds.SoundEvent;
  */
 public class ModSounds {
 
+	public static final SoundEvent MUSIC_DISC_TWILIGHT = register("music_disc_twilight");
+
 	public static final SoundEvent PUFF_CREEPER_DEATH = register("puff_creeper_death");
 	public static final SoundEvent PUFF_CREEPER_HURT = register("puff_creeper_hurt");
 	public static final SoundEvent PUFF_CREEPER_PUFF = register("puff_creeper_puff");
