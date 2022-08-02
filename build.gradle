@@ -16,6 +16,12 @@ repositories {
 		name = "TerraformersMC"
 		url = "https://maven.terraformersmc.com/"
 	}
+	maven {
+		url "https://cursemaven.com"
+		content {
+			includeGroup "curse.maven"
+		}
+	}
 }
 
 dependencies {
@@ -29,8 +35,11 @@ dependencies {
 
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.5'
 
-	// Isn't required to be installed by the user but should be included in dev enviroment.
+	// Isn't required to be installed by the user but should be included in dev environment.
 	modImplementation "com.terraformersmc:modmenu:4.0.5"
+
+	// Removes experimental warning when loading a world in dev environment.
+	modImplementation "curse.maven:shutup-experimental-settings-407174:3759881"
 
 }
 
