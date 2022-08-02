@@ -2,7 +2,6 @@ package de.kxmischesdomi.mushroom.mixin;
 
 import de.kxmischesdomi.mushroom.entity.GlowMushroomCow;
 import de.kxmischesdomi.mushroom.entity.Glowfly;
-import de.kxmischesdomi.mushroom.entity.ShroomPal;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -28,10 +27,10 @@ public abstract class SpawnPlacementsMixin {
 
 	@Inject(method = "<clinit>", at = @At("TAIL"))
 	private static void cinitInject(CallbackInfo ci) {
-		register(ModEntities.SHROOM_PAL, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ShroomPal::checkShroomPalSpawnRules);
+		register(ModEntities.SHROOM_PAL, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Mob::checkMobSpawnRules);
 		register(ModEntities.PUFF_CREEPER, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkMonsterSpawnRules);
 		register(ModEntities.GLOW_MOOSHROOM, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GlowMushroomCow::checkMushroomSpawnRules);
-		register(ModEntities.GLOWFLY, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Glowfly::checkGlowflySpawnRules);
+		register(ModEntities.GLOWFLY, SpawnPlacements.Type.NO_RESTRICTIONS, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Glowfly::checkGlowflySpawnRules);
 	}
 
 }

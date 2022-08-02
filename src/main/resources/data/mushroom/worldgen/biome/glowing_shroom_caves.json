@@ -103,9 +103,9 @@
     "creature": [
       {
         "type": "mushroom:glow_mooshroom",
-        "minCount": 1,
-        "maxCount": 2,
-        "weight": 10
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 8
       }
     ],
     "ambient": [
