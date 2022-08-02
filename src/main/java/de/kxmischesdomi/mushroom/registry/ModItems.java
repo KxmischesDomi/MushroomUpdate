@@ -32,7 +32,7 @@ public class ModItems {
 
 	public static final Item SHROOM_GLIDER = register("shroom_glider", new ShroomGlider(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new FabricItemSettings().group(TAB).maxCount(1).durability(100)));
 
-	public static final Item MUSIC_DISC_TWILIGHT = register("music_disc_twilight", new MusicDiscItem(1, ModSounds.MUSIC_DISC_TWILIGHT, new Item.Properties().stacksTo(1).tab(TAB).rarity(Rarity.RARE)));
+	public static final Item MUSIC_DISC_TWILIGHT = register("music_disc_twilight", new MusicDiscItem(1, ModSounds.MUSIC_DISC_TWILIGHT, new Item.Properties().stacksTo(1).tab(TAB).rarity(Rarity.RARE), 119));
 
 	public static final Item SHROOM_PAL_SPAWN_EGG = register("shroom_pal_spawn_egg", new SpawnEggItem(ModEntities.SHROOM_PAL, 0x8B1A18, 0xFCBDBD, new FabricItemSettings().group(TAB)));
 	public static final Item PUFF_CREEPER_SPAWN_EGG = register("puff_creeper_spawn_egg", new SpawnEggItem(ModEntities.PUFF_CREEPER, 0xC5AB80, 0x5D5247, new FabricItemSettings().group(TAB)));

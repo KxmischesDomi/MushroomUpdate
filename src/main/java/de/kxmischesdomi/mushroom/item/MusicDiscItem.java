@@ -12,8 +12,8 @@ public class MusicDiscItem extends RecordItem {
 	/**
 	 * Add public access to constructor of {@link RecordItem}
 	 */
-	public MusicDiscItem(int i, SoundEvent soundEvent, Properties properties) {
-		super(i, soundEvent, properties);
+	public MusicDiscItem(int i, SoundEvent soundEvent, Properties properties, int j) {
+		super(i, soundEvent, properties, j);
 	}
 
 }
