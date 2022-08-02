@@ -28,8 +28,7 @@ public class MushroomClient implements ClientModInitializer {
 
 		GeoArmorRenderer.registerArmorRenderer(new ShroomGliderRenderer(), ModItems.SHROOM_GLIDER);
 
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.GLOW_MUSHROOM);
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.POTTED_GLOW_MUSHROOM);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.GLOW_MUSHROOM,  ModBlocks.POTTED_GLOW_MUSHROOM);
 	}
 
 }
