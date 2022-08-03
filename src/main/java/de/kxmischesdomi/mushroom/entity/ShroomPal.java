@@ -21,6 +21,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.*;
@@ -179,6 +180,20 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	 */
 	public void setCropsEaten(int cropsEaten) {
 		entityData.set(CROPS_EATEN, cropsEaten);
+	}
+
+	@Override
+	protected void dropCustomDeathLoot(DamageSource damageSource, int i, boolean bl) {
+		super.dropCustomDeathLoot(damageSource, i, bl);
+		this.spawnAtLocation(new ItemStack(getMushroomTypeItem(), getDropAmount()));
+	}
+
+	public int getDropAmount() {
+		return isBig() ? random.nextInt(2) + 1 : 1;
+	}
+
+	public Item getMushroomTypeItem() {
+		return isBrownMushroom() ? Items.BROWN_MUSHROOM_BLOCK : Items.RED_MUSHROOM_BLOCK;
 	}
 
 	@Nullable
