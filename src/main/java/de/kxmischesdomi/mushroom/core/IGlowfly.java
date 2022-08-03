@@ -45,12 +45,12 @@ public interface IGlowfly {
 
 			playHealParticles(
 					glowflyPos,
-					new Vec3(ModEntities.GLOWFLY.getWidth() / 2, ModEntities.GLOWFLY.getHeight(), ModEntities.GLOWFLY.getWidth() / 2),
+					new Vec3(ModEntities.GLOWFLY.getWidth() / 2, ModEntities.GLOWFLY.getHeight() / 2, ModEntities.GLOWFLY.getWidth() / 2),
 					5
 			);
 			playHealParticles(
 					entity.position(),
-					new Vec3(entity.getType().getWidth() / 2, entity.getType().getHeight(), entity.getType().getWidth() / 2),
+					new Vec3(entity.getType().getWidth() / 2, entity.getType().getHeight() / 2, entity.getType().getWidth() / 2),
 					30
 			);
 		}
