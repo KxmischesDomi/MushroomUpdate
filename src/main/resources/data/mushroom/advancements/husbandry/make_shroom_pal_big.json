@@ -1,0 +1,39 @@
+{
+	"parent": "mushroom:husbandry/make_shroom_pal_consume",
+	"display": {
+		"icon": {
+			"item": "minecraft:red_mushroom_block"
+		},
+		"title": {
+			"translate": "advancements.husbandry.mushroom.make_shroom_pal_big.title"
+		},
+		"description": {
+			"translate": "advancements.husbandry.mushroom.make_shroom_pal_big.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"shroom_pal_consume": {
+			"conditions": {
+				"entity": [
+					{
+						"condition": "minecraft:entity_properties",
+						"entity": "this",
+						"predicate": {
+							"nbt": "{\"CropsEaten\":50, \"IsBig\": false}"
+						}
+					}
+				]
+			},
+			"trigger": "mushroom:shroom_pal_consume"
+		}
+	},
+	"requirements": [
+		[
+			"shroom_pal_consume"
+		]
+	]
+}

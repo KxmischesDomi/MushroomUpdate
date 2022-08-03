@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "mushroom:block/glowfly_glass"
+    },
+    "hanging=true": {
+      "model": "mushroom:block/glowfly_glass_hanging"
+    }
+  }
+}

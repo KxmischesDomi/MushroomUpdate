@@ -1,9 +1,12 @@
 package de.kxmischesdomi.mushroom.entity;
 
 import de.kxmischesdomi.mushroom.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
+import de.kxmischesdomi.mushroom.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -11,6 +14,11 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.animal.Bucketable;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -66,6 +74,20 @@ public class Glowfly extends PathfinderMob implements IAnimatable {
 	public void tick() {
 		super.tick();
 		this.setDeltaMovement(this.getDeltaMovement().multiply(1.0, 0.6, 1.0));
+	}
+
+	@Override
+	protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
+		ItemStack itemStack = player.getItemInHand(interactionHand);
+		if (itemStack.is(Items.GLASS_BOTTLE) && isAlive()) {
+			ItemStack stack = ModItems.GLOWFLY_GLASS.getDefaultInstance();
+			Bucketable.saveDefaultDataToBucketTag(this, stack);
+			ItemStack itemStack3 = ItemUtils.createFilledResult(itemStack, player, stack, false);
+			player.setItemInHand(interactionHand, itemStack3);
+			discard();
+			return InteractionResult.sidedSuccess(level.isClientSide());
+		}
+		return super.mobInteract(player, interactionHand);
 	}
 
 	@Override

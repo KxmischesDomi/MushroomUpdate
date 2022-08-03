@@ -2,6 +2,7 @@ package de.kxmischesdomi.mushroom.registry;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
 import de.kxmischesdomi.mushroom.block.GlowMushroomBlock;
+import de.kxmischesdomi.mushroom.block.GlowflyLanternBlock;
 import de.kxmischesdomi.mushroom.block.HugeGlowMushroomBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -41,6 +42,15 @@ public class ModBlocks {
 			.noOcclusion()
 			)
 	);
+
+	public static final Block GLOWFLY_GLASS = register("glowfly_glass", new GlowflyLanternBlock(
+			BlockBehaviour.Properties.of(Material.METAL)
+					.requiresCorrectToolForDrops()
+					.strength(3.5f)
+					.sound(SoundType.LANTERN)
+					.lightLevel(blockState -> 15)
+					.noOcclusion()
+	));
 
 	private static Block register(String name, Block block) {
 		return Registry.register(Registry.BLOCK, new ResourceLocation(MushroomMod.MOD_ID, name), block);

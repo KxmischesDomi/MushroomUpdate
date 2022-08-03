@@ -13,6 +13,7 @@
 	"block.mushroom.glow_mushroom": "Glow Mushroom",
 	"block.mushroom.glow_mushroom_block": "Glow Mushroom Block",
 	"block.mushroom.potted_glow_mushroom": "Potted Glow Mushroom",
+	"block.mushroom.glowfly_glass": "Glowfly in glass",
 
 	"entity.mushroom.shroom_pal": "Shroom Pal",
 	"entity.mushroom.puff_creeper": "Puff Creeper",
@@ -21,6 +22,13 @@
 
 	"biome.mushroom.shroom_caves": "Shroom Caves",
 	"biome.mushroom.glowing_shroom_caves": "Glowing Shroom Caves",
+
+	"advancements.husbandry.mushroom.make_shroom_pal_consume.title": "Saprotrophic Pals",
+	"advancements.husbandry.mushroom.make_shroom_pal_consume.description": "Make a Shroom Pal consume crops",
+	"advancements.husbandry.mushroom.make_shroom_pal_big.title": "Old Friend",
+	"advancements.husbandry.mushroom.make_shroom_pal_big.description": "Have a Shroom Pal consume 50 crops, making it an adult",
+	"advancements.adventure.mushroom.spyglass_at_glowfly.title": "Is It the Wild Update?",
+	"advancements.adventure.mushroom.spyglass_at_glowfly.description": "Look at a Glowfly through a Spyglass",
 
 	"subtitles.entity.mushroom.puff_creeper.death": "Puff Creeper dies",
 	"subtitles.entity.mushroom.puff_creeper.hurt": "Puff Creeper hurts",

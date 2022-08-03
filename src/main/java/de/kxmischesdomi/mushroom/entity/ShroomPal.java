@@ -1,5 +1,6 @@
 package de.kxmischesdomi.mushroom.entity;
 
+import de.kxmischesdomi.mushroom.registry.ModCriteriaTriggers;
 import de.kxmischesdomi.mushroom.registry.ModSounds;
 import de.kxmischesdomi.mushroom.registry.ModTags;
 import net.minecraft.core.BlockPos;
@@ -7,6 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
@@ -35,6 +38,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author KxmischesDomi | https://github.com/kxmischesdomi
@@ -48,6 +52,8 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 	private static final EntityDataAccessor<Integer> CROPS_EATEN = SynchedEntityData.defineId(ShroomPal.class, EntityDataSerializers.INT);
 
 	private final AnimationFactory factory = new AnimationFactory(this);
+
+	private UUID lastFollowingPlayer;
 
 	public ShroomPal(EntityType<? extends PathfinderMob> entityType, Level level) {
 		super(entityType, level);
@@ -100,6 +106,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		compoundTag.putBoolean("IsBig", isBig());
 		compoundTag.putBoolean("IsBrown", isBrownMushroom());
 		compoundTag.putInt("CropsEaten", getCropsEaten());
+		if (lastFollowingPlayer != null) {
+			compoundTag.putUUID("LastFollowingPlayer", lastFollowingPlayer);
+		}
 	}
 
 	/**
@@ -111,6 +120,9 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 		this.setBig(compoundTag.getBoolean("IsBig"));
 		this.setBrownMushroom(compoundTag.getBoolean("IsBrown"));
 		this.setCropsEaten(compoundTag.getInt("CropsEaten"));
+		if (compoundTag.contains("LastFollowingPlayer")) {
+			this.lastFollowingPlayer = compoundTag.getUUID("LastFollowingPlayer");
+		}
 	}
 
 	/**
@@ -341,8 +353,14 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 					Block.popResource(pal.level, this.blockPos, new ItemStack(Items.BONE_MEAL));
 				}
 
+				pal.setCropsEaten(pal.getCropsEaten() + 1);
+
+				ServerPlayer player;
+				if (pal.level instanceof ServerLevel level && pal.lastFollowingPlayer != null && (player = (ServerPlayer) level.getPlayerByUUID(pal.lastFollowingPlayer)) != null) {
+					ModCriteriaTriggers.SHROOM_PAL_CONSUME.trigger(player, pal);
+				}
+
 				if (!pal.isBig()) {
-					pal.setCropsEaten(pal.getCropsEaten() + 1);
 					if (pal.getCropsEaten() >= 50) {
 						pal.setBig(true);
 						pal.playSound(ModSounds.SHROOM_PAL_GROW);
@@ -389,9 +407,6 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 			if (mob.lastHurtByPlayerTime > 0) {
 				return false;
 			}
-			if (mob.isBig()) {
-				return false;
-			}
 
 			List<? extends LivingEntity> list = mob.level.getEntitiesOfClass(toFollow, mob.getBoundingBox().inflate(HORIZONTAL_SCAN_RANGE, VERTICAL_SCAN_RANGE, HORIZONTAL_SCAN_RANGE));
 
@@ -417,7 +432,7 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 			if (mob.lastHurtByPlayerTime > 0) {
 				return false;
 			}
-			if (this.following == null || !this.following.isAlive() || mob.isBig()) {
+			if (this.following == null || !this.following.isAlive()) {
 				return false;
 			}
 			double d = this.mob.distanceToSqr(this.following);
@@ -437,6 +452,10 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 
 		@Override
 		public void tick() {
+			if (this.following instanceof Player player) {
+				mob.lastFollowingPlayer = player.getUUID();
+			}
+
 			if (--this.timeToRecalcPath > 0 || this.following == null) {
 				return;
 			}
