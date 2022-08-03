@@ -267,6 +267,8 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 
 	public static class FlyToMobToHealGoal extends Goal {
 
+		private static final double TRACKING_DISTANCE = 10;
+
 		private final Glowfly glowfly;
 		private LivingEntity mobToHeal;
 
@@ -280,7 +282,7 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 			if (!glowfly.hasHealingPower()) {
 				return false;
 			}
-			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), 10);
+			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), TRACKING_DISTANCE);
 			if (mobToHeal == null || mobToHeal.distanceTo(glowfly) <= glowfly.getHealingRange()) {
 				return false;
 			}
@@ -290,11 +292,12 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 
 		@Override
 		public boolean canContinueToUse() {
-			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), 10);
-			if (mobToHeal != this.mobToHeal || !glowfly.hasHealingPower()) {
+			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), TRACKING_DISTANCE);
+			float d = mobToHeal.distanceTo(glowfly);
+			if (mobToHeal != this.mobToHeal || !glowfly.hasHealingPower() || d > TRACKING_DISTANCE) {
 				return false;
 			}
-			if (mobToHeal.distanceTo(glowfly) <= glowfly.getHealingRange()) {
+			if (d <= glowfly.getHealingRange()) {
 				glowfly.glowflyHealMob(glowfly.position(), mobToHeal);
 				return false;
 			}
@@ -305,7 +308,7 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 		public void start() {
 			glowfly.getNavigation().moveTo(mobToHeal, 1);
 		}
-		
+
 	}
 
 
