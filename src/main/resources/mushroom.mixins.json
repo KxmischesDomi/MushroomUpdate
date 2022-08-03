@@ -8,6 +8,7 @@
 		"BlendingDataMixin",
 		"LivingEntityMixin",
 		"OverworldBiomeBuilderMixin",
+		"PlayerMixin",
 		"SpawnPlacementsMixin"
 	],
 	"client": [
