@@ -294,6 +294,10 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 
 		@Override
 		public boolean canContinueToUse() {
+			if (this.mobToHeal.getHealth() >= this.mobToHeal.getMaxHealth()) {
+				this.mobToHeal = null;
+				return false;
+			}
 			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), TRACKING_DISTANCE);
 			float d = this.mobToHeal.distanceTo(glowfly);
 			if (mobToHeal != this.mobToHeal || !glowfly.hasHealingPower() || d > TRACKING_DISTANCE) {
