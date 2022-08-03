@@ -1,9 +1,11 @@
 package de.kxmischesdomi.mushroom.entity;
 
 import de.kxmischesdomi.mushroom.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
+import de.kxmischesdomi.mushroom.registry.ModCriteriaTriggers;
 import de.kxmischesdomi.mushroom.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -78,12 +80,16 @@ public class Glowfly extends PathfinderMob implements IAnimatable {
 
 	@Override
 	protected InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
-		ItemStack itemStack = player.getItemInHand(interactionHand);
-		if (itemStack.is(Items.GLASS_BOTTLE) && isAlive()) {
-			ItemStack stack = ModItems.GLOWFLY_GLASS.getDefaultInstance();
-			Bucketable.saveDefaultDataToBucketTag(this, stack);
-			ItemStack itemStack3 = ItemUtils.createFilledResult(itemStack, player, stack, false);
-			player.setItemInHand(interactionHand, itemStack3);
+		ItemStack itemInHand = player.getItemInHand(interactionHand);
+		if (itemInHand.is(Items.GLASS_BOTTLE) && isAlive()) {
+			ItemStack glowflyGlass = new ItemStack(ModItems.GLOWFLY_GLASS);
+			Bucketable.saveDefaultDataToBucketTag(this, glowflyGlass);
+			ItemStack result = ItemUtils.createFilledResult(itemInHand, player, glowflyGlass, false);
+			player.setItemInHand(interactionHand, result);
+			Level level = player.level;
+			if (!level.isClientSide) {
+				ModCriteriaTriggers.FILLED_GLASS.trigger((ServerPlayer)player);
+			}
 			discard();
 			return InteractionResult.sidedSuccess(level.isClientSide());
 		}

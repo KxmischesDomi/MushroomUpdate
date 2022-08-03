@@ -1,0 +1,28 @@
+{
+	"parent": "mushroom:adventure/spyglass_at_glowfly",
+	"display": {
+		"icon": {
+			"item": "mushroom:glowfly_glass"
+		},
+		"title": {
+			"translate": "advancements.adventure.mushroom.glowfly_in_a_glass.title"
+		},
+		"description": {
+			"translate": "advancements.adventure.mushroom.glowfly_in_a_glass.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"glowfly_glass": {
+			"trigger": "mushroom:filled_glass"
+		}
+	},
+	"requirements": [
+		[
+			"glowfly_glass"
+		]
+	]
+}
