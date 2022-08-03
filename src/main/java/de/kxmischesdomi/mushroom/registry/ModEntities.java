@@ -45,7 +45,7 @@ public class ModEntities {
 	public static final EntityType<Glowfly> GLOWFLY = register("glowfly",
 			FabricEntityTypeBuilder
 					.create(MobCategory.AMBIENT, Glowfly::new)
-					.dimensions(EntityDimensions.fixed(0.1f, 0.05f))
+					.dimensions(EntityDimensions.fixed(0.15f, 0.1f))
 					.trackRangeChunks(3)
 	);
 
