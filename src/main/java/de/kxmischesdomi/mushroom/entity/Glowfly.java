@@ -272,6 +272,8 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 		private final Glowfly glowfly;
 		private LivingEntity mobToHeal;
 
+		private int timeToRecalcPath;
+
 		public FlyToMobToHealGoal(Glowfly glowfly) {
 			this.glowfly = glowfly;
 			setFlags(EnumSet.of(Flag.MOVE));
@@ -293,12 +295,12 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 		@Override
 		public boolean canContinueToUse() {
 			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), TRACKING_DISTANCE);
-			float d = mobToHeal.distanceTo(glowfly);
+			float d = this.mobToHeal.distanceTo(glowfly);
 			if (mobToHeal != this.mobToHeal || !glowfly.hasHealingPower() || d > TRACKING_DISTANCE) {
 				return false;
 			}
 			if (d <= glowfly.getHealingRange()) {
-				glowfly.glowflyHealMob(glowfly.position(), mobToHeal);
+				glowfly.glowflyHealMob(glowfly.position(), this.mobToHeal);
 				return false;
 			}
 			return true;
@@ -306,7 +308,21 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 
 		@Override
 		public void start() {
-			glowfly.getNavigation().moveTo(mobToHeal, 1);
+			this.timeToRecalcPath = 0;
+		}
+
+		@Override
+		public boolean requiresUpdateEveryTick() {
+			return true;
+		}
+
+		@Override
+		public void tick() {
+			if (--this.timeToRecalcPath > 0 || this.mobToHeal == null) {
+				return;
+			}
+			this.timeToRecalcPath = this.adjustedTickDelay(10);
+			this.glowfly.getNavigation().moveTo(this.mobToHeal.getX(), mobToHeal.getY() + mobToHeal.getType().getHeight() / 2, mobToHeal.getZ(), 1);
 		}
 
 	}
