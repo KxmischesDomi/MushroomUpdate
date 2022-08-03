@@ -27,10 +27,13 @@ public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 	@Override
 	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
 		if (randomSource.nextBoolean()) {
-			double d = (double)blockPos.getX() + randomSource.nextDouble() / 2;
-			double e = (double)blockPos.getY() + randomSource.nextDouble() / 2;
-			double f = (double)blockPos.getZ() + randomSource.nextDouble() / 2;
-			level.addParticle(ParticleTypes.GLOW, d, e, f, 0, 0, 0);
+			double xRand = randomSource.nextDouble();
+			double x = (double)blockPos.getX() + xRand / 2 + xRand / 2;
+			double yRand= randomSource.nextDouble();
+			double y = (double)blockPos.getY() + yRand / 2 + xRand / 2;
+			double zRand = randomSource.nextDouble();
+			double z = (double)blockPos.getZ() + zRand / 2 + xRand / 2;
+			level.addParticle(ParticleTypes.GLOW, x, y, z, 0, 0, 0);
 		}
 	}
 
