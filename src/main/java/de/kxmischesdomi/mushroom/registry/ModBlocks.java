@@ -45,9 +45,8 @@ public class ModBlocks {
 
 	public static final Block GLOWFLY_GLASS = register("glowfly_glass", new GlowflyLanternBlock(
 			BlockBehaviour.Properties.of(Material.METAL)
-					.requiresCorrectToolForDrops()
-					.strength(3.5f)
-					.sound(SoundType.LANTERN)
+					.strength(1f)
+					.sound(SoundType.GLASS)
 					.lightLevel(blockState -> 15)
 					.noOcclusion()
 	));

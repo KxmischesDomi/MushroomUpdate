@@ -17,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -48,7 +49,6 @@ public class GlowflyGlassItem extends BlockItem {
 			} else {
 				return InteractionResultHolder.pass(itemStack);
 			}
-			System.out.println(blockPos);
 
 			spawnExtraContent(player, level, itemStack, blockPos);
 			if (player instanceof ServerPlayer) {
@@ -56,10 +56,17 @@ public class GlowflyGlassItem extends BlockItem {
 			}
 
 			player.awardStat(Stats.ITEM_USED.get(this));
-			return InteractionResultHolder.sidedSuccess(BucketItem.getEmptySuccessItem(itemStack, player), level.isClientSide());
+			return InteractionResultHolder.sidedSuccess(getEmptySuccessItem(itemStack, player), level.isClientSide());
 		}
 
 		return super.use(level, player, interactionHand);
+	}
+
+	public static ItemStack getEmptySuccessItem(ItemStack itemStack, Player player) {
+		if (!player.getAbilities().instabuild) {
+			return new ItemStack(Items.GLASS_BOTTLE);
+		}
+		return itemStack;
 	}
 
 	public void spawnExtraContent(Player player, Level level, ItemStack itemStack, BlockPos blockPos) {
