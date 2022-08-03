@@ -1,9 +1,12 @@
 package de.kxmischesdomi.mushroom.core;
 
+import de.kxmischesdomi.mushroom.registry.ModCriteriaTriggers;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
+import de.kxmischesdomi.mushroom.registry.ModStats;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -23,6 +26,10 @@ public interface IGlowfly {
 		return 1.5;
 	}
 
+	default float getHealthRegenerating() {
+		return 1.5f;
+	}
+
 	boolean hasHealingPower();
 
 	int getHealingCooldown();
@@ -39,7 +46,17 @@ public interface IGlowfly {
 		Level level = entity.getLevel();
 
 		if (!level.isClientSide) {
-			entity.heal(1.5f);
+			float regenerating = getHealthRegenerating();
+			entity.heal(regenerating);
+
+			if (entity instanceof ServerPlayer player) {
+				player.awardStat(ModStats.GLOWFLY_HEALTH_GAINED, Math.round(regenerating * 10.0f));
+				int value = player.getStats().getValue(Stats.CUSTOM.get(ModStats.GLOWFLY_HEALTH_GAINED));
+				if (value > 19 * 10) {
+					ModCriteriaTriggers.GLOWFLY_REGENERATE_FULL.trigger(player);
+				}
+			}
+
 			setHasHealingPower(false);
 			setHealingCooldown(10*20);
 

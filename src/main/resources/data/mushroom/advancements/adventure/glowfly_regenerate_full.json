@@ -1,0 +1,28 @@
+{
+	"parent": "mushroom:adventure/glowfly_in_a_glass",
+	"display": {
+		"icon": {
+			"item": "minecraft:golden_apple"
+		},
+		"title": {
+			"translate": "advancements.adventure.mushroom.glowfly_regenerate_full.title"
+		},
+		"description": {
+			"translate": "advancements.adventure.mushroom.glowfly_regenerate_full.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"glowfly_regenerate_full": {
+			"trigger": "mushroom:glowfly_regenerate_full"
+		}
+	},
+	"requirements": [
+		[
+			"glowfly_regenerate_full"
+		]
+	]
+}
