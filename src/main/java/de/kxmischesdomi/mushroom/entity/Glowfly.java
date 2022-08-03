@@ -1,10 +1,17 @@
 package de.kxmischesdomi.mushroom.entity;
 
+import de.kxmischesdomi.mushroom.core.IGlowfly;
 import de.kxmischesdomi.mushroom.entity.ai.goal.WaterAvoidingRandomFlyingGoal;
 import de.kxmischesdomi.mushroom.registry.ModCriteriaTriggers;
 import de.kxmischesdomi.mushroom.registry.ModItems;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -14,6 +21,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.animal.Bucketable;
@@ -31,13 +39,20 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
+import java.util.Collection;
+import java.util.EnumSet;
+
 /**
  * @author KxmischesDomi | https://github.com/kxmischesdomi
  * @since 1.0
  */
-public class Glowfly extends PathfinderMob implements IAnimatable {
+public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
+
+	private static final EntityDataAccessor<Boolean> HAS_HEALING_POWER = SynchedEntityData.defineId(Glowfly.class, EntityDataSerializers.BOOLEAN);
 
 	private final AnimationFactory factory = new AnimationFactory(this);
+
+	private int healingCooldown = 0;
 
 	public Glowfly(EntityType<? extends PathfinderMob> entityType, Level level) {
 		super(entityType, level);
@@ -61,14 +76,41 @@ public class Glowfly extends PathfinderMob implements IAnimatable {
 	 */
 	@Override
 	protected void registerGoals() {
+		this.goalSelector.addGoal(0, new FlyToMobToHealGoal(this));
 		this.goalSelector.addGoal(1, new WaterAvoidingRandomFlyingGoal(this, 1, 1));
+	}
+
+	@Override
+	protected void defineSynchedData() {
+		super.defineSynchedData();
+		this.entityData.define(HAS_HEALING_POWER, true);
+	}
+
+	@Override
+	public void addAdditionalSaveData(CompoundTag compoundTag) {
+		super.addAdditionalSaveData(compoundTag);
+		compoundTag.putBoolean("HasHealingPower", this.hasHealingPower());
+		compoundTag.putInt("HealingCooldown", this.healingCooldown);
+	}
+
+	@Override
+	public void readAdditionalSaveData(CompoundTag compoundTag) {
+		super.readAdditionalSaveData(compoundTag);
+		if (compoundTag.contains("HasHealingPower")) {
+			this.setHasHealingPower(compoundTag.getBoolean("HasHealingPower"));
+		}
+		if (compoundTag.contains("HealingCooldown")) {
+			this.healingCooldown = compoundTag.getInt("HealingCooldown");
+		}
 	}
 
 	@Override
 	public void aiStep() {
 		super.aiStep();
-		if (random.nextFloat() > 0.95F) {
-			this.level.addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+		if (hasHealingPower()) {
+			if (random.nextFloat() > 0.95F) {
+				this.level.addParticle(ParticleTypes.GLOW, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
+			}
 		}
 	}
 
@@ -76,6 +118,36 @@ public class Glowfly extends PathfinderMob implements IAnimatable {
 	public void tick() {
 		super.tick();
 		this.setDeltaMovement(this.getDeltaMovement().multiply(1.0, 0.6, 1.0));
+
+		if (level instanceof ServerLevel) {
+			tickCooldownHealing();
+		}
+
+	}
+
+	@Override
+	public boolean hasHealingPower() {
+		return this.entityData.get(HAS_HEALING_POWER);
+	}
+
+	@Override
+	public int getHealingCooldown() {
+		return this.healingCooldown;
+	}
+
+	@Override
+	public void setHealingCooldown(int cooldown) {
+		this.healingCooldown = cooldown;
+	}
+
+	@Override
+	public void setHasHealingPower(boolean hasHealingPower) {
+		this.entityData.set(HAS_HEALING_POWER, hasHealingPower);
+	}
+
+	@Override
+	public Collection<ServerPlayer> getTrackingPlayers() {
+		return PlayerLookup.tracking(this);
 	}
 
 	@Override
@@ -164,7 +236,7 @@ public class Glowfly extends PathfinderMob implements IAnimatable {
 	@Override
 	public void registerControllers(AnimationData animationData) {
 		animationData.addAnimationController(new AnimationController(this, "controller", 1, event -> {
-			if (!isOnGround()) {
+			if (!isOnGround() && !isNoAi()) {
 				event.getController().setAnimation(new AnimationBuilder().addAnimation("fly", true));
 				return PlayState.CONTINUE;
 			}
@@ -191,6 +263,49 @@ public class Glowfly extends PathfinderMob implements IAnimatable {
 	public static boolean checkMobSpawnRules(EntityType<? extends Mob> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
 		BlockPos blockPos2 = blockPos.below();
 		return mobSpawnType == MobSpawnType.SPAWNER || levelAccessor.getBlockState(blockPos2).isValidSpawn(levelAccessor, blockPos2, entityType);
+	}
+
+	public static class FlyToMobToHealGoal extends Goal {
+
+		private final Glowfly glowfly;
+		private LivingEntity mobToHeal;
+
+		public FlyToMobToHealGoal(Glowfly glowfly) {
+			this.glowfly = glowfly;
+			setFlags(EnumSet.of(Flag.MOVE));
+		}
+
+		@Override
+		public boolean canUse() {
+			if (!glowfly.hasHealingPower()) {
+				return false;
+			}
+			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), 10);
+			if (mobToHeal == null || mobToHeal.distanceTo(glowfly) <= glowfly.getHealingRange()) {
+				return false;
+			}
+			this.mobToHeal = mobToHeal;
+			return true;
+		}
+
+		@Override
+		public boolean canContinueToUse() {
+			LivingEntity mobToHeal = IGlowfly.getNearestMobToHeal((ServerLevel) glowfly.level, glowfly.position(), 10);
+			if (mobToHeal != this.mobToHeal || !glowfly.hasHealingPower()) {
+				return false;
+			}
+			if (mobToHeal.distanceTo(glowfly) <= glowfly.getHealingRange()) {
+				glowfly.glowflyHealMob(glowfly.position(), mobToHeal);
+				return false;
+			}
+			return true;
+		}
+
+		@Override
+		public void start() {
+			glowfly.getNavigation().moveTo(mobToHeal, 1);
+		}
+		
 	}
 
 
