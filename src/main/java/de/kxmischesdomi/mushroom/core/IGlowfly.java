@@ -44,9 +44,16 @@ public interface IGlowfly {
 
 	Collection<ServerPlayer> getTrackingPlayers();
 
-	default void checkForMobHealing(Vec3 glowflyPos) {
+	default void checkForMobHealing(ServerLevel level, Vec3 glowflyPos) {
 		if (!hasHealingPower()) return;
-
+		LivingEntity mob = IGlowfly.getNearestMobToHeal(
+				level,
+				glowflyPos,
+				getHealingRange()
+		);
+		if (mob != null) {
+			glowflyHealMob(glowflyPos, mob);
+		}
 	}
 
 	default void glowflyHealMob(Vec3 glowflyPos, LivingEntity entity) {
@@ -136,10 +143,33 @@ public interface IGlowfly {
 	}
 
 	static void saveDefaultDataToGlassTag(Glowfly mob, ItemStack itemStack) {
-		Bucketable.saveDefaultDataToBucketTag(mob, itemStack);
 		CompoundTag compoundTag = itemStack.getOrCreateTag();
-		compoundTag.putBoolean("HasHealingPower", mob.hasHealingPower());
-		compoundTag.putInt("HealingCooldown", mob.getHealingCooldown());
+
+		if (mob.hasCustomName()) {
+			itemStack.setHoverName(mob.getCustomName());
+		}
+		if (mob.isNoAi()) {
+			compoundTag.putBoolean("NoAI", mob.isNoAi());
+		}
+		if (mob.isSilent()) {
+			compoundTag.putBoolean("Silent", mob.isSilent());
+		}
+		if (mob.hasGlowingTag()) {
+			compoundTag.putBoolean("Glowing", mob.hasGlowingTag());
+		}
+		if (mob.isInvulnerable()) {
+			compoundTag.putBoolean("Invulnerable", mob.isInvulnerable());
+		}
+		if (mob.getHealth() != mob.getMaxHealth()) {
+			compoundTag.putFloat("Health", mob.getHealth());
+		}
+
+		if (!mob.hasHealingPower()) {
+			compoundTag.putBoolean("HasHealingPower", mob.hasHealingPower());
+		}
+		if (mob.getHealingCooldown() > 0) {
+			compoundTag.putInt("HealingCooldown", mob.getHealingCooldown());
+		}
 	}
 
 	static void loadDefaultDataFromGlassTag(Glowfly mob, CompoundTag compoundTag) {

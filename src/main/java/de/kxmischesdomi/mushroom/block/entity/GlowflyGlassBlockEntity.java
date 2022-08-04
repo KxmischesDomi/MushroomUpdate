@@ -10,7 +10,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -43,14 +42,7 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 
 			if (hasHealingPower()) {
 				Vec3 pos = new Vec3(getBlockPos().getX() + 0.5, getBlockPos().getY() + 0.5, getBlockPos().getZ() + 0.5);
-				LivingEntity mob = IGlowfly.getNearestMobToHeal(
-						serverLevel,
-						pos,
-						getHealingRange()
-				);
-				if (mob != null) {
-					glowflyHealMob(pos, mob);
-				}
+				checkForMobHealing(serverLevel, pos);
 			}
 
 		}
@@ -89,7 +81,6 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 
 	@Override
 	public void load(CompoundTag compoundTag) {
-		System.out.println("load " + compoundTag);
 		this.glowflyNbt = compoundTag;
 		if (compoundTag.contains("HasHealingPower")) {
 			this.hasHealingPower = compoundTag.getBoolean("HasHealingPower");
