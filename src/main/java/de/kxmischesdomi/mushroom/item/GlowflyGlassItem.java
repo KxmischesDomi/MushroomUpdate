@@ -14,10 +14,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -64,7 +61,7 @@ public class GlowflyGlassItem extends BlockItem {
 
 	public static ItemStack getEmptySuccessItem(ItemStack itemStack, Player player) {
 		if (!player.getAbilities().instabuild) {
-			return new ItemStack(Items.GLASS_BOTTLE);
+			return ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE));
 		}
 		return itemStack;
 	}
