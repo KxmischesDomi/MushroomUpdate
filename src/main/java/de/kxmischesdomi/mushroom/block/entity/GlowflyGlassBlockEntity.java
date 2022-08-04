@@ -49,11 +49,6 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 	}
 
 	@Override
-	public double getHealingRange() {
-		return 2.5;
-	}
-
-	@Override
 	public boolean hasHealingPower() {
 		return hasHealingPower;
 	}
