@@ -1,11 +1,18 @@
 package de.kxmischesdomi.mushroom.block;
 
 import de.kxmischesdomi.mushroom.block.entity.GlowflyGlassBlockEntity;
+import de.kxmischesdomi.mushroom.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -41,6 +48,40 @@ public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 	@Override
 	public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
 		return new GlowflyGlassBlockEntity(blockPos, blockState);
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos blockPos, BlockState blockState, @Nullable LivingEntity livingEntity, ItemStack itemStack) {
+		if (level.getBlockEntity(blockPos) instanceof GlowflyGlassBlockEntity glassBlockEntity) {
+			glassBlockEntity.load(itemStack.getOrCreateTag());
+		}
+	}
+
+	@Override
+	public void playerWillDestroy(Level level, BlockPos blockPos, BlockState blockState, Player player) {
+		BlockEntity blockEntity = level.getBlockEntity(blockPos);
+		if (blockEntity instanceof GlowflyGlassBlockEntity glassBlockEntity) {
+			if (!level.isClientSide && player.isCreative() && !glassBlockEntity.saveWithoutMetadata().isEmpty()) {
+				ItemStack itemStack = new ItemStack(ModItems.GLOWFLY_GLASS);
+				blockEntity.saveToItem(itemStack);
+				ItemEntity itemEntity = new ItemEntity(level, (double)blockPos.getX() + 0.5, (double)blockPos.getY() + 0.5, (double)blockPos.getZ() + 0.5, itemStack);
+				itemEntity.setDefaultPickUpDelay();
+				level.addFreshEntity(itemEntity);
+			}
+		}
+		super.playerWillDestroy(level, blockPos, blockState, player);
+	}
+
+	@Override
+	public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
+		if (level instanceof ServerLevel) {
+			ItemStack itemStack1 = new ItemStack(ModItems.GLOWFLY_GLASS);
+			if (blockEntity instanceof GlowflyGlassBlockEntity glassBlockEntity) {
+				glassBlockEntity.saveToItem(itemStack1);
+			}
+			Block.popResource(level, blockPos, itemStack1);
+		}
+		super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
 	}
 
 	// BaseEntityBlock //
