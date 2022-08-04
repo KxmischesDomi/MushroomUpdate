@@ -1,6 +1,7 @@
 package de.kxmischesdomi.mushroom.block;
 
 import de.kxmischesdomi.mushroom.block.entity.GlowflyGlassBlockEntity;
+import de.kxmischesdomi.mushroom.registry.ModBlockEntities;
 import de.kxmischesdomi.mushroom.registry.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,15 +34,21 @@ public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 
 	@Override
 	public void animateTick(BlockState blockState, Level level, BlockPos blockPos, RandomSource randomSource) {
-		if (randomSource.nextBoolean()) {
-			double xRand = randomSource.nextDouble();
-			double x = (double)blockPos.getX() + xRand / 2 + xRand / 2;
-			double yRand= randomSource.nextDouble();
-			double y = (double)blockPos.getY() + yRand / 2 + xRand / 2;
-			double zRand = randomSource.nextDouble();
-			double z = (double)blockPos.getZ() + zRand / 2 + xRand / 2;
-			level.addParticle(ParticleTypes.GLOW, x, y, z, 0, 0, 0);
+		BlockEntity blockEntity = level.getBlockEntity(blockPos);
+		if (blockEntity instanceof GlowflyGlassBlockEntity glowflyGlassBlockEntity) {
+			if (glowflyGlassBlockEntity.hasHealingPower()) {
+				if (randomSource.nextBoolean()) {
+					double xRand = randomSource.nextDouble();
+					double x = (double)blockPos.getX() + xRand / 2 + xRand / 2;
+					double yRand= randomSource.nextDouble();
+					double y = (double)blockPos.getY() + yRand / 2 + xRand / 2;
+					double zRand = randomSource.nextDouble();
+					double z = (double)blockPos.getZ() + zRand / 2 + xRand / 2;
+					level.addParticle(ParticleTypes.GLOW, x, y, z, 0, 0, 0);
+				}
+			}
 		}
+
 	}
 
 	@Nullable
@@ -84,7 +91,18 @@ public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 		super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
 	}
 
-	// BaseEntityBlock //
+	// Block Entity //
+
+
+	@Nullable
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> blockEntityType) {
+		return createTickerHelper(blockEntityType, ModBlockEntities.GLOWFLY_GLASS_BLOCK_ENTITY, (level1, blockPos, blockState1, blockEntity) -> {
+			if (blockEntity instanceof GlowflyGlassBlockEntity entity) {
+				entity.tick();
+			}
+		});
+	}
 
 	@Override
 	public boolean triggerEvent(BlockState blockState, Level level, BlockPos blockPos, int i, int j) {

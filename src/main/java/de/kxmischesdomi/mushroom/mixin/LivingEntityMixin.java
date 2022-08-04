@@ -39,6 +39,7 @@ public abstract class LivingEntityMixin extends Entity {
 						item.setDamageValue(Math.max(item.getDamageValue() - 1, 0));
 					}
 					cir.setReturnValue(true);
+					return;
 				}
 			}
 

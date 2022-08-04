@@ -1,14 +1,18 @@
 package de.kxmischesdomi.mushroom.core;
 
+import de.kxmischesdomi.mushroom.entity.Glowfly;
 import de.kxmischesdomi.mushroom.registry.ModCriteriaTriggers;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
 import de.kxmischesdomi.mushroom.registry.ModStats;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -39,6 +43,11 @@ public interface IGlowfly {
 	void setHasHealingPower(boolean hasHealingPower);
 
 	Collection<ServerPlayer> getTrackingPlayers();
+
+	default void checkForMobHealing(Vec3 glowflyPos) {
+		if (!hasHealingPower()) return;
+
+	}
 
 	default void glowflyHealMob(Vec3 glowflyPos, LivingEntity entity) {
 		if (!hasHealingPower()) return;
@@ -123,6 +132,23 @@ public interface IGlowfly {
 					10
 					);
 
+		}
+	}
+
+	static void saveDefaultDataToGlassTag(Glowfly mob, ItemStack itemStack) {
+		Bucketable.saveDefaultDataToBucketTag(mob, itemStack);
+		CompoundTag compoundTag = itemStack.getOrCreateTag();
+		compoundTag.putBoolean("HasHealingPower", mob.hasHealingPower());
+		compoundTag.putInt("HealingCooldown", mob.getHealingCooldown());
+	}
+
+	static void loadDefaultDataFromGlassTag(Glowfly mob, CompoundTag compoundTag) {
+		Bucketable.loadDefaultDataFromBucketTag(mob, compoundTag);
+		if (compoundTag.contains("HasHealingPower")) {
+			mob.setHasHealingPower(compoundTag.getBoolean("HasHealingPower"));
+		}
+		if (compoundTag.contains("HealingCooldown")) {
+			mob.setHealingCooldown(compoundTag.getInt("HealingCooldown"));
 		}
 	}
 

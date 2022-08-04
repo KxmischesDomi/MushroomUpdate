@@ -24,7 +24,6 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -155,7 +154,7 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 		ItemStack itemInHand = player.getItemInHand(interactionHand);
 		if (itemInHand.is(Items.GLASS_BOTTLE) && isAlive()) {
 			ItemStack glowflyGlass = new ItemStack(ModItems.GLOWFLY_GLASS);
-			Bucketable.saveDefaultDataToBucketTag(this, glowflyGlass);
+			IGlowfly.saveDefaultDataToGlassTag(this, glowflyGlass);
 			ItemStack result = ItemUtils.createFilledResult(itemInHand, player, glowflyGlass, false);
 			player.setItemInHand(interactionHand, result);
 			Level level = player.level;

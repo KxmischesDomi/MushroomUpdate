@@ -1,5 +1,7 @@
 package de.kxmischesdomi.mushroom.item;
 
+import de.kxmischesdomi.mushroom.core.IGlowfly;
+import de.kxmischesdomi.mushroom.entity.Glowfly;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -10,9 +12,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.animal.Bucketable;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
@@ -69,8 +69,8 @@ public class GlowflyGlassItem extends BlockItem {
 	public void spawnExtraContent(Player player, Level level, ItemStack itemStack, BlockPos blockPos) {
 		if (level instanceof ServerLevel serverLevel) {
 			Entity spawn = ModEntities.GLOWFLY.spawn(serverLevel, itemStack, null, blockPos, MobSpawnType.BUCKET, true, false);
-			if (spawn instanceof Mob mob) {
-				Bucketable.loadDefaultDataFromBucketTag(mob, itemStack.getOrCreateTag());
+			if (spawn instanceof Glowfly glowfly) {
+				IGlowfly.loadDefaultDataFromGlassTag(glowfly, itemStack.getOrCreateTag());
 			}
 			level.gameEvent(player, GameEvent.ENTITY_PLACE, blockPos);
 		}
