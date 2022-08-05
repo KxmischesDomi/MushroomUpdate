@@ -108,7 +108,7 @@ public interface IGlowfly {
 					if (entity instanceof Player player && (player.isCreative() || player.isSpectator())) {
 						return false;
 					}
-					return entity.getHealth() < entity.getMaxHealth();
+					return entity.isAlive() && entity.getHealth() < entity.getMaxHealth();
 				}
 		);
 
