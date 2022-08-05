@@ -79,11 +79,11 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 		this.glowflyNbt = compoundTag;
 		if (compoundTag.contains("HasHealingPower")) {
 			this.hasHealingPower = compoundTag.getBoolean("HasHealingPower");
-			compoundTag.remove("HasHealingPower");
+			glowflyNbt.remove("HasHealingPower");
 		}
 		if (compoundTag.contains("HealingCooldown")) {
 			this.healingCooldown = compoundTag.getInt("HealingCooldown");
-			compoundTag.remove("HealingCooldown");
+			glowflyNbt.remove("HealingCooldown");
 		}
 	}
 

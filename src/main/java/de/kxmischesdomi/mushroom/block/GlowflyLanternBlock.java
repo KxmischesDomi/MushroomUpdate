@@ -12,6 +12,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -20,6 +21,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -28,8 +32,16 @@ import org.jetbrains.annotations.Nullable;
  */
 public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 
+	protected static final VoxelShape AABB = Shapes.or(Block.box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0), Block.box(5.3, 7.0, 5.3, 10.7, 9.0, 10.7));
+	protected static final VoxelShape HANGING_AABB = Shapes.or(Block.box(4.0, 1.0, 4.0, 12.0, 9.0, 12.0), Block.box(5.3, 8.0, 5.3, 10.7, 10.0, 10.7));
+
 	public GlowflyLanternBlock(Properties properties) {
 		super(properties);
+	}
+
+	@Override
+	public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+		return Shapes.or(Block.box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0), Block.box(5.3, 12.0, 5.3, 10.7, 14.0, 10.7));
 	}
 
 	@Override

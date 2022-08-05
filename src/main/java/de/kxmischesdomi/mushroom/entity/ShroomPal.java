@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -194,6 +195,16 @@ public class ShroomPal extends PathfinderMob implements IAnimatable {
 
 	public Item getMushroomTypeItem() {
 		return isBrownMushroom() ? Items.BROWN_MUSHROOM_BLOCK : Items.RED_MUSHROOM_BLOCK;
+	}
+
+	@Override
+	public float getEyeHeight(Pose pose) {
+		return super.getEyeHeight(pose);
+	}
+
+	@Override
+	public Vec3 getLeashOffset() {
+		return super.getLeashOffset();
 	}
 
 	@Nullable
