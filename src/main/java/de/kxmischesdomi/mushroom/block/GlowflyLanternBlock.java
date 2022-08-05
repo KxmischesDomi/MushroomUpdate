@@ -92,15 +92,14 @@ public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 	}
 
 	@Override
-	public void playerDestroy(Level level, Player player, BlockPos blockPos, BlockState blockState, @Nullable BlockEntity blockEntity, ItemStack itemStack) {
-		if (level instanceof ServerLevel) {
-			ItemStack itemStack1 = new ItemStack(ModItems.GLOWFLY_GLASS);
-			if (blockEntity instanceof GlowflyGlassBlockEntity glassBlockEntity) {
-				glassBlockEntity.saveToItem(itemStack1);
-			}
-			Block.popResource(level, blockPos, itemStack1);
+	public void spawnAfterBreak(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, ItemStack itemStack, boolean bl) {
+		ItemStack itemStack1 = new ItemStack(ModItems.GLOWFLY_GLASS);
+		BlockEntity blockEntity = serverLevel.getBlockEntity(blockPos);
+		if (blockEntity instanceof GlowflyGlassBlockEntity glassBlockEntity) {
+			glassBlockEntity.saveToItem(itemStack1);
 		}
-		super.playerDestroy(level, player, blockPos, blockState, blockEntity, itemStack);
+		Block.popResource(serverLevel, blockPos, itemStack1);
+		super.spawnAfterBreak(blockState, serverLevel, blockPos, itemStack, bl);
 	}
 
 	// Block Entity //
