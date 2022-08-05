@@ -51,11 +51,11 @@ public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 			if (glowflyGlassBlockEntity.hasHealingPower()) {
 				if (randomSource.nextBoolean()) {
 					double xRand = randomSource.nextDouble();
-					double x = (double)blockPos.getX() + xRand / 2 + xRand / 2;
+					double x = (double)blockPos.getX() + 0.25 + xRand / 2;
 					double yRand= randomSource.nextDouble();
-					double y = (double)blockPos.getY() + yRand / 2 + xRand / 2;
+					double y = (double)blockPos.getY() + yRand / 2;
 					double zRand = randomSource.nextDouble();
-					double z = (double)blockPos.getZ() + zRand / 2 + xRand / 2;
+					double z = (double)blockPos.getZ() + 0.25 + zRand / 2;
 					level.addParticle(ParticleTypes.GLOW, x, y, z, 0, 0, 0);
 				}
 			}
