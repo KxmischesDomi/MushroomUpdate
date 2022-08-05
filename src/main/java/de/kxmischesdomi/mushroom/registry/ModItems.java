@@ -2,6 +2,7 @@ package de.kxmischesdomi.mushroom.registry;
 
 import de.kxmischesdomi.mushroom.MushroomMod;
 import de.kxmischesdomi.mushroom.item.GlowMushroomStewItem;
+import de.kxmischesdomi.mushroom.item.GlowflyGlassItem;
 import de.kxmischesdomi.mushroom.item.ShroomGlider;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
@@ -35,6 +36,7 @@ public class ModItems {
 	public static final Item GLOW_MUSHROOM_STEW = register("glow_mushroom_stew", new GlowMushroomStewItem(new Item.Properties().stacksTo(1).tab(TAB).food(Foods.MUSHROOM_STEW)));
 
 	public static final Item SHROOM_GLIDER = register("shroom_glider", new ShroomGlider(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new FabricItemSettings().group(TAB).maxCount(1).durability(100)));
+	public static final Item GLOWFLY_GLASS = registerBlock(ModBlocks.GLOWFLY_GLASS, new GlowflyGlassItem(ModBlocks.GLOWFLY_GLASS, new FabricItemSettings().tab(TAB)));
 
 	public static final Item MUSIC_DISC_TWILIGHT = registerMusicDisc("music_disc_twilight", 1, ModSounds.MUSIC_DISC_TWILIGHT, 119, new FabricItemSettings().group(TAB).stacksTo(1).rarity(Rarity.RARE));
 
@@ -52,7 +54,11 @@ public class ModItems {
 	}
 
 	private static Item registerBlock(Block block) {
-		return register(Registry.BLOCK.getKey(block), new BlockItem(block, new Item.Properties().tab(TAB)));
+		return registerBlock(block, new BlockItem(block, new Item.Properties().tab(TAB)));
+	}
+
+	private static Item registerBlock(Block block, Item item) {
+		return register(Registry.BLOCK.getKey(block), item);
 	}
 
 	/**
@@ -63,6 +69,7 @@ public class ModItems {
 		try {
 			RecordItem item;
 			String versionString = SharedConstants.getCurrentVersion().getName();
+
 			// Check if the version is newer or equal to 1.19.1
 			if (versionString.compareTo("1.19.1") >= 0) {
 				Constructor<RecordItem> constructor = RecordItem.class.getDeclaredConstructor(int.class, SoundEvent.class, Item.Properties.class, int.class);

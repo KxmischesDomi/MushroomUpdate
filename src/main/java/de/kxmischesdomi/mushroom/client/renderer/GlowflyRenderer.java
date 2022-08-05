@@ -30,7 +30,7 @@ public class GlowflyRenderer extends GeoEntityRenderer<Glowfly> {
 
 	@Override
 	protected int getBlockLightLevel(Glowfly entity, BlockPos blockPos) {
-		return 15;
+		return entity.hasHealingPower() ? 15 : 0;
 	}
 
 }

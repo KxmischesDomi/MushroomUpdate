@@ -1,0 +1,28 @@
+{
+	"parent": "minecraft:husbandry/plant_seed",
+	"display": {
+		"icon": {
+			"item": "minecraft:red_mushroom"
+		},
+		"title": {
+			"translate": "advancements.husbandry.mushroom.make_shroom_pal_consume.title"
+		},
+		"description": {
+			"translate": "advancements.husbandry.mushroom.make_shroom_pal_consume.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"shroom_pal_consume": {
+			"trigger": "mushroom:shroom_pal_consume"
+		}
+	},
+	"requirements": [
+		[
+			"shroom_pal_consume"
+		]
+	]
+}

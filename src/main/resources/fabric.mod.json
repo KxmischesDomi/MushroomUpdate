@@ -1,41 +1,41 @@
 {
-  "schemaVersion": 1,
-  "id": "mushroom",
-  "version": "${version}",
+	"schemaVersion": 1,
+	"id": "mushroom",
+	"version": "${version}",
 
-  "name": "AnimalMace's Mushroom Update",
-  "description": "",
-  "authors": [
-    "KxmischesDomi",
-    "AnimalMace",
-    "Vodka",
-    "Marb7e"
-  ],
-  "contact": {
-    "homepage": "https://discord.gg/CvrFVbgeEU",
-    "sources": "https://github.com/KxmischesDomi/MushroomUpdate"
-  },
+	"name": "AnimalMace's Mushroom Update",
+	"description": "",
+	"authors": [
+		"KxmischesDomi",
+		"AnimalMace",
+		"Vodka",
+		"Marb7e"
+	],
+	"contact": {
+		"homepage": "https://discord.gg/CvrFVbgeEU",
+		"sources": "https://github.com/KxmischesDomi/MushroomUpdate"
+	},
 
-  "license": "Custom License",
-  "icon": "assets/mushroom/icon.png",
+	"license": "Custom License",
+	"icon": "assets/mushroom/icon.png",
 
-  "environment": "*",
-  "entrypoints": {
-    "main": [
-      "de.kxmischesdomi.mushroom.MushroomMod"
-    ],
-    "client": [
-      "de.kxmischesdomi.mushroom.MushroomClient"
-    ]
-  },
-  "mixins": [
-	  "mushroom.mixins.json"
-  ],
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"de.kxmischesdomi.mushroom.MushroomMod"
+		],
+		"client": [
+			"de.kxmischesdomi.mushroom.MushroomClient"
+		]
+	},
+	"mixins": [
+		"mushroom.mixins.json"
+	],
 
-  "depends": {
-    "minecraft": "1.19.x",
-    "fabricloader": "*",
-    "geckolib3": "*",
-    "fabric": "*"
-  }
+	"depends": {
+		"minecraft": "1.19.x",
+		"fabricloader": "*",
+		"geckolib3": "*",
+		"fabric": "*"
+	}
 }
