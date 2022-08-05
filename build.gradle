@@ -33,7 +33,7 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.5'
+	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.10'
 
 	// Isn't required to be installed by the user but should be included in dev environment.
 	modImplementation "com.terraformersmc:modmenu:4.0.5"
