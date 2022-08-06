@@ -32,9 +32,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class GlowflyLanternBlock extends LanternBlock implements EntityBlock {
 
-	protected static final VoxelShape AABB = Shapes.or(Block.box(4.0, 0.0, 4.0, 12.0, 8.0, 12.0), Block.box(5.3, 7.0, 5.3, 10.7, 9.0, 10.7));
-	protected static final VoxelShape HANGING_AABB = Shapes.or(Block.box(4.0, 1.0, 4.0, 12.0, 9.0, 12.0), Block.box(5.3, 8.0, 5.3, 10.7, 10.0, 10.7));
-
 	public GlowflyLanternBlock(Properties properties) {
 		super(properties);
 	}
