@@ -37,6 +37,7 @@ public class ModItems {
 	public static final Item GLOW_MUSHROOM_STEW = register("glow_mushroom_stew", new GlowMushroomStewItem(new Item.Properties().stacksTo(1).tab(TAB).food(Foods.MUSHROOM_STEW)));
 
 	public static final Item SHROOM_GLIDER = register("shroom_glider", new ShroomGlider(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new FabricItemSettings().group(TAB).maxCount(1).durability(100)));
+	public static final Item PUFF_SPORES = register("puff_spores", new Item(new Item.Properties().tab(TAB)));
 	public static final Item GLOWFLY_GLASS = registerBlock(ModBlocks.GLOWFLY_GLASS, new GlowflyGlassItem(ModBlocks.GLOWFLY_GLASS, new FabricItemSettings().tab(TAB)));
 
 	public static final Item MUSIC_DISC_TWILIGHT = registerMusicDisc("music_disc_twilight", ModSounds.MUSIC_DISC_TWILIGHT, 119, new FabricItemSettings().group(TAB).stacksTo(1).rarity(Rarity.RARE));

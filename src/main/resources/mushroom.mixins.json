@@ -9,6 +9,7 @@
 		"LivingEntityMixin",
 		"OverworldBiomeBuilderMixin",
 		"PlayerMixin",
+		"PotionBrewingMixin",
 		"SpawnPlacementsMixin"
 	],
 	"client": [
