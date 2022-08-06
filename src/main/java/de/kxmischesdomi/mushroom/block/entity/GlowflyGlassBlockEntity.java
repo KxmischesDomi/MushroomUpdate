@@ -76,7 +76,14 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 
 	@Override
 	public void load(CompoundTag compoundTag) {
-		this.glowflyNbt = compoundTag;
+		this.glowflyNbt = compoundTag.copy();
+		// Remove nbt that minecraft adds after the chunk was reloaded
+		glowflyNbt.remove("id");
+		glowflyNbt.remove("keepPacked");
+		glowflyNbt.remove("x");
+		glowflyNbt.remove("y");
+		glowflyNbt.remove("z");
+
 		if (compoundTag.contains("HasHealingPower")) {
 			this.hasHealingPower = compoundTag.getBoolean("HasHealingPower");
 			glowflyNbt.remove("HasHealingPower");
