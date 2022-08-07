@@ -23,6 +23,8 @@ import java.util.function.BiConsumer;
 @Mixin(PotionBrewing.class)
 public abstract class PotionBrewingMixin {
 
+	private static String TAG_PUFF_SPORES_EFFECT = "PuffSporesEffect";
+
 	@Inject(method = "isIngredient", at = @At("HEAD"), cancellable = true)
 	private static void isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		if (stack.is(ModItems.PUFF_SPORES)) {
@@ -48,7 +50,7 @@ public abstract class PotionBrewingMixin {
 
 		for (int i = 0; i < list.size(); i++) {
 			CompoundTag compound = list.getCompound(i);
-			if (compound.contains("PuffSporesEffect")) {
+			if (compound.contains(TAG_PUFF_SPORES_EFFECT)) {
 				int count = compound.getInt("PuffSporesEffect");
 				tagConsumer.accept(count, compound);
 				return count;
@@ -64,7 +66,7 @@ public abstract class PotionBrewingMixin {
 
 				if (getPuffSporesEffect(itemStack2, (count, compoundTag) -> {
 					int i = Math.max(1, count + 1);
-					compoundTag.putInt("PuffSporesEffect", i);
+					compoundTag.putInt(TAG_PUFF_SPORES_EFFECT, i);
 					compoundTag.putInt("Duration", calculateNewDuration(i));
 
 				}) == 0) {
@@ -72,7 +74,7 @@ public abstract class PotionBrewingMixin {
 						@Override
 						public CompoundTag save(CompoundTag compoundTag) {
 							CompoundTag save = super.save(compoundTag);
-							save.putInt("PuffSporesEffect", 1);
+							save.putInt(TAG_PUFF_SPORES_EFFECT, 1);
 							save.putInt("Duration", calculateNewDuration(1));
 							return save;
 						}
