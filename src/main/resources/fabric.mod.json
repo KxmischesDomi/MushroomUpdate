@@ -26,6 +26,9 @@
 		],
 		"client": [
 			"de.kxmischesdomi.mushroom.MushroomClient"
+		],
+		"preLaunch": [
+			"de.kxmischesdomi.mushroom.MushroomPreLaunch"
 		]
 	},
 	"mixins": [
