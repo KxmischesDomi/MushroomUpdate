@@ -1,5 +1,6 @@
 package de.kxmischesdomi.mushroom.entity;
 
+import de.kxmischesdomi.mushroom.item.GlowMushroomStewItem;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
 import de.kxmischesdomi.mushroom.registry.ModItems;
 import net.minecraft.core.BlockPos;
@@ -58,6 +59,7 @@ public class GlowMushroomCow extends Cow implements Shearable {
 		if (itemStack.is(Items.BOWL) && !this.isBaby()) {
 
 			ItemStack itemStack2 = new ItemStack(ModItems.GLOW_MUSHROOM_STEW);
+			GlowMushroomStewItem.setGlowColor(itemStack2, random.nextInt(0xFF | 0xFFFFFF + 1));
 			ItemStack itemStack3 = ItemUtils.createFilledResult(itemStack, player, itemStack2, false);
 			player.setItemInHand(interactionHand, itemStack3);
 

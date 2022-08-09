@@ -1,5 +1,7 @@
 package de.kxmischesdomi.mushroom.item;
 
+import de.kxmischesdomi.mushroom.api.GlowColorable;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,7 +23,27 @@ public class GlowMushroomStewItem extends BowlFoodItem {
 	@Override
 	public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
 		livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 0));
+		if (hasGlowColor(itemStack)) {
+			((GlowColorable) livingEntity).setGlowColor(getGlowColor(itemStack));
+		}
 		return super.finishUsingItem(itemStack, level, livingEntity);
+	}
+
+	public static boolean hasGlowColor(ItemStack itemStack) {
+		return getGlowColor(itemStack) != 0x000000;
+	}
+
+	public static void setGlowColor(ItemStack itemStack, int glowColor) {
+		CompoundTag tag = itemStack.getOrCreateTag();
+		tag.putInt("GlowColor", glowColor);
+	}
+
+	public static int getGlowColor(ItemStack itemStack) {
+		CompoundTag tag = itemStack.getTag();
+		if (tag == null || !tag.contains("GlowColor")) {
+			return 0x000000;
+		}
+		return tag.getInt("GlowColor");
 	}
 
 }

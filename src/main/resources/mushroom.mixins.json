@@ -6,6 +6,7 @@
 	"mixins": [
 		"BiomesMixin",
 		"BlendingDataMixin",
+		"EntityMixin",
 		"LivingEntityMixin",
 		"OverworldBiomeBuilderMixin",
 		"PlayerMixin",

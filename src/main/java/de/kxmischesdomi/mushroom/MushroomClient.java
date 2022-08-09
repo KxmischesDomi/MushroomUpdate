@@ -8,6 +8,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.item.DyeColor;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 /**
@@ -29,6 +32,23 @@ public class MushroomClient implements ClientModInitializer {
 		GeoArmorRenderer.registerArmorRenderer(new ShroomGliderRenderer(), ModItems.SHROOM_GLIDER);
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), ModBlocks.GLOW_MUSHROOM,  ModBlocks.POTTED_GLOW_MUSHROOM, ModBlocks.GLOWFLY_GLASS);
+	}
+
+	public static int getColor(Entity entity) {
+		int m = 25;
+		int n = entity.tickCount / m + entity.getId();
+		int o = DyeColor.values().length;
+		int p = n % o;
+		int q = (n + 1) % o;
+		float r = ((float) (entity.tickCount % 25)) / 25.0f;
+		float[] fs = Sheep.getColorArray(DyeColor.byId(p));
+		float[] gs = Sheep.getColorArray(DyeColor.byId(q));
+		float s = fs[0] * (1.0f - r) + gs[0] * r;
+		float t = fs[1] * (1.0f - r) + gs[1] * r;
+		float u = fs[2] * (1.0f - r) + gs[2] * r;
+		// turn s, t and u into a hex code with full brightness
+		int hex = 255 | ((int) (s * 255.0f) << 16) | ((int) (t * 255.0f) << 8) | (int) (u * 255.0f);
+		return hex;
 	}
 
 }
