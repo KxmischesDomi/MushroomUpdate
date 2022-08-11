@@ -1,5 +1,6 @@
 package de.kxmischesdomi.mushroom.entity;
 
+import de.kxmischesdomi.mushroom.api.GlowColorable;
 import de.kxmischesdomi.mushroom.item.GlowMushroomStewItem;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
 import de.kxmischesdomi.mushroom.registry.ModItems;
@@ -11,6 +12,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -18,20 +20,45 @@ import net.minecraft.world.entity.Shearable;
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
 
+import java.util.Map;
+import java.util.Optional;
+
 /**
  * @author KxmischesDomi | https://github.com/kxmischesdomi
  * @since 1.0
  */
 public class GlowMushroomCow extends Cow implements Shearable {
+
+	public static final Map<Item, DyeColor> FLOWER_COLORS = Map.ofEntries(
+			Map.entry(Items.POPPY, DyeColor.RED),
+			Map.entry(Items.RED_TULIP, DyeColor.RED),
+			Map.entry(Items.ORANGE_TULIP, DyeColor.ORANGE),
+			Map.entry(Items.WHITE_TULIP, DyeColor.WHITE),
+			Map.entry(Items.PINK_TULIP, DyeColor.PINK),
+			Map.entry(Items.DANDELION, DyeColor.YELLOW),
+			Map.entry(Items.OXEYE_DAISY, DyeColor.WHITE),
+			Map.entry(Items.AZURE_BLUET, DyeColor.LIGHT_GRAY),
+			Map.entry(Items.ALLIUM, DyeColor.PURPLE),
+			Map.entry(Items.BLUE_ORCHID, DyeColor.CYAN),
+			Map.entry(Items.CORNFLOWER, DyeColor.BLUE),
+			Map.entry(Items.LILY_OF_THE_VALLEY, DyeColor.WHITE),
+			Map.entry(Items.WITHER_ROSE, DyeColor.BLACK),
+			Map.entry(Items.LILAC, DyeColor.MAGENTA),
+			Map.entry(Items.ROSE_BUSH, DyeColor.RED),
+			Map.entry(Items.PEONY, DyeColor.PINK),
+			Map.entry(Items.FERN, DyeColor.GREEN),
+			Map.entry(Items.LARGE_FERN, DyeColor.GREEN),
+			Map.entry(Items.GRASS, DyeColor.GREEN),
+			Map.entry(Items.TALL_GRASS, DyeColor.GREEN),
+			Map.entry(Items.DEAD_BUSH, DyeColor.BROWN)
+	);
 
 	public GlowMushroomCow(EntityType<? extends Cow> entityType, Level level) {
 		super(entityType, level);
@@ -59,7 +86,7 @@ public class GlowMushroomCow extends Cow implements Shearable {
 		if (itemStack.is(Items.BOWL) && !this.isBaby()) {
 
 			ItemStack itemStack2 = new ItemStack(ModItems.GLOW_MUSHROOM_STEW);
-			GlowMushroomStewItem.setGlowColor(itemStack2, random.nextInt(0xFF | 0xFFFFFF + 1));
+			GlowMushroomStewItem.setGlowColor(itemStack2, ((GlowColorable) this).getGlowColor());
 			ItemStack itemStack3 = ItemUtils.createFilledResult(itemStack, player, itemStack2, false);
 			player.setItemInHand(interactionHand, itemStack3);
 
@@ -73,6 +100,25 @@ public class GlowMushroomCow extends Cow implements Shearable {
 				itemStack.hurtAndBreak(1, player, player2 -> player2.broadcastBreakEvent(interactionHand));
 			}
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
+		}
+		Optional<DyeColor> colorOptional = getColorFromFlower(itemStack.getItem());
+		System.out.println(colorOptional);
+		if (colorOptional.isPresent()) {
+			DyeColor color = colorOptional.get();
+			boolean different = dyeGlowColor(color);
+			if (different) {
+				if (!player.getAbilities().instabuild) {
+					itemStack.shrink(1);
+				}
+				for (int i = 0; i < 2; ++i) {
+					this.level.addParticle(ParticleTypes.SMOKE, this.getX() + this.random.nextDouble() / 2.0, this.getY(0.5), this.getZ() + this.random.nextDouble() / 2.0, 0.0, this.random.nextDouble() / 5.0, 0.0);
+				}
+				if (itemStack.is(Items.WITHER_ROSE)) {
+					hurt(DamageSource.WITHER, 0.5f);
+				}
+				return InteractionResult.sidedSuccess(this.level.isClientSide);
+			}
+			return InteractionResult.CONSUME;
 		}
 
 		return super.mobInteract(player, interactionHand);
@@ -103,6 +149,58 @@ public class GlowMushroomCow extends Cow implements Shearable {
 		}
 	}
 
+	/**
+	 * @return if the color changed
+	 */
+	public boolean dyeGlowColor(DyeColor color) {
+		GlowColorable colorable = (GlowColorable) this;
+
+		int currentColor = colorable.getGlowColor();
+		float[] diffuseColors = color.getTextureDiffuseColors();
+		int newColor = ((int) (diffuseColors[0] * 255) << 16) | ((int) (diffuseColors[1] * 255) << 8) | (int) (diffuseColors[2] * 255);
+
+		if (currentColor == 0x000000) {
+			colorable.setGlowColor(newColor);
+			return true;
+		} else {
+			// Query old color
+			float f = (float)(currentColor >> 16 & 0xFF) / 255.0f;
+			float g = (float)(currentColor >> 8 & 0xFF) / 255.0f;
+			float h = (float)(currentColor & 0xFF) / 255.0f;
+			int i = (int)(Math.max(f, Math.max(g, h)) * 255.0f);
+			int[] is = new int[3];
+			is[0] = is[0] + (int)(f * 255.0f);
+			is[1] = is[1] + (int)(g * 255.0f);
+			is[2] = is[2] + (int)(h * 255.0f);
+			int j = 1;
+
+			// Apply new color
+			int l = (int)(diffuseColors[0] * 255.0f);
+			int m = (int)(diffuseColors[1] * 255.0f);
+			int n = (int)(diffuseColors[2] * 255.0f);
+			i += Math.max(l, Math.max(m, n));
+			is[0] = is[0] + l;
+			is[1] = is[1] + m;
+			is[2] = is[2] + n;
+			++j;
+
+			// Apply changes
+			int k = is[0] / j;
+			int o = is[1] / j;
+			int p = is[2] / j;
+			h = (float)i / (float)j;
+			float q = Math.max(k, Math.max(o, p));
+			k = (int)((float)k * h / q);
+			o = (int)((float)o * h / q);
+			p = (int)((float)p * h / q);
+			n = k;
+			n = (n << 8) + o;
+			n = (n << 8) + p;
+			colorable.setGlowColor(n);
+			return currentColor != n;
+		}
+	}
+
 	@Override
 	public boolean readyForShearing() {
 		return this.isAlive() && !this.isBaby();
@@ -115,6 +213,11 @@ public class GlowMushroomCow extends Cow implements Shearable {
 
 	public static boolean checkMushroomSpawnRules(EntityType<GlowMushroomCow> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
 		return checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, blockPos, randomSource);
+	}
+
+	public static Optional<DyeColor> getColorFromFlower(Item item) {
+		DyeColor value = FLOWER_COLORS.get(item);
+		return value == null ? Optional.empty() : Optional.of(value);
 	}
 
 }
