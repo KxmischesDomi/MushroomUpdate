@@ -5,6 +5,7 @@ import de.kxmischesdomi.mushroom.entity.Glowfly;
 import de.kxmischesdomi.mushroom.registry.ModEntities;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -62,6 +63,12 @@ public class GlowflyGlassItem extends BlockItem {
 	@Override
 	public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int i, boolean bl) {
 		super.inventoryTick(itemStack, level, entity, i, bl);
+		int cooldown = getHealingCooldown(itemStack);
+		if (cooldown > 0) {
+			setHealingCooldown(itemStack, cooldown - 1);
+		} else if (hasHealingCooldownTag(itemStack)) {
+			removeHealingCooldownTag(itemStack);
+		}
 	}
 
 	public static ItemStack getEmptySuccessItem(ItemStack itemStack, Player player) {
@@ -89,8 +96,24 @@ public class GlowflyGlassItem extends BlockItem {
 		return super.useOn(useOnContext);
 	}
 
-	public void getGlowflyCooldown() {
+	public boolean hasHealingCooldownTag(ItemStack itemStack) {
+		CompoundTag tag = itemStack.getTag();
+		return tag != null && tag.contains("HealingCooldown", 3);
+	}
 
+	public void removeHealingCooldownTag(ItemStack itemStack) {
+		CompoundTag tag = itemStack.getTag();
+		if (tag != null) {
+			tag.remove("HealingCooldown");
+		}
+	}
+
+	public int getHealingCooldown(ItemStack itemStack) {
+		return itemStack.getOrCreateTag().getInt("HealingCooldown");
+	}
+
+	public void setHealingCooldown(ItemStack itemStack, int cooldown) {
+		itemStack.getOrCreateTag().putInt("HealingCooldown", cooldown);
 	}
 
 }
