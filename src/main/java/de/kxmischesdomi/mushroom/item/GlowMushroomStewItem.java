@@ -1,6 +1,7 @@
 package de.kxmischesdomi.mushroom.item;
 
 import de.kxmischesdomi.mushroom.api.GlowColorable;
+import de.kxmischesdomi.mushroom.entity.GlowMushroomCow;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -24,7 +25,13 @@ public class GlowMushroomStewItem extends BowlFoodItem {
 	public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
 		livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 0));
 		if (hasGlowColor(itemStack)) {
-			((GlowColorable) livingEntity).setGlowColor(getGlowColor(itemStack));
+			GlowColorable colorable = (GlowColorable) livingEntity;
+			if (colorable.hasGlowColor()) {
+				GlowMushroomCow.dyeGlowColor(colorable, getGlowColor(itemStack));
+			} else {
+				int glowColor = getGlowColor(itemStack);
+				colorable.setGlowColor(glowColor);
+			}
 		}
 		return super.finishUsingItem(itemStack, level, livingEntity);
 	}

@@ -2,6 +2,7 @@ package de.kxmischesdomi.mushroom.mixin;
 
 import de.kxmischesdomi.mushroom.api.GlowColorable;
 import de.kxmischesdomi.mushroom.entity.GlowMushroomCow;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -25,6 +26,8 @@ public abstract class EntityMixin implements GlowColorable {
 
 	@Shadow @Final protected SynchedEntityData entityData;
 
+	@Shadow public abstract boolean isCurrentlyGlowing();
+
 	private static final EntityDataAccessor<Integer> DATA_GLOWING_COLOR = SynchedEntityData.defineId(Entity.class, EntityDataSerializers.INT);
 
 	@Inject(method = "<init>", at = @At("TAIL"))
@@ -32,7 +35,24 @@ public abstract class EntityMixin implements GlowColorable {
 		if (isSupported()) {
 			entityData.define(DATA_GLOWING_COLOR, isGlowMooshroom() ? 0xFFFFFF : 0x000000);
 		}
+	}
 
+	@Inject(method = "saveWithoutId", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;addAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V"))
+	public void addAdditionalSaveData(CompoundTag compoundTag, CallbackInfoReturnable<CompoundTag> cir) {
+		if (isSupported()) {
+			if (hasGlowColor()) {
+				compoundTag.putInt("GlowColor", getGlowColor());
+			}
+		}
+	}
+
+	@Inject(method = "load", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;readAdditionalSaveData(Lnet/minecraft/nbt/CompoundTag;)V"))
+	public void readAdditionalSaveData(CompoundTag compoundTag, CallbackInfo ci) {
+		if (isSupported()) {
+			if (compoundTag.contains("GlowColor", 3)) {
+				setGlowColor(compoundTag.getInt("GlowColor"));
+			}
+		}
 	}
 
 	@Inject(method = "tick", at = @At("HEAD"))
@@ -47,16 +67,9 @@ public abstract class EntityMixin implements GlowColorable {
 	@Inject(method = "getTeamColor", at = @At("HEAD"), cancellable = true)
 	public void getTeamColorInject(CallbackInfoReturnable<Integer> cir) {
 		if (isSupported()) {
-			if ((getEntity().hasEffect(MobEffects.GLOWING) || isGlowMooshroom()) && hasGlowColor()) {
+			if (isCurrentlyGlowing() && hasGlowColor()) {
 				cir.setReturnValue(getGlowColor());
 			}
-		}
-	}
-
-	@Inject(method = "isCurrentlyGlowing", at = @At("HEAD"), cancellable = true)
-	public void isCurrentlyGlowingInject(CallbackInfoReturnable<Boolean> cir) {
-		if (isGlowMooshroom()) {
-			cir.setReturnValue(true);
 		}
 	}
 
@@ -85,6 +98,5 @@ public abstract class EntityMixin implements GlowColorable {
 		}
 		return null;
 	}
-
 
 }

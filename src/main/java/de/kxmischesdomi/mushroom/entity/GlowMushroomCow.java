@@ -102,10 +102,9 @@ public class GlowMushroomCow extends Cow implements Shearable {
 			return InteractionResult.sidedSuccess(this.level.isClientSide);
 		}
 		Optional<DyeColor> colorOptional = getColorFromFlower(itemStack.getItem());
-		System.out.println(colorOptional);
 		if (colorOptional.isPresent()) {
 			DyeColor color = colorOptional.get();
-			boolean different = dyeGlowColor(color);
+			boolean different = dyeGlowColor(((GlowColorable) this), color);
 			if (different) {
 				if (!player.getAbilities().instabuild) {
 					itemStack.shrink(1);
@@ -149,18 +148,59 @@ public class GlowMushroomCow extends Cow implements Shearable {
 		}
 	}
 
+	@Override
+	public boolean isCurrentlyGlowing() {
+		return true;
+	}
+
+	@Override
+	public boolean readyForShearing() {
+		return this.isAlive() && !this.isBaby();
+	}
+
+	@Override
+	public GlowMushroomCow getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
+		return ModEntities.GLOW_MOOSHROOM.create(serverLevel);
+	}
+
+	public static boolean checkMushroomSpawnRules(EntityType<GlowMushroomCow> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
+		return checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, blockPos, randomSource);
+	}
+
+	public static Optional<DyeColor> getColorFromFlower(Item item) {
+		DyeColor value = FLOWER_COLORS.get(item);
+		return value == null ? Optional.empty() : Optional.of(value);
+	}
+
+	public static boolean dyeGlowColor(GlowColorable colorable, DyeColor color) {
+		return dyeGlowColor(colorable, color.getTextureDiffuseColors());
+	}
+
+	public static boolean dyeGlowColor(GlowColorable colorable, int color) {
+		// split hex color color into r, g, b components as float array
+		float[] rgb = new float[3];
+		int r = (color >> 16) & 0xFF;
+		int g = (color >> 8) & 0xFF;
+		int b = color & 0xFF;
+		rgb[0] = r / 255.0f;
+		rgb[1] = g / 255.0f;
+		rgb[2] = b / 255.0f;
+		return dyeGlowColor(colorable, rgb);
+	}
+
 	/**
 	 * @return if the color changed
 	 */
-	public boolean dyeGlowColor(DyeColor color) {
-		GlowColorable colorable = (GlowColorable) this;
+	public static boolean dyeGlowColor(GlowColorable colorable, float[] diffuseColors) {
 
 		int currentColor = colorable.getGlowColor();
-		float[] diffuseColors = color.getTextureDiffuseColors();
 		int newColor = ((int) (diffuseColors[0] * 255) << 16) | ((int) (diffuseColors[1] * 255) << 8) | (int) (diffuseColors[2] * 255);
 
-		if (currentColor == 0x000000) {
+		if (currentColor == 0x000000 || currentColor == 0xFFFFFF) {
 			colorable.setGlowColor(newColor);
+			for (int i = 0; i < 3; i++) {
+				dyeGlowColor(colorable, diffuseColors);
+			}
 			return true;
 		} else {
 			// Query old color
@@ -199,25 +239,6 @@ public class GlowMushroomCow extends Cow implements Shearable {
 			colorable.setGlowColor(n);
 			return currentColor != n;
 		}
-	}
-
-	@Override
-	public boolean readyForShearing() {
-		return this.isAlive() && !this.isBaby();
-	}
-
-	@Override
-	public GlowMushroomCow getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		return ModEntities.GLOW_MOOSHROOM.create(serverLevel);
-	}
-
-	public static boolean checkMushroomSpawnRules(EntityType<GlowMushroomCow> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
-		return checkMobSpawnRules(entityType, levelAccessor, mobSpawnType, blockPos, randomSource);
-	}
-
-	public static Optional<DyeColor> getColorFromFlower(Item item) {
-		DyeColor value = FLOWER_COLORS.get(item);
-		return value == null ? Optional.empty() : Optional.of(value);
 	}
 
 }
