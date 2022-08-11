@@ -25,7 +25,7 @@ public class ModBlocks {
 			.randomTicks()
 			.instabreak()
 			.sound(SoundType.GRASS)
-			.lightLevel(blockState -> 14)
+			.lightLevel(blockState -> 5)
 			.hasPostProcess(ModBlocks::always), () -> ModConfiguredFeatures.HUGE_GLOW_MUSHROOM
 			)
 	);
@@ -33,7 +33,7 @@ public class ModBlocks {
 	public static final Block GLOW_MUSHROOM_BLOCK = register("glow_mushroom_block", new HugeGlowMushroomBlock(BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.COLOR_CYAN)
 			.strength(0.2f)
 			.sound(SoundType.WOOD)
-			.lightLevel(state -> 14)
+			.lightLevel(state -> 5)
 			)
 	);
 
