@@ -59,6 +59,11 @@ public class GlowflyGlassItem extends BlockItem {
 		return super.use(level, player, interactionHand);
 	}
 
+	@Override
+	public void inventoryTick(ItemStack itemStack, Level level, Entity entity, int i, boolean bl) {
+		super.inventoryTick(itemStack, level, entity, i, bl);
+	}
+
 	public static ItemStack getEmptySuccessItem(ItemStack itemStack, Player player) {
 		if (!player.getAbilities().instabuild) {
 			return ItemUtils.createFilledResult(itemStack, player, new ItemStack(Items.GLASS_BOTTLE));
@@ -83,4 +88,9 @@ public class GlowflyGlassItem extends BlockItem {
 		}
 		return super.useOn(useOnContext);
 	}
+
+	public void getGlowflyCooldown() {
+
+	}
+
 }

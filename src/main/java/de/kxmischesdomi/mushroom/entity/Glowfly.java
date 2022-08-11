@@ -47,11 +47,9 @@ import java.util.EnumSet;
  */
 public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 
-	private static final EntityDataAccessor<Boolean> HAS_HEALING_POWER = SynchedEntityData.defineId(Glowfly.class, EntityDataSerializers.BOOLEAN);
+	private static final EntityDataAccessor<Integer> HEALING_COOLDOWN = SynchedEntityData.defineId(Glowfly.class, EntityDataSerializers.INT);
 
 	private final AnimationFactory factory = new AnimationFactory(this);
-
-	private int healingCooldown = 0;
 
 	public Glowfly(EntityType<? extends PathfinderMob> entityType, Level level) {
 		super(entityType, level);
@@ -82,25 +80,22 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 	@Override
 	protected void defineSynchedData() {
 		super.defineSynchedData();
-		this.entityData.define(HAS_HEALING_POWER, true);
+		this.entityData.define(HEALING_COOLDOWN, 0);
 	}
 
 	@Override
 	public void addAdditionalSaveData(CompoundTag compoundTag) {
 		super.addAdditionalSaveData(compoundTag);
-		compoundTag.putBoolean("HasHealingPower", this.hasHealingPower());
-		compoundTag.putInt("HealingCooldown", this.healingCooldown);
+		int cooldown = getHealingCooldown();
+		if (cooldown > 0) {
+			compoundTag.putInt("HealingCooldown", cooldown);
+		}
 	}
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag compoundTag) {
 		super.readAdditionalSaveData(compoundTag);
-		if (compoundTag.contains("HasHealingPower")) {
-			this.setHasHealingPower(compoundTag.getBoolean("HasHealingPower"));
-		}
-		if (compoundTag.contains("HealingCooldown")) {
-			this.healingCooldown = compoundTag.getInt("HealingCooldown");
-		}
+		setHealingCooldown(compoundTag.getInt("HealingCooldown"));
 	}
 
 	@Override
@@ -126,22 +121,17 @@ public class Glowfly extends PathfinderMob implements IGlowfly, IAnimatable {
 
 	@Override
 	public boolean hasHealingPower() {
-		return this.entityData.get(HAS_HEALING_POWER);
+		return getHealingCooldown() <= 0;
 	}
 
 	@Override
 	public int getHealingCooldown() {
-		return this.healingCooldown;
+		return this.entityData.get(HEALING_COOLDOWN);
 	}
 
 	@Override
 	public void setHealingCooldown(int cooldown) {
-		this.healingCooldown = cooldown;
-	}
-
-	@Override
-	public void setHasHealingPower(boolean hasHealingPower) {
-		this.entityData.set(HAS_HEALING_POWER, hasHealingPower);
+		this.entityData.set(HEALING_COOLDOWN, cooldown);
 	}
 
 	@Override

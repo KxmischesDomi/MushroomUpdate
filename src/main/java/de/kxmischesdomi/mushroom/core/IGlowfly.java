@@ -40,8 +40,6 @@ public interface IGlowfly {
 
 	void setHealingCooldown(int cooldown);
 
-	void setHasHealingPower(boolean hasHealingPower);
-
 	Collection<ServerPlayer> getTrackingPlayers();
 
 	default void checkForMobHealing(ServerLevel level, Vec3 glowflyPos) {
@@ -73,7 +71,6 @@ public interface IGlowfly {
 				}
 			}
 
-			setHasHealingPower(false);
 			setHealingCooldown(10*20);
 
 			playHealParticles(
@@ -93,9 +90,6 @@ public interface IGlowfly {
 	default void tickCooldownHealing() {
 		if (getHealingCooldown() > 0) {
 			setHealingCooldown(getHealingCooldown() - 1);
-		}
-		if (getHealingCooldown() == 0 && !hasHealingPower()) {
-			setHasHealingPower(true);
 		}
 	}
 
@@ -164,9 +158,6 @@ public interface IGlowfly {
 			compoundTag.putFloat("Health", mob.getHealth());
 		}
 
-		if (!mob.hasHealingPower()) {
-			compoundTag.putBoolean("HasHealingPower", mob.hasHealingPower());
-		}
 		if (mob.getHealingCooldown() > 0) {
 			compoundTag.putInt("HealingCooldown", mob.getHealingCooldown());
 		}
@@ -174,9 +165,6 @@ public interface IGlowfly {
 
 	static void loadDefaultDataFromGlassTag(Glowfly mob, CompoundTag compoundTag) {
 		Bucketable.loadDefaultDataFromBucketTag(mob, compoundTag);
-		if (compoundTag.contains("HasHealingPower")) {
-			mob.setHasHealingPower(compoundTag.getBoolean("HasHealingPower"));
-		}
 		if (compoundTag.contains("HealingCooldown")) {
 			mob.setHealingCooldown(compoundTag.getInt("HealingCooldown"));
 		}

@@ -10,7 +10,6 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,7 +25,6 @@ import java.util.Collection;
  */
 public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 
-	boolean hasHealingPower = true;
 	int healingCooldown = 0;
 
 	CompoundTag glowflyNbt;
@@ -36,13 +34,15 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 	}
 
 	public void tick() {
+		tickCooldownHealing();
+
 		if (level instanceof ServerLevel serverLevel) {
-			tickCooldownHealing();
-
-
 			if (hasHealingPower()) {
 				Vec3 pos = new Vec3(getBlockPos().getX() + 0.5, getBlockPos().getY() + 0.5, getBlockPos().getZ() + 0.5);
 				checkForMobHealing(serverLevel, pos);
+				if (!hasHealingPower()) {
+					level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
+				}
 			}
 
 		}
@@ -50,7 +50,7 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 
 	@Override
 	public boolean hasHealingPower() {
-		return hasHealingPower;
+		return healingCooldown == 0;
 	}
 
 	@Override
@@ -61,12 +61,7 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 	@Override
 	public void setHealingCooldown(int cooldown) {
 		this.healingCooldown = cooldown;
-	}
 
-	@Override
-	public void setHasHealingPower(boolean hasHealingPower) {
-		this.hasHealingPower = hasHealingPower;
-		level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_CLIENTS);
 	}
 
 	@Override
@@ -84,10 +79,6 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 		glowflyNbt.remove("y");
 		glowflyNbt.remove("z");
 
-		if (compoundTag.contains("HasHealingPower")) {
-			this.hasHealingPower = compoundTag.getBoolean("HasHealingPower");
-			glowflyNbt.remove("HasHealingPower");
-		}
 		if (compoundTag.contains("HealingCooldown")) {
 			this.healingCooldown = compoundTag.getInt("HealingCooldown");
 			glowflyNbt.remove("HealingCooldown");
@@ -99,21 +90,18 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 		if (glowflyNbt != null) {
 			compoundTag.merge(this.glowflyNbt);
 		}
-		saveGlowflyHealing(compoundTag, false);
+		saveGlowflyHealing(compoundTag);
 	}
 
-	private void saveGlowflyHealing(CompoundTag compoundTag, boolean forceIncludeHealingPower) {
-		if (!hasHealingPower() || forceIncludeHealingPower) {
-			compoundTag.putBoolean("HasHealingPower", this.hasHealingPower);
-		}
-		if (healingCooldown > 0) {
+	private void saveGlowflyHealing(CompoundTag compoundTag) {
+		System.out.println(healingCooldown);
+		if (!hasHealingPower()) {
 			compoundTag.putInt("HealingCooldown", this.healingCooldown);
 		}
 	}
 
 	@Override
 	public void saveToItem(ItemStack itemStack) {
-		BlockItem.setBlockEntityData(itemStack, this.getType(), new CompoundTag());
 		saveAdditional(itemStack.getOrCreateTag());
 	}
 
@@ -126,7 +114,7 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 	@Override
 	public CompoundTag getUpdateTag() {
 		CompoundTag compoundTag = new CompoundTag();
-		saveGlowflyHealing(compoundTag, true);
+		saveGlowflyHealing(compoundTag);
 		return compoundTag;
 	}
 

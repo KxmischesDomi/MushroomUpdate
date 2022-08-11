@@ -13,6 +13,8 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -106,9 +108,8 @@ public class GlowMushroomCow extends Cow implements Shearable {
 			DyeColor color = colorOptional.get();
 			boolean different = dyeGlowColor(((GlowColorable) this), color);
 			if (different) {
-				if (!player.getAbilities().instabuild) {
-					itemStack.shrink(1);
-				}
+				usePlayerItem(player, interactionHand, itemStack);
+				handleFoodConsume();
 				for (int i = 0; i < 2; ++i) {
 					this.level.addParticle(ParticleTypes.SMOKE, this.getX() + this.random.nextDouble() / 2.0, this.getY(0.5), this.getZ() + this.random.nextDouble() / 2.0, 0.0, this.random.nextDouble() / 5.0, 0.0);
 				}
@@ -149,8 +150,20 @@ public class GlowMushroomCow extends Cow implements Shearable {
 	}
 
 	@Override
+	protected void usePlayerItem(Player player, InteractionHand interactionHand, ItemStack itemStack) {
+		if (isFood(itemStack)) {
+			handleFoodConsume();
+		}
+		super.usePlayerItem(player, interactionHand, itemStack);
+	}
+
+	public void handleFoodConsume() {
+		addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 0, false, false)); // 30 seconds
+	}
+
+	@Override
 	public boolean isCurrentlyGlowing() {
-		return true;
+		return super.isCurrentlyGlowing();
 	}
 
 	@Override
@@ -160,7 +173,17 @@ public class GlowMushroomCow extends Cow implements Shearable {
 
 	@Override
 	public GlowMushroomCow getBreedOffspring(ServerLevel serverLevel, AgeableMob ageableMob) {
-		return ModEntities.GLOW_MOOSHROOM.create(serverLevel);
+		GlowMushroomCow cow = ModEntities.GLOW_MOOSHROOM.create(serverLevel);
+		if (cow == null) return null;
+		// Colors are not the same depending on the color that is added on top of another so we're gonna make that random
+		boolean useFirst = random.nextBoolean();
+		GlowColorable first = ((GlowColorable) (useFirst ? this : ageableMob));
+		GlowColorable second = ((GlowColorable) (useFirst ? ageableMob : this));
+		GlowColorable baby = (GlowColorable) cow;
+		baby.setGlowColor(first.getGlowColor());
+		dyeGlowColor(baby, second.getGlowColor());
+		cow.handleFoodConsume();
+		return cow;
 	}
 
 	public static boolean checkMushroomSpawnRules(EntityType<GlowMushroomCow> entityType, LevelAccessor levelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource) {
