@@ -33,7 +33,7 @@ public abstract class EntityMixin implements GlowColorable {
 	@Inject(method = "<init>", at = @At("TAIL"))
 	public void defineSynchedDataInject(CallbackInfo ci) {
 		if (isSupported()) {
-			entityData.define(DATA_GLOWING_COLOR, isGlowMooshroom() ? 0xFFFFFF : 0x000000);
+			entityData.define(DATA_GLOWING_COLOR, 0x000000);
 		}
 	}
 

@@ -85,10 +85,13 @@ public class GlowMushroomCow extends Cow implements Shearable {
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand interactionHand) {
 		ItemStack itemStack = player.getItemInHand(interactionHand);
+		GlowColorable colorable = (GlowColorable) this;
 		if (itemStack.is(Items.BOWL) && !this.isBaby()) {
 
 			ItemStack itemStack2 = new ItemStack(ModItems.GLOW_MUSHROOM_STEW);
-			GlowMushroomStewItem.setGlowColor(itemStack2, ((GlowColorable) this).getGlowColor());
+			if (colorable.hasGlowColor()) {
+				GlowMushroomStewItem.setGlowColor(itemStack2, colorable.getGlowColor());
+			}
 			ItemStack itemStack3 = ItemUtils.createFilledResult(itemStack, player, itemStack2, false);
 			player.setItemInHand(interactionHand, itemStack3);
 
@@ -106,7 +109,7 @@ public class GlowMushroomCow extends Cow implements Shearable {
 		Optional<DyeColor> colorOptional = getColorFromFlower(itemStack.getItem());
 		if (colorOptional.isPresent()) {
 			DyeColor color = colorOptional.get();
-			boolean different = dyeGlowColor(((GlowColorable) this), color);
+			boolean different = dyeGlowColor(colorable, color);
 			if (different) {
 				usePlayerItem(player, interactionHand, itemStack);
 				handleFoodConsume();
@@ -221,9 +224,6 @@ public class GlowMushroomCow extends Cow implements Shearable {
 
 		if (currentColor == 0x000000 || currentColor == 0xFFFFFF) {
 			colorable.setGlowColor(newColor);
-			for (int i = 0; i < 3; i++) {
-				dyeGlowColor(colorable, diffuseColors);
-			}
 			return true;
 		} else {
 			// Query old color

@@ -7,7 +7,7 @@ package de.kxmischesdomi.mushroom.api;
 public interface GlowColorable {
 
 	default boolean hasGlowColor() {
-		return getGlowColor() != 0x0000;
+		return getGlowColor() != 0x000000;
 	}
 
 	void setGlowColor(int glowColor);
