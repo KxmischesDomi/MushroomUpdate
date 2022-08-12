@@ -27,9 +27,12 @@ public class GlowMushroomStewItem extends BowlFoodItem {
 
 	@Override
 	public InteractionResult interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand interactionHand) {
-		player.setItemInHand(interactionHand, new ItemStack(Items.BOWL));
-		finishUsingItem(itemStack, livingEntity.level, livingEntity);
-		return InteractionResult.SUCCESS;
+		if (!(livingEntity instanceof Player)) {
+			player.setItemInHand(interactionHand, new ItemStack(Items.BOWL));
+			finishUsingItem(itemStack, livingEntity.level, livingEntity);
+			return InteractionResult.SUCCESS;
+		}
+		return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);
 	}
 
 	@Override
