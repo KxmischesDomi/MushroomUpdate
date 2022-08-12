@@ -94,7 +94,6 @@ public class GlowflyGlassBlockEntity extends BlockEntity implements IGlowfly {
 	}
 
 	private void saveGlowflyHealing(CompoundTag compoundTag) {
-		System.out.println(healingCooldown);
 		if (!hasHealingPower()) {
 			compoundTag.putInt("HealingCooldown", this.healingCooldown);
 		}
