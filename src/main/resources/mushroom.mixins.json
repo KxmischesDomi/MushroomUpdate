@@ -12,6 +12,7 @@
 		"OverworldBiomeBuilderMixin",
 		"PlayerMixin",
 		"PotionBrewingMixin",
+		"PotionSlotMixin",
 		"SpawnPlacementsMixin"
 	],
 	"client": [

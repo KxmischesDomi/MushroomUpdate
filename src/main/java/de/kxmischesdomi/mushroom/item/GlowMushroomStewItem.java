@@ -2,7 +2,9 @@ package de.kxmischesdomi.mushroom.item;
 
 import de.kxmischesdomi.mushroom.api.GlowColorable;
 import de.kxmischesdomi.mushroom.entity.GlowMushroomCow;
+import de.kxmischesdomi.mushroom.registry.ModCriteriaTriggers;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -39,6 +41,9 @@ public class GlowMushroomStewItem extends BowlFoodItem {
 	public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
 		livingEntity.addEffect(new MobEffectInstance(MobEffects.GLOWING, 600, 0));
 		if (hasGlowColor(itemStack)) {
+			if (livingEntity instanceof ServerPlayer serverPlayer) {
+				ModCriteriaTriggers.DRINK_COLORED_GLOW_STEW.trigger(serverPlayer);
+			}
 			GlowColorable colorable = (GlowColorable) livingEntity;
 			if (colorable.hasGlowColor()) {
 				GlowMushroomCow.dyeGlowColor(colorable, getGlowColor(itemStack));

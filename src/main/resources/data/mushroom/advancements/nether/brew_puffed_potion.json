@@ -1,0 +1,28 @@
+{
+	"parent": "minecraft:nether/brew_potion",
+	"display": {
+		"icon": {
+			"item": "mushroom:puff_spores"
+		},
+		"title": {
+			"translate": "advancements.nether.mushroom.brew_puffed_potion.title"
+		},
+		"description": {
+			"translate": "advancements.nether.mushroom.brew_puffed_potion.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"criteria": {
+		"puffed_potion": {
+			"trigger": "mushroom:brewed_puffed_potion"
+		}
+	},
+	"requirements": [
+		[
+			"puffed_potion"
+		]
+	]
+}

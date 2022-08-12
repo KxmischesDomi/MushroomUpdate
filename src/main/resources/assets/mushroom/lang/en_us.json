@@ -30,12 +30,16 @@
 	"advancements.husbandry.mushroom.make_shroom_pal_big.description": "Have a Shroom Pal consume 50 crops, making it an adult",
 	"advancements.husbandry.mushroom.glider_land_with_parrot.title": "Calm Flight Attendant",
 	"advancements.husbandry.mushroom.glider_land_with_parrot.description": "Land with a Shroom Glider when it has less than 5 durability while a Parrot is on your shoulder",
+	"advancements.husbandry.mushroom.drink_colored_glow_stew.title": "§1C§2o§3l§4o§5r§6m§7a§8t§9i§ac",
+	"advancements.husbandry.mushroom.drink_colored_glow_stew.description": "Drink a colored Glow Mushroom Stew",
 	"advancements.adventure.mushroom.spyglass_at_glowfly.title": "Is It the Wild Update?",
 	"advancements.adventure.mushroom.spyglass_at_glowfly.description": "Look at a Glowfly through a Spyglass",
 	"advancements.adventure.mushroom.glowfly_regenerate_full.title": "Hopes and Dreams",
 	"advancements.adventure.mushroom.glowfly_regenerate_full.description": "Use Glowflies to heal 19 HP",
 	"advancements.adventure.mushroom.glowfly_in_a_glass.title": "Watch out!",
 	"advancements.adventure.mushroom.glowfly_in_a_glass.description": "Catch a Glowfly with a Glass Bottle",
+	"advancements.nether.mushroom.brew_puffed_potion.title": "Something stinks here",
+	"advancements.nether.mushroom.brew_puffed_potion.description": "Poison a potion with puff spores",
 
 	"stat.mushroom.glowfly_health_gained": "Glowfly Health Gained",
 
