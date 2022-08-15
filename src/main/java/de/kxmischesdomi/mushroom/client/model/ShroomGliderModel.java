@@ -24,7 +24,7 @@ public class ShroomGliderModel extends AnimatedGeoModel<ShroomGlider> {
 
 	@Override
 	public ResourceLocation getAnimationResource(ShroomGlider animatable) {
-		return null;
+		return new ResourceLocation(MushroomMod.MOD_ID, "animations/shroom_glider.animation.json");
 
 	}
 
