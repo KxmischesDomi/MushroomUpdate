@@ -22,6 +22,8 @@ import java.util.Collections;
 @Mixin(PotionBrewing.class)
 public abstract class PotionBrewingMixin {
 
+	private static final int maxLevel = 6;
+
 	@Inject(method = "isIngredient", at = @At("HEAD"), cancellable = true)
 	private static void isIngredient(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		if (stack.is(ModItems.PUFF_SPORES)) {
@@ -32,7 +34,7 @@ public abstract class PotionBrewingMixin {
 	@Inject(method = "hasPotionMix", at = @At("HEAD"), cancellable = true)
 	private static void hasPotionMix(ItemStack itemStack, ItemStack itemStack2, CallbackInfoReturnable<Boolean> cir) {
 		if (itemStack2.is(ModItems.PUFF_SPORES)) {
-			if (PuffSporesItem.getPuffSporesEffect(itemStack, (count, tag) -> {}) >= 6) {
+			if (PuffSporesItem.getPuffSporesEffect(itemStack, (count, tag) -> {}) >= maxLevel) {
 				cir.setReturnValue(false);
 				return;
 			}
@@ -46,7 +48,7 @@ public abstract class PotionBrewingMixin {
 			if (itemStack.is(ModItems.PUFF_SPORES)) {
 
 				if (PuffSporesItem.getPuffSporesEffect(itemStack2, (count, compoundTag) -> {
-					int i = Math.max(1, count + 1);
+					int i = Math.min(Math.max(1, count + 1), maxLevel);
 					compoundTag.putInt(PuffSporesItem.TAG_PUFF_SPORES_EFFECT, i);
 					compoundTag.putInt("Duration", calculateNewDuration(i));
 
@@ -69,7 +71,8 @@ public abstract class PotionBrewingMixin {
 	}
 
 	private static int calculateNewDuration(int i) {
-		return Math.min(60, i * 10) * 20;
+		int secondsPerLevel = 5;
+		return Math.min(secondsPerLevel * maxLevel, i * secondsPerLevel) * 20;
 	}
 
 }
