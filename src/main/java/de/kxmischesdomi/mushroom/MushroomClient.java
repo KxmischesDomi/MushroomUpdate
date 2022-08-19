@@ -7,7 +7,11 @@ import de.kxmischesdomi.mushroom.registry.ModItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.DyeColor;
@@ -22,6 +26,10 @@ public class MushroomClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+
+		FabricLoader.getInstance().getModContainer(MushroomMod.MOD_ID).ifPresent(modContainer -> {
+			ResourceManagerHelper.registerBuiltinResourcePack(new ResourceLocation(MushroomMod.MOD_ID, "barebones"), modContainer, ResourcePackActivationType.NORMAL);
+		});
 
 		EntityRendererRegistry.register(ModEntities.SHROOM_PAL, ShroomPalRenderer::new);
 		EntityRendererRegistry.register(ModEntities.GLOWFLY, GlowflyRenderer::new);
