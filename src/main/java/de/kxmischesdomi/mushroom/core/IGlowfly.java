@@ -31,7 +31,7 @@ public interface IGlowfly {
 	}
 
 	default float getHealthRegenerating() {
-		return 1.5f;
+		return 3f;
 	}
 
 	boolean hasHealingPower();
@@ -66,7 +66,7 @@ public interface IGlowfly {
 			if (entity instanceof ServerPlayer player) {
 				player.awardStat(ModStats.GLOWFLY_HEALTH_GAINED, Math.round(regenerating * 10.0f));
 				int value = player.getStats().getValue(Stats.CUSTOM.get(ModStats.GLOWFLY_HEALTH_GAINED));
-				if (value > 19 * 10) {
+				if (value > 20 * 10) {
 					ModCriteriaTriggers.GLOWFLY_REGENERATE_FULL.trigger(player);
 				}
 			}
