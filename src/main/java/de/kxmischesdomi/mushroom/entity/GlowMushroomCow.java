@@ -39,27 +39,29 @@ import java.util.Optional;
 public class GlowMushroomCow extends Cow implements Shearable {
 
 	public static final Map<Item, DyeColor> FLOWER_COLORS = Map.ofEntries(
-			Map.entry(Items.POPPY, DyeColor.RED),
-			Map.entry(Items.RED_TULIP, DyeColor.RED),
-			Map.entry(Items.ORANGE_TULIP, DyeColor.ORANGE),
-			Map.entry(Items.WHITE_TULIP, DyeColor.WHITE),
-			Map.entry(Items.PINK_TULIP, DyeColor.PINK),
-			Map.entry(Items.DANDELION, DyeColor.YELLOW),
-			Map.entry(Items.OXEYE_DAISY, DyeColor.WHITE),
-			Map.entry(Items.AZURE_BLUET, DyeColor.LIGHT_GRAY),
 			Map.entry(Items.ALLIUM, DyeColor.PURPLE),
+			Map.entry(Items.AZURE_BLUET, DyeColor.LIGHT_GRAY),
 			Map.entry(Items.BLUE_ORCHID, DyeColor.CYAN),
+			Map.entry(Items.DANDELION, DyeColor.YELLOW),
+			Map.entry(Items.DEAD_BUSH, DyeColor.BROWN),
 			Map.entry(Items.CORNFLOWER, DyeColor.BLUE),
-			Map.entry(Items.LILY_OF_THE_VALLEY, DyeColor.WHITE),
-			Map.entry(Items.WITHER_ROSE, DyeColor.BLACK),
+
 			Map.entry(Items.LILAC, DyeColor.MAGENTA),
-			Map.entry(Items.ROSE_BUSH, DyeColor.RED),
+			Map.entry(Items.LILY_OF_THE_VALLEY, DyeColor.WHITE),
+			Map.entry(Items.ORANGE_TULIP, DyeColor.ORANGE),
+			Map.entry(Items.OXEYE_DAISY, DyeColor.WHITE),
 			Map.entry(Items.PEONY, DyeColor.PINK),
-			Map.entry(Items.FERN, DyeColor.GREEN),
-			Map.entry(Items.LARGE_FERN, DyeColor.GREEN),
-			Map.entry(Items.GRASS, DyeColor.GREEN),
-			Map.entry(Items.TALL_GRASS, DyeColor.GREEN),
-			Map.entry(Items.DEAD_BUSH, DyeColor.BROWN)
+			Map.entry(Items.PINK_TULIP, DyeColor.PINK),
+			Map.entry(Items.POPPY, DyeColor.RED),
+			Map.entry(Items.ROSE_BUSH, DyeColor.RED),
+			Map.entry(Items.RED_TULIP, DyeColor.RED),
+			Map.entry(Items.WHITE_TULIP, DyeColor.WHITE),
+			Map.entry(Items.WITHER_ROSE, DyeColor.BLACK),
+
+			Map.entry(Items.LARGE_FERN, DyeColor.GREEN), // grass
+			Map.entry(Items.FERN, DyeColor.GREEN), // grass
+			Map.entry(Items.GRASS, DyeColor.GREEN), // grass
+			Map.entry(Items.TALL_GRASS, DyeColor.GREEN) // grass
 	);
 
 	public GlowMushroomCow(EntityType<? extends Cow> entityType, Level level) {
