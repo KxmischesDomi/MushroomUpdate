@@ -25,6 +25,7 @@ public class MushroomMod implements ModInitializer {
 		ModCriteriaTriggers.init();
 		ModBlockEntities.init();
 		ModStats.init();
+		ModPaintings.init();
 
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MUSHROOM_FIELDS), MobCategory.MONSTER, ModEntities.PUFF_CREEPER, 100, 1, 3);
 		BiomeModifications.addSpawn(BiomeSelectors.includeByKey(Biomes.MUSHROOM_FIELDS), MobCategory.CREATURE, ModEntities.SHROOM_PAL, 10, 4, 8);
