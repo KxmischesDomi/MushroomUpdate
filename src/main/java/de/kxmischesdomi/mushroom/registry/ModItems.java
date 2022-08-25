@@ -17,6 +17,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.redstone.Redstone;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -70,6 +71,7 @@ public class ModItems {
 	/**
 	 * Creates a music disc item that has compatibility for 1.19 and 1.19.1 due to changes in the item's constructor
 	 */
+	@Nonnull
 	private static Item registerMusicDisc(String name, SoundEvent soundEvent, int length, Item.Properties properties) {
 
 		try {
@@ -89,13 +91,13 @@ public class ModItems {
 				constructor.setAccessible(true);
 				item = constructor.newInstance(output, soundEvent, properties);
 			}
-			register(new ResourceLocation(MushroomMod.MOD_ID, name), item);
+			return register(new ResourceLocation(MushroomMod.MOD_ID, name), item);
 		} catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
 			MushroomMod.LOGGER.error("Failed to register music disc item " + name + ": " + e.getMessage());
 			e.printStackTrace();
 		}
 
-		return null;
+		throw new IllegalStateException("Failed to register music disc for either 1.19 or 1.19.1");
 	}
 
 	public static void init() {
