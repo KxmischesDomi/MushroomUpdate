@@ -34,20 +34,17 @@
     [],
     [],
     [
-      "minecraft:amethyst_geode"
+      "minecraft:amethyst_geode",
 	  "minecraft:large_dripstone"
     ],
     [],
     [
       "mushroom:glow_caves/shroom_patch_mycelium",
-      "mushroom:shroom_caves/shroom_patch_moss",
       "mushroom:glow_caves/glow_caves_pool",
       "mushroom:shroom_caves/mycelium",
       "mushroom:glow_caves/clay_patch",
       "mushroom:glow_caves/mushroom_glow_small",
       "mushroom:glow_caves/mushroom_glow",
-      "minecraft:lush_caves_ceiling_vegetation",
-
       "mushroom:shroom_caves/root_patch"
     ],
     [],
