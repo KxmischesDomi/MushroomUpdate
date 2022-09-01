@@ -21,7 +21,7 @@
       "options": {
         "type": "minecraft:glow"
       },
-      "probability": 0.02
+      "probability": 0.001
     },
     "sky_color": 8103167,
     "fog_color": 12638463,
