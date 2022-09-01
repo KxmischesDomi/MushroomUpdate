@@ -32,16 +32,12 @@
   },
   "features": [
     [],
-    [
-      "minecraft:lake_lava_surface"
-    ],
+    [],
     [
       "minecraft:amethyst_geode"
+	  "minecraft:large_dripstone"
     ],
-    [
-      "minecraft:monster_room",
-      "minecraft:monster_room_deep"
-    ],
+    [],
     [
       "mushroom:glow_caves/shroom_patch_mycelium",
       "mushroom:shroom_caves/shroom_patch_moss",
@@ -62,6 +58,7 @@
       "minecraft:ore_diorite_lower",
       "minecraft:ore_andesite_upper",
       "minecraft:ore_andesite_lower",
+	  "minecraft:ore_tuff",
 	  "minecraft:ore_coal_upper",
       "minecraft:ore_coal_lower",
       "minecraft:ore_iron_upper",
@@ -82,14 +79,15 @@
       "minecraft:disk_clay",
       "minecraft:disk_gravel"
     ],
-    [],
+    [
+	  "minecraft:dripstone_cluster",
+      "minecraft:pointed_dripstone"
+	],
     [
       "minecraft:spring_water"
     ],
     [
-      "minecraft:glow_lichen",
       "minecraft:patch_tall_grass_2",
-      "minecraft:classic_vines_cave_feature",
       "minecraft:seagrass_normal",
       "minecraft:seagrass_simple",
       "minecraft:kelp_cold"
@@ -103,9 +101,9 @@
     "creature": [
       {
         "type": "mushroom:glow_mooshroom",
-        "weight": 10,
-        "minCount": 4,
-        "maxCount": 8
+        "weight": 100,
+        "minCount": 1,
+        "maxCount": 2
       }
     ],
     "ambient": [
@@ -125,7 +123,14 @@
         "maxCount": 6
       }
     ],
-    "water_creature": [],
+    "water_creature": [
+      {
+        "type": "minecraft:glow_squid",
+        "weight": 10,
+        "minCount": 4,
+        "maxCount": 6
+      }
+    ],
     "water_ambient": [],
     "misc": []
   },
